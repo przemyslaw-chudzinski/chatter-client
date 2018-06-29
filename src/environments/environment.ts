@@ -2,8 +2,20 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export const domainConfig = {
+  clientUrl: 'http://localhost:4200',
+  apiUrl: 'http://localhost:8000'
+};
+
 export const environment = {
-  production: false
+  production: false,
+  tokenKey: 'token',
+  oauth: {
+    grant_type: 'authorization_code',
+    client_id: 1,
+    client_secret: 'PUi4n07WyJ35px3M7lPOzab1xC1yvMQjgdbIUa1D	',
+    redirect_uri: domainConfig.clientUrl + '/callback'
+  }
 };
 
 /*

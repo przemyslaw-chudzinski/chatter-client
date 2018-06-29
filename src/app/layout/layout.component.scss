@@ -1,0 +1,16 @@
+@import '../../variables';
+:host,
+mat-drawer-container {
+  height: 100vh;
+  display: block;
+}
+
+mat-drawer {
+  width: 20rem;
+  overflow: auto;
+  background-color: $blue-gray-900;
+}
+
+.layout-content {
+  margin: 2rem;
+}

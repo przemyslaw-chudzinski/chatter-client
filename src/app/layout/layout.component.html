@@ -1,0 +1,13 @@
+<mat-drawer-container>
+
+  <chatter-topbar (menuButtonClicked)="drawer.toggle()"></chatter-topbar>
+
+  <mat-drawer #drawer mode="side" [opened]="asideOpened">
+    <chatter-contact-list [data]="users"></chatter-contact-list>
+  </mat-drawer>
+
+  <div class="layout-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
