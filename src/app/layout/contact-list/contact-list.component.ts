@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ResponseData } from '../../models/response-data';
-import { IUser } from '../../auth/models/auth';
+import { IUser } from '../../auth/models/user.model';
 
 @Component({
   // tslint:disable-next-line:component-selector

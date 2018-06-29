@@ -1,0 +1,54 @@
+<div class="chatter-login-form">
+
+  <!-- Login form -->
+  <mat-card class="animated fadeIn" *ngIf="showLoginForm">
+    <h2>
+      <mat-icon>chat</mat-icon>
+      <span>Chatter - Sign In</span>
+    </h2>
+    <chatter-login-form></chatter-login-form>
+    <button mat-raised-button color="primary">Sign in</button>
+    <button mat-button (click)="toggleForms()">Forgot password?</button>
+  </mat-card>
+  <!-- ################################################################### -->
+
+  <!-- Forgot password form -->
+  <mat-card class="animated fadeIn" *ngIf="!showLoginForm">
+    <h2>
+      <mat-icon>chat</mat-icon>
+      <span>Chatter - Reset password</span>
+    </h2>
+    <chatter-forgot-password-form></chatter-forgot-password-form>
+    <button mat-raised-button color="primary">Send email</button>
+    <button mat-button (click)="toggleForms()">Back to sign in</button>
+  </mat-card>
+  <!-- ################################################################### -->
+
+</div>
+
+<br>
+<br>
+<mat-card>
+  <chatter-button>Simple button type</chatter-button>
+  <chatter-button color="primary">Simple button type</chatter-button>
+  <chatter-button color="warn">Simple button type</chatter-button>
+  <hr>
+  <chatter-button buttonType="raised">Simple button type</chatter-button>
+  <chatter-button buttonType="raised" color="primary">Simple button type</chatter-button>
+  <chatter-button buttonType="raised" color="warn">Simple button type</chatter-button>
+
+  <hr>
+  <chatter-button buttonType="fab">Simple button type</chatter-button>
+  <chatter-button buttonType="fab" color="primary">Simple button type</chatter-button>
+  <chatter-button buttonType="fab" color="warn">Simple button type</chatter-button>
+
+  <hr>
+  <chatter-button buttonType="miniFab">Simple button type</chatter-button>
+  <chatter-button buttonType="miniFab" color="primary">Simple button type</chatter-button>
+  <chatter-button buttonType="miniFab" color="warn">Simple button type</chatter-button>
+
+  <hr>
+  <chatter-button buttonType="icon" icon="notifications">Simple button type</chatter-button>
+  <chatter-button buttonType="icon" icon="notifications" color="primary">Simple button type</chatter-button>
+  <chatter-button buttonType="icon" icon="notifications" color="warn">Simple button type</chatter-button>
+</mat-card>

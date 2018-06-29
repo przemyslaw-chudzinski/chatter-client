@@ -17,14 +17,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.user$.pipe(
-      map(user => {
-        if (user && AuthService.token() && !AuthService.isTokenExpired()) {
-          return true;
-        }
-        AuthService.redirectToSingIn();
-        return false;
-      })
-    );
+    return true;
   }
 }

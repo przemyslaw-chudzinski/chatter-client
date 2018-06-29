@@ -13,6 +13,7 @@ import { ButtonNotificationComponent } from './button-notification/button-notifi
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from './button/button.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatCardModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+    ButtonModule
   ],
   declarations: [
     LayoutComponent,

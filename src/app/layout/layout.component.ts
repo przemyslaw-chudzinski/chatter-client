@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users.service';
-import { tap, take } from 'rxjs/operators';
 import { ResponseData } from '../models/response-data';
-import { IUser } from '../auth/models/auth';
+import { IUser } from '../auth/models/user.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -15,14 +13,7 @@ export class LayoutComponent implements OnInit {
 
   users: ResponseData<IUser>;
 
-  constructor(private userService: UsersService) {}
+  constructor() {}
 
-  ngOnInit() {
-    // this.userService.users$
-    //   .pipe(
-    //     take(1),
-    //     tap(response => (this.users = response))
-    //   )
-    //   .subscribe();
-  }
+  ngOnInit() {}
 }

@@ -5,6 +5,8 @@ import { LoginFormService } from './login-form/login-form.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
+import { ForgotPasswordFormService } from './forgot-password-form/forgot-password-form.service';
 
 @NgModule({
   imports: [
@@ -14,14 +16,14 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule
   ],
-  declarations: [LoginFormComponent],
-  exports: [LoginFormComponent]
+  declarations: [LoginFormComponent, ForgotPasswordFormComponent],
+  exports: [LoginFormComponent, ForgotPasswordFormComponent]
 })
 export class FormLayersModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FormLayersModule,
-      providers: [LoginFormService]
+      providers: [LoginFormService, ForgotPasswordFormService]
     };
   }
 }

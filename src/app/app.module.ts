@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { FormLayersModule } from './forms/form-layers/form-layers.module';
-import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,12 +19,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: 'src/app/pages/dashboard/dashboard.module#DashboardModule'
-    // canActivate: [AuthGuard]
   },
   {
     path: 'messages',
     loadChildren: 'src/app/pages/messages/messages.module#MessagesModule'
-    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    loadChildren: 'src/app/pages/auth/auth.module#AuthModule'
   }
 ];
 

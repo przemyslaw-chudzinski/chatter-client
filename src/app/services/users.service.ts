@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ResponseData } from '../models/response-data';
-import { IUser } from '../auth/models/auth';
 import { AuthService } from '../auth/auth.service';
+import { IUser } from '../auth/models/user.model';
 
 @Injectable()
 export class UsersService {
