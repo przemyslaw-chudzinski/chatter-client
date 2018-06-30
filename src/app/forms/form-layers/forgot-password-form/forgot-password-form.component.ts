@@ -6,7 +6,7 @@ import { ForgotPasswordFormService } from './forgot-password-form.service';
   selector: 'chatter-forgot-password-form',
   templateUrl: './forgot-password-form.component.html',
   styleUrls: ['./forgot-password-form.component.scss'],
-  exportAs: 'forgot-password-form'
+  exportAs: 'chatter-forgot-password-form'
 })
 export class ForgotPasswordFormComponent implements OnInit {
   constructor(public forgotPasswordFormService: ForgotPasswordFormService) {}

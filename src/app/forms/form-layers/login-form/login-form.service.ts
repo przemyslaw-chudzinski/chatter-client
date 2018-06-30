@@ -1,33 +1,17 @@
 import { Injectable } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { FormLayersBase } from '../form-layers-base';
 
 @Injectable()
-export class LoginFormService {
-  private _formGroup: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
+export class LoginFormService extends FormLayersBase {
+  constructor(protected fb: FormBuilder) {
+    super(fb);
+  }
 
   init(): void {
-    this._formGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
-  }
-
-  get formGroup(): FormGroup {
-    return this._formGroup;
-  }
-
-  get email(): AbstractControl {
-    return this._formGroup.controls.email;
-  }
-
-  get password(): AbstractControl {
-    return this._formGroup.controls.password;
   }
 }

@@ -29,3 +29,14 @@ export class ButtonComponent implements OnInit {
     this.clicked.emit(event);
   }
 }
+/**
+ * TODO:
+ *
+ * 1. Add support for mat-stroked-button
+ *
+ * 2. Add support for mat-flat button
+ *
+ * 3. Add support for ng content
+ *
+ * 4. Add support for mat-menu-item button
+ */

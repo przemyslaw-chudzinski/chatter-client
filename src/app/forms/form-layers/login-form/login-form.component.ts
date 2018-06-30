@@ -6,7 +6,7 @@ import { LoginFormService } from './login-form.service';
   selector: 'chatter-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
-  exportAs: 'login-form'
+  exportAs: 'chatter-login-form'
 })
 export class LoginFormComponent implements OnInit {
   constructor(public loginFormService: LoginFormService) {}
