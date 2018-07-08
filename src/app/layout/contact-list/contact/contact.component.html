@@ -1,4 +1,5 @@
-<div class="chater-contact"
+<div *ngIf="show"
+     class="chater-contact"
      [routerLink]="['/messages', contact._id]"
      routerLinkActive="selected">
   <div class="chater-contact-avatar">
@@ -7,5 +8,7 @@
   </div>
   <div class="chater-contact-info">
     <strong [innerText]="contact.firstName + ' ' + contact.lastName"></strong>
+    <span class="chatter-contact-available"
+          *ngIf="contact.available"></span>
   </div>
 </div>

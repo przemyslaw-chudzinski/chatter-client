@@ -30,7 +30,6 @@ export class AuthService {
     private websocketService: WebsocketService
   ) {
     this.init();
-    // this.ws.init();
   }
 
   static token(): string {
@@ -50,7 +49,7 @@ export class AuthService {
     const decodedToken = this.jwtHelper.decodeToken(token);
     if (token && !this.isTokenExpired()) {
       this._user$.next(decodedToken.user);
-      console.log('nawiązanie do ws');
+      this.websocketService.connect(decodedToken.user._id);
       return this.routerLinksService.navigateByUrl(routerLinks.dashboardPage);
     }
     return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
@@ -70,7 +69,8 @@ export class AuthService {
         tap(user => this._user$.next(user)),
         tap(() =>
           this.routerLinksService.navigateByUrl(routerLinks.dashboardPage)
-        )
+        ),
+        tap(user => this.websocketService.connect(user._id))
       );
   }
 

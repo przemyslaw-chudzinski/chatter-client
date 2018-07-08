@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from '../../../auth/models/user.model';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
-import { Subscription } from '../../../../../node_modules/rxjs';
-import { tap } from '../../../../../node_modules/rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { tap, take } from 'rxjs/operators';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,8 +12,18 @@ import { tap } from '../../../../../node_modules/rxjs/operators';
 })
 export class ContactComponent implements OnInit {
   @Input() contact: IUser;
+  show = true; // TODO: Return correctly data from server
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private auth: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.user$
+      .pipe(
+        take(1),
+        tap(
+          user => (this.contact._id === user._id ? (this.show = false) : null)
+        )
+      )
+      .subscribe();
+  }
 }

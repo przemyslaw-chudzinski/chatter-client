@@ -6,4 +6,5 @@ export interface IUser {
   active: boolean;
   createdAt: string;
   updatedAt: string;
+  available?: boolean;
 }

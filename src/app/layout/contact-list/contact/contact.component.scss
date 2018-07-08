@@ -16,10 +16,20 @@
   .chater-contact-info {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   &:hover,
   &.selected {
     background-color: $blue-gray-700;
     outline: none;
+  }
+
+  .chatter-contact-available {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: green;
   }
 }
