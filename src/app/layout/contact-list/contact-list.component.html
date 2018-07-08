@@ -1,17 +1,26 @@
 <div *ngIf="data && data.results && data.results.length">
 
   <mat-tab-group>
+
     <mat-tab label="Contacts">
+
       <ng-template matTabContent>
+
         <chatter-contact *ngFor="let contact of data.results"
                          [contact]="contact"></chatter-contact>
+
       </ng-template>
+
     </mat-tab>
-    <mat-tab label="Groups">
+
+    <mat-tab label="Chanles">
+
       <ng-template matTabContent>
-        The Second Content
+        Chanels
       </ng-template>
+
     </mat-tab>
+
   </mat-tab-group>
 
 </div>
