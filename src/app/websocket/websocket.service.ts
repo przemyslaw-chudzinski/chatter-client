@@ -27,6 +27,14 @@ export class WebsocketService {
     // this._ws.onclose = this.onCloseHandler.bind(this, userId);
   }
 
+  disconnect(userId: string): void {
+    console.log(userId);
+    this.send({
+      action: 'USER_LOGGED_OUT',
+      userId: userId
+    });
+  }
+
   private onOpenHandler(userId: string, event: any): void {
     this.send({
       action: 'USER_LOGGED',

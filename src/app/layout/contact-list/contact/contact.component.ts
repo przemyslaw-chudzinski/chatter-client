@@ -21,7 +21,8 @@ export class ContactComponent implements OnInit {
       .pipe(
         take(1),
         tap(
-          user => (this.contact._id === user._id ? (this.show = false) : null)
+          user =>
+            user && (this.contact._id === user._id ? (this.show = false) : null)
         )
       )
       .subscribe();

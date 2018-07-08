@@ -13,6 +13,7 @@ import { RouterLinksService } from '../routes/router-links.service';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { IAuthResponse } from './models/auth-response.model';
 import { WebsocketService } from '../websocket/websocket.service';
+import { take } from '../../../node_modules/rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -76,7 +77,14 @@ export class AuthService {
 
   logOut(): void {
     AuthService.removeToken();
-    this._user$.next(null);
     this.routerLinksService.navigateByUrl(routerLinks.loginPage);
+    this._user$
+      .pipe(
+        take(1),
+        tap(console.log),
+        tap(user => user && this.websocketService.disconnect(user._id)),
+        tap(() => this._user$.next(null))
+      )
+      .subscribe();
   }
 }
