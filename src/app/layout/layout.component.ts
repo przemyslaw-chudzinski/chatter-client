@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ResponseData } from '../models/response-data';
+import { AuthService } from '../auth/auth.service';
+import { UsersService } from '../users/users.service';
+import { take, tap } from '../../../node_modules/rxjs/operators';
+import { IResponseData } from '../models/response-data';
 import { IUser } from '../auth/models/user.model';
 
 @Component({
@@ -9,11 +12,15 @@ import { IUser } from '../auth/models/user.model';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  asideOpened = true;
+  users: IResponseData<IUser>;
+  constructor(public auth: AuthService, private usersService: UsersService) {}
 
-  users: ResponseData<IUser>;
-
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.usersService.users$
+      .pipe(
+        take(1),
+        tap(response => (this.users = response))
+      )
+      .subscribe();
+  }
 }

@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$chatter-app-primary:mat-palette($mat-pink);
+$chatter-app-accent: mat-palette($mat-blue-gray);
+$chatter-app-warn: mat-palette($mat-red);
+
+// Additional palettes
+$chatter-app-success: mat-palette($mat-green);
+
+$chatter-app-dark-theme: mat-dark-theme($chatter-app-primary,
+$chatter-app-accent,
+$chatter-app-warn);
+
+@include angular-material-theme($chatter-app-dark-theme);
+
+$primary: mat-color($chatter-app-primary);
+$accent: mat-color($chatter-app-accent);
+$warn: mat-color($chatter-app-warn);
+
+// Additional colors
+$success: mat-color($chatter-app-success);

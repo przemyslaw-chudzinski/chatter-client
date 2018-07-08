@@ -1,0 +1,14 @@
+@import '../../../../scss/themes/chatter-dark-theme';
+.chatter-form-alert {
+  padding: 1rem;
+  margin: .5rem 0;
+
+  &.chatter-form-alert-warn {
+    background-color: $warn;
+  }
+
+  &.chatter-form-alert-success {
+    background-color: $success;
+
+  }
+}

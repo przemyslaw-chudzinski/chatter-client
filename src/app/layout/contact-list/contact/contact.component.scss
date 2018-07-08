@@ -1,4 +1,4 @@
-@import '../../../../scss/variables';
+@import '../../../../scss/themes/variables';
 .chater-contact {
   color: $blue-gray-100;
   display: flex;
@@ -17,7 +17,9 @@
     display: flex;
     align-items: center;
   }
-  &:hover {
+  &:hover,
+  &.selected {
     background-color: $blue-gray-700;
+    outline: none;
   }
 }

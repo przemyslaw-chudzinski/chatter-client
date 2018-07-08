@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
-  <button mat-button routerLink="/dashboard">
+  <button mat-button
+          routerLink="/dashboard">
     <mat-icon>chat</mat-icon>
     <span>Chatter</span>
   </button>
-  <button mat-icon-button (click)="menuButtonClicked.emit()">
+  <button mat-icon-button
+          (click)="menuButtonClicked.emit(null)">
     <mat-icon>menu</mat-icon>
   </button>
   <span class="topbar-spacer"></span>

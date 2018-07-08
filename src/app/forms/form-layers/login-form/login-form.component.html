@@ -1,8 +1,18 @@
-<form [formGroup]="loginFormService.formGroup">
+<form *ngIf="formGroup"
+      [formGroup]="formGroup"
+      (keydown.enter)="submitHandler($event)">
   <mat-form-field>
-    <input type="text" matInput placeholder="Email" autocomplete="off" formControlName="email">
+    <input type="text"
+           matInput
+           placeholder="Email"
+           autocomplete="off"
+           formControlName="email">
   </mat-form-field>
   <mat-form-field>
-    <input type="password" matInput placeholder="Password" autocomplete="off" formControlName="password">
+    <input type="password"
+           matInput
+           placeholder="Password"
+           autocomplete="off"
+           formControlName="password">
   </mat-form-field>
 </form>

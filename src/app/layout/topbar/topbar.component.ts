@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -6,9 +6,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent {
   @Output() menuButtonClicked: EventEmitter<null> = new EventEmitter<null>();
   constructor() {}
-
-  ngOnInit() {}
 }

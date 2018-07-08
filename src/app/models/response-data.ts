@@ -1,4 +1,4 @@
-export class ResponseData<T> {
+export interface IResponseData<T> {
   results: T[];
   results_number: number;
 }

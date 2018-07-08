@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from '../../../auth/models/user.model';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { Subscription } from '../../../../../node_modules/rxjs';
+import { tap } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,7 +13,7 @@ import { IUser } from '../../../auth/models/user.model';
 export class ContactComponent implements OnInit {
   @Input() contact: IUser;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {}
 }

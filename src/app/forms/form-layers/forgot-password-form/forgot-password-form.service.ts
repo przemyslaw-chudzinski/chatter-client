@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { FormLayersBase } from '../form-layers-base';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Injectable()
-export class ForgotPasswordFormService extends FormLayersBase {
-  constructor(protected fb: FormBuilder) {
-    super(fb);
-  }
+export class ForgotPasswordFormService {
+  constructor(protected fb: FormBuilder) {}
 
-  init(): void {
-    this.formGroup = this.fb.group({
+  init(): FormGroup {
+    return this.fb.group({
       email: [null, [Validators.required, Validators.email]]
     });
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginFormService } from './login-form.service';
+import { FormGroup } from '../../../../../node_modules/@angular/forms';
+import { FormLayersBase } from '../form-layers-base';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,10 +10,14 @@ import { LoginFormService } from './login-form.service';
   styleUrls: ['./login-form.component.scss'],
   exportAs: 'chatter-login-form'
 })
-export class LoginFormComponent implements OnInit {
-  constructor(public loginFormService: LoginFormService) {}
+export class LoginFormComponent extends FormLayersBase implements OnInit {
+  formGroup: FormGroup;
+
+  constructor(public loginFormService: LoginFormService) {
+    super();
+  }
 
   ngOnInit() {
-    this.loginFormService.init();
+    this.formGroup = this.loginFormService.init();
   }
 }

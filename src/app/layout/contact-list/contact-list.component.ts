@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ResponseData } from '../../models/response-data';
+import { IResponseData } from '../../models/response-data';
 import { IUser } from '../../auth/models/user.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { IUser } from '../../auth/models/user.model';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
-  @Input() data: ResponseData<IUser>;
+  @Input() data: IResponseData<IUser>;
 
   constructor() {}
 

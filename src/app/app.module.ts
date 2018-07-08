@@ -4,28 +4,37 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
-import { UsersService } from './services/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { FormLayersModule } from './forms/form-layers/form-layers.module';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { RouterLinksService } from './routes/router-links.service';
+import { routerLinks } from './routes/router-links';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './auth/auth.service';
+import { ChatterHttpModule } from './chatter-http/chatter-http.module';
+import { UsersModule } from './users/users.module';
+import { WebsocketModule } from './websocket/websocket.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: routerLinks.dashboardPage,
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    loadChildren: 'src/app/pages/dashboard/dashboard.module#DashboardModule'
+    path: routerLinks.dashboardPage,
+    loadChildren: 'src/app/pages/dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard]
   },
   {
-    path: 'messages',
-    loadChildren: 'src/app/pages/messages/messages.module#MessagesModule'
+    path: routerLinks.messagesPage,
+    loadChildren: 'src/app/pages/messages/messages.module#MessagesModule',
+    canActivate: [AuthGuard]
   },
   {
-    path: 'login',
+    path: routerLinks.loginPage,
     loadChildren: 'src/app/pages/auth/auth.module#AuthModule'
   }
 ];
@@ -39,9 +48,17 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     AuthModule.forRoot(),
-    FormLayersModule.forRoot()
+    FormLayersModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: AuthService.token
+      }
+    }),
+    ChatterHttpModule.forRoot(),
+    UsersModule.forRoot(),
+    WebsocketModule.forRoot()
   ],
-  providers: [UsersService],
+  providers: [RouterLinksService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

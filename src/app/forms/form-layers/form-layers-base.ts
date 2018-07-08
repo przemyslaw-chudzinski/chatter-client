@@ -1,6 +1,9 @@
-import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { Output, EventEmitter } from '@angular/core';
 
-export class FormLayersBase {
+export abstract class FormLayersBase {
+  @Output() enterDown = new EventEmitter<null>();
+
   private _formGroup: FormGroup;
 
   get formGroup(): FormGroup {
@@ -23,5 +26,13 @@ export class FormLayersBase {
     return this.formGroup.valid;
   }
 
-  constructor(protected fb: FormBuilder) {}
+  reset(): void {
+    this._formGroup.reset();
+  }
+
+  submitHandler(event: Event): void {
+    this.enterDown.emit(null);
+  }
+
+  constructor() {}
 }

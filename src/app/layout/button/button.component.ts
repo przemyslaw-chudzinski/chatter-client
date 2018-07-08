@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { EButtonTypes } from './models/button-types.enum';
+import { EButtonTypes } from './enums/button-types.enum';
 import { ButtonService } from './button.service';
 
 @Component({

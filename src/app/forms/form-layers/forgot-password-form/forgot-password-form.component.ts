@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForgotPasswordFormService } from './forgot-password-form.service';
+import { FormGroup } from '../../../../../node_modules/@angular/forms';
+import { FormLayersBase } from '../form-layers-base';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,10 +10,14 @@ import { ForgotPasswordFormService } from './forgot-password-form.service';
   styleUrls: ['./forgot-password-form.component.scss'],
   exportAs: 'chatter-forgot-password-form'
 })
-export class ForgotPasswordFormComponent implements OnInit {
-  constructor(public forgotPasswordFormService: ForgotPasswordFormService) {}
+export class ForgotPasswordFormComponent extends FormLayersBase
+  implements OnInit {
+  formGroup: FormGroup;
+  constructor(public forgotPasswordFormService: ForgotPasswordFormService) {
+    super();
+  }
 
   ngOnInit() {
-    this.forgotPasswordFormService.init();
+    this.formGroup = this.forgotPasswordFormService.init();
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -6,16 +7,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
-export class UserMenuComponent implements OnInit {
-  items: any[] = [
-    {
-      label: 'Account Settings',
-      path: '',
-      icon: ''
-    }
-  ];
+export class UserMenuComponent {
+  constructor(private auth: AuthService) {}
 
-  constructor() {}
-
-  ngOnInit() {}
+  logOut(event: Event): void {
+    this.auth.logOut();
+  }
 }

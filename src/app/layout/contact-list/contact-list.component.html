@@ -1,6 +1,7 @@
 <span class="contact-header">
   Contacts
 </span>
-<div *ngIf="data?.results && data.results.length">
-  <chatter-contact *ngFor="let contact of data.results" [contact]="contact"></chatter-contact>
+<div *ngIf="data && data.results && data.results.length">
+  <chatter-contact *ngFor="let contact of data.results"
+                   [contact]="contact"></chatter-contact>
 </div>

@@ -1,26 +1,41 @@
 <div class="chatter-login-form">
 
   <!-- Login form -->
-  <mat-card class="animated fadeIn" *ngIf="showLoginForm">
+  <mat-card class="animated fadeIn"
+            *ngIf="showLoginForm">
     <h2>
       <mat-icon>chat</mat-icon>
       <span>Chatter - Sign In</span>
     </h2>
-    <chatter-login-form #chatterLoginForm="chatter-login-form"></chatter-login-form>
-    <button mat-raised-button color="primary" (click)="signIn($event)">Sign in</button>
-    <button mat-button (click)="toggleForms()">Forgot password?</button>
+
+    <chatter-form-alert-main [message]="alertMessage"
+                             [type]="alertType"
+                             [visible]="alertVisible"></chatter-form-alert-main>
+
+    <chatter-login-form #chatterLoginForm="chatter-login-form"
+                        (enterDown)="signIn()"></chatter-login-form>
+    <button mat-raised-button
+            color="primary"
+            (click)="signIn($event)"
+            [disabled]="chatterLoginForm.formGroup.invalid">Sign in</button>
+    <button mat-button
+            (click)="toggleForms()">Forgot password?</button>
   </mat-card>
   <!-- ################################################################### -->
 
   <!-- Forgot password form -->
-  <mat-card class="animated fadeIn" *ngIf="!showLoginForm">
+  <mat-card class="animated fadeIn"
+            *ngIf="!showLoginForm">
     <h2>
       <mat-icon>chat</mat-icon>
       <span>Chatter - Reset password</span>
     </h2>
     <chatter-forgot-password-form #chatterForgotPasswordForm="chatter-forgot-password-form"></chatter-forgot-password-form>
-    <button mat-raised-button color="primary">Send email</button>
-    <button mat-button (click)="toggleForms()">Back to sign in</button>
+    <button mat-raised-button
+            color="primary"
+            [disabled]="chatterForgotPasswordForm.formGroup.invalid">Send email</button>
+    <button mat-button
+            (click)="toggleForms()">Back to sign in</button>
   </mat-card>
   <!-- ################################################################### -->
 

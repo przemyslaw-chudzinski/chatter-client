@@ -1,8 +1,11 @@
-<div class="chater-contact" [routerLink]="['/messages', contact.id]">
+<div class="chater-contact"
+     [routerLink]="['/messages', contact._id]"
+     routerLinkActive="selected">
   <div class="chater-contact-avatar">
-    <img src="http://placehold.it/50x50" alt="">
+    <img src="http://placehold.it/50x50"
+         alt="">
   </div>
   <div class="chater-contact-info">
-    <strong [innerText]="contact.name"></strong>
+    <strong [innerText]="contact.firstName + ' ' + contact.lastName"></strong>
   </div>
 </div>
