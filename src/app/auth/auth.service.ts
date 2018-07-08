@@ -81,7 +81,6 @@ export class AuthService {
     this._user$
       .pipe(
         take(1),
-        tap(console.log),
         tap(user => user && this.websocketService.disconnect(user._id)),
         tap(() => this._user$.next(null))
       )

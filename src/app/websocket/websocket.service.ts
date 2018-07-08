@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from '../../../node_modules/rxjs';
 import { IWebSocketPayload } from './models/websocket-payload.model';
+import { EWebSocketActions } from './enums/websocket-actions.enum';
 
 @Injectable()
 export class WebsocketService {
@@ -28,16 +29,15 @@ export class WebsocketService {
   }
 
   disconnect(userId: string): void {
-    console.log(userId);
     this.send({
-      action: 'USER_LOGGED_OUT',
+      action: EWebSocketActions.UserLoggedOut,
       userId: userId
     });
   }
 
   private onOpenHandler(userId: string, event: any): void {
     this.send({
-      action: 'USER_LOGGED',
+      action: EWebSocketActions.UserLogged,
       userId: userId
     });
   }

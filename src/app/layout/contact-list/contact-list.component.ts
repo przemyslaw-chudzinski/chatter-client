@@ -10,6 +10,7 @@ import { IUser } from '../../auth/models/user.model';
 import { WebsocketService } from '../../websocket/websocket.service';
 import { tap, startWith } from '../../../../node_modules/rxjs/operators';
 import { Subscription } from '../../../../node_modules/rxjs';
+import { EWebSocketActions } from '../../websocket/enums/websocket-actions.enum';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -30,7 +31,10 @@ export class ContactListComponent implements OnDestroy, OnChanges {
           .pipe(
             startWith(null),
             tap(data => {
-              if (data && data.action === 'CONTACT_STATUS_CHANGED') {
+              if (
+                data &&
+                data.action === EWebSocketActions.ContactStatusChanged
+              ) {
                 if (this.data && this.data.results) {
                   const dataToUpdate = { ...this.data };
                   dataToUpdate.results = dataToUpdate.results.map(item => {
