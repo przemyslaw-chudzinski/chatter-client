@@ -4,6 +4,10 @@
               mode="side"
               [opened]="auth.user$ | async">
 
+    <span class="contact-header">
+      Contacts
+    </span>
+
     <chatter-contact-list [data]="users"></chatter-contact-list>
 
   </mat-drawer>

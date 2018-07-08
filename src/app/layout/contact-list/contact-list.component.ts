@@ -54,6 +54,7 @@ export class ContactListComponent implements OnDestroy, OnChanges {
   }
 
   ngOnDestroy() {
-    this.onMessageSub.unsubscribe();
+    // tslint:disable-next-line:no-unused-expression
+    this.onMessageSub && this.onMessageSub.unsubscribe();
   }
 }

@@ -1,7 +1,17 @@
-<span class="contact-header">
-  Contacts
-</span>
 <div *ngIf="data && data.results && data.results.length">
-  <chatter-contact *ngFor="let contact of data.results"
-                   [contact]="contact"></chatter-contact>
+
+  <mat-tab-group>
+    <mat-tab label="Contacts">
+      <ng-template matTabContent>
+        <chatter-contact *ngFor="let contact of data.results"
+                         [contact]="contact"></chatter-contact>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Groups">
+      <ng-template matTabContent>
+        The Second Content
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
 </div>

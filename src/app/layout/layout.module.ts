@@ -14,6 +14,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from './button/button.module';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { ButtonModule } from './button/button.module';
     MatCardModule,
     MatMenuModule,
     RouterModule,
-    ButtonModule
+    ButtonModule,
+    MatTabsModule
   ],
   declarations: [
     LayoutComponent,
