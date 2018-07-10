@@ -50,6 +50,8 @@ export class AuthService {
     const decodedToken = this.jwtHelper.decodeToken(token);
     if (token && !this.isTokenExpired()) {
       this._user$.next(decodedToken.user);
+      console.log(decodedToken.user);
+      this.websocketService.userId = decodedToken.user._id;
       this.websocketService.connect(decodedToken.user._id);
       return this.routerLinksService.navigateByUrl(routerLinks.dashboardPage);
     }
@@ -71,6 +73,7 @@ export class AuthService {
         tap(() =>
           this.routerLinksService.navigateByUrl(routerLinks.dashboardPage)
         ),
+        tap(user => (this.websocketService.userId = user._id)),
         tap(user => this.websocketService.connect(user._id))
       );
   }

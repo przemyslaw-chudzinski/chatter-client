@@ -1,3 +1,23 @@
-<p>
-  messages-index works!
-</p>
+<div class="chatter-chat">
+
+  <div class="chatter-chat-header">
+    <h4>Anna Kowalska</h4>
+  </div>
+
+  <!-- Chatter Chat messages list -->
+  <div class="chatter-chat-messages-list">
+    <!-- Single message -->
+    <div *ngFor="let msg of messages"
+         class="chatter-chat-message">
+      {{ msg }}
+    </div>
+    <!-- ######################################### -->
+  </div>
+  <!-- ################################################### -->
+
+  <!-- Chatter chat editor -->
+  <div class="chatter-chat-editor">
+    <button (click)="sendMessage()">Send message</button>
+  </div>
+  <!-- ################################################### -->
+</div>

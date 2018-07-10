@@ -1,7 +1,9 @@
 import { EWebSocketActions } from '../enums/websocket-actions.enum';
 
-export interface IWebSocketPayload {
+export interface IWebSocketData {
   action: EWebSocketActions;
-  userId: string;
+  userId?: string;
+  contactId?: string;
   visibleContactsIds?: string[];
+  data?: any;
 }
