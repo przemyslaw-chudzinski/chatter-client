@@ -13,8 +13,8 @@ import { ButtonNotificationComponent } from './button-notification/button-notifi
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
-import { ButtonModule } from './button/button.module';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MessagesModule } from './messages/messages.module';
 
 @NgModule({
   imports: [
@@ -26,8 +26,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatMenuModule,
     RouterModule,
-    ButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MessagesModule
   ],
   declarations: [
     LayoutComponent,
@@ -37,6 +37,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     ButtonNotificationComponent,
     UserMenuComponent
   ],
-  exports: [LayoutComponent, TopbarComponent]
+  exports: [LayoutComponent, TopbarComponent, MessagesModule]
 })
 export class LayoutModule {}

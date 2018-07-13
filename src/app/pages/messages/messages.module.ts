@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MessagesComponent } from './messages.component';
 import { MessagesIndexComponent } from './messages-index/messages-index.component';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutModule } from '../../layout/layout.module';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), LayoutModule],
   declarations: [MessagesComponent, MessagesIndexComponent]
 })
 export class MessagesModule {}

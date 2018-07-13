@@ -7,7 +7,6 @@ import { FormLayersModule } from '../../forms/form-layers/form-layers.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ButtonModule } from '../../layout/button/button.module';
 import { AuthModule as AuthModuleAlias } from '../../auth/auth.module';
 import { FormAlertsModule } from '../../layout/form-alerts/form-alerts.module';
 
@@ -32,7 +31,6 @@ const routes: Routes = [
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    ButtonModule,
     AuthModuleAlias,
     FormAlertsModule
   ],
