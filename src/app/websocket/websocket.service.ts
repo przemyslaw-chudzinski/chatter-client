@@ -18,7 +18,7 @@ export class WebsocketService {
   constructor() {
     if (!WebSocket) {
       // tslint:disable-next-line:quotemark
-      throw new Error("Your browser does0n't support WebSocket");
+      throw new Error("Your browser doesn't support WebSocket");
     }
   }
 
@@ -31,7 +31,6 @@ export class WebsocketService {
     this._ws = new WebSocket('ws://localhost:8000');
     this._ws.onopen = this.onOpenHandler.bind(this, userId);
     this._ws.onmessage = this.onMessageHandler.bind(this);
-    // this._ws.onclose = this.onCloseHandler.bind(this, userId);
   }
 
   disconnect(userId: string): void {
@@ -48,7 +47,7 @@ export class WebsocketService {
         action: EWebSocketActions.MessageToContact,
         userId: this._userId,
         contactId: contactId,
-        data: 'message from user ' + this._userId
+        data: message
       });
   }
 
@@ -63,13 +62,6 @@ export class WebsocketService {
     const data = JSON.parse(event.data);
     this._onMessage$.next(data);
   }
-
-  // private onCloseHandler(userId: string, event: any): void {
-  //   this.send({
-  //     action: 'USER_LOGGED_OUT',
-  //     userId: userId
-  //   });
-  // }
 
   private send(data: IWebSocketData): void {
     if (typeof data === 'object') {

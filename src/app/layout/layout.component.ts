@@ -3,7 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { IResponseData } from '../models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { UsersService } from '../users/users.service';
-import { take, tap } from '../../../node_modules/rxjs/operators';
+import { take, tap, switchMap } from '../../../node_modules/rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -16,9 +16,9 @@ export class LayoutComponent implements OnInit {
   constructor(public auth: AuthService, private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.usersService.users$
+    this.auth.user$
       .pipe(
-        take(1),
+        switchMap(user => user && this.usersService.users$()),
         tap(users => (this.users = users))
       )
       .subscribe();

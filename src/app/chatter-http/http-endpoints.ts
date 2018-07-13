@@ -8,5 +8,6 @@ export const authEndpoints = {
 };
 
 export const usersEndpoints = {
-  usersEndpoint: `${apiUrl}/users`
+  usersEndpoint: `${apiUrl}/users`,
+  userEndpoint: (userId: string): string => `${apiUrl}/users/${userId}`
 };

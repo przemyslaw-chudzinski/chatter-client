@@ -1,7 +1,7 @@
 <div class="chatter-chat">
 
   <div class="chatter-chat-header">
-    <h4>Anna Kowalska</h4>
+    <h4 *ngIf="contact">{{ contact.firstName }} {{ contact.lastName }} - <small>{{ contact.email }}</small></h4>
   </div>
 
   <!-- Chatter Chat messages list -->

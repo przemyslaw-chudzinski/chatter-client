@@ -13,7 +13,7 @@ export class UsersService {
     private auth: AuthService
   ) {}
 
-  get users$(): Observable<IResponseData<IUser>> {
+  users$(): Observable<IResponseData<IUser>> {
     return this.httpClient.get<IResponseData<IUser>>(
       usersEndpoints.usersEndpoint,
       {
@@ -22,5 +22,16 @@ export class UsersService {
         }
       }
     );
+  }
+
+  user$(userId = ''): Observable<IUser> {
+    if (userId === '') {
+      throw new Error('userId is required');
+    }
+    return this.httpClient.get<IUser>(usersEndpoints.userEndpoint(userId), {
+      headers: {
+        Authorization: 'Bearer ' + AuthService.token()
+      }
+    });
   }
 }
