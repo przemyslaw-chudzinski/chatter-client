@@ -8,6 +8,7 @@ import { IMessage } from '../../../layout/messages/models/message.model';
 import { Subscription } from '../../../../../node_modules/rxjs';
 import { UsersService } from '../../../users/users.service';
 import { IUser } from '../../../auth/models/user.model';
+import { MessagesService } from '../../../messages/messages.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -24,7 +25,8 @@ export class MessagesIndexComponent implements OnInit, OnDestroy {
     private websocketService: WebsocketService,
     private route: ActivatedRoute,
     public auth: AuthService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit() {
@@ -52,7 +54,9 @@ export class MessagesIndexComponent implements OnInit, OnDestroy {
         .pipe(
           tap(() => (this.messages = [])),
           switchMap(params => this.usersService.user$(params.id)),
-          tap(contact => (this.contact = contact))
+          tap(contact => (this.contact = contact)),
+          switchMap(contact => this.messagesService.getMessages$(contact._id)),
+          tap(response => (this.messages = response.results))
         )
         .subscribe()
     );

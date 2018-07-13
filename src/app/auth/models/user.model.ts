@@ -3,8 +3,8 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  active: boolean;
-  createdAt: string;
-  updatedAt: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
   available?: boolean;
 }

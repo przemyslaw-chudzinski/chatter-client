@@ -11,3 +11,8 @@ export const usersEndpoints = {
   usersEndpoint: `${apiUrl}/users`,
   userEndpoint: (userId: string): string => `${apiUrl}/users/${userId}`
 };
+
+export const messagesEndpoints = {
+  messagesEndpoint: (recipientId: string): string =>
+    `${apiUrl}/messages/${recipientId}`
+};

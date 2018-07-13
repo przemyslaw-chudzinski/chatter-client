@@ -16,6 +16,7 @@ import { AuthService } from './auth/auth.service';
 import { ChatterHttpModule } from './chatter-http/chatter-http.module';
 import { UsersModule } from './users/users.module';
 import { WebsocketModule } from './websocket/websocket.module';
+import { MessagesModule } from './messages/messages.module';
 
 const routes: Routes = [
   {
@@ -56,7 +57,8 @@ const routes: Routes = [
     }),
     ChatterHttpModule.forRoot(),
     UsersModule.forRoot(),
-    WebsocketModule.forRoot()
+    WebsocketModule.forRoot(),
+    MessagesModule.forRoot()
   ],
   providers: [RouterLinksService],
   bootstrap: [AppComponent]
