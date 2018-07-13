@@ -1,6 +1,7 @@
 <div class="chatter-chat-messages-list">
   <!-- Single message -->
   <chatter-message *ngFor="let msg of messages"
-                   [message]="msg"></chatter-message>
+                   [message]="msg.message"
+                   [author]="msg.author"></chatter-message>
   <!-- ######################################### -->
 </div>

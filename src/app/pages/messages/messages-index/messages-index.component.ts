@@ -3,6 +3,8 @@ import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 import { tap } from '../../../../../node_modules/rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
+import { AuthService } from '../../../auth/auth.service';
+import { IMessage } from '../../../layout/messages/models/message.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,11 +14,12 @@ import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.en
 })
 export class MessagesIndexComponent implements OnInit {
   private contactId: string;
-  messages: string[] = [];
+  messages: IMessage[] = [];
 
   constructor(
     private websocketService: WebsocketService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -28,22 +31,19 @@ export class MessagesIndexComponent implements OnInit {
         tap(event => {
           // When message is recived
           if (event.action === EWebSocketActions.MessageToContact) {
-            console.log('recived message', event.data);
             const messagesToUpdate = [...this.messages];
             messagesToUpdate.push(event.data);
             this.messages = messagesToUpdate;
-            console.log('messages list after update', this.messages);
           }
         })
       )
       .subscribe();
   }
 
-  sendMessage(): void {
+  sendMessage(event: IMessage): void {
     // tslint:disable-next-line:no-unused-expression
     this.contactId &&
-      this.websocketService.sendMessage('to jest widomosć', this.contactId);
-
-    this.messages.push('to jest widomosć ode mnie');
+      this.websocketService.sendMessage(event.message, this.contactId);
+    this.messages.push(event);
   }
 }

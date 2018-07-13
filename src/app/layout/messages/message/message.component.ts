@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IUser } from '../../../auth/models/user.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
   @Input() message: string;
+  @Input() author: IUser;
   constructor() {}
 
   ngOnInit() {}

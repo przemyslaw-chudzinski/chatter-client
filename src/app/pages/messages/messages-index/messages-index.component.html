@@ -9,8 +9,6 @@
   <!-- ################################################### -->
 
   <!-- Chatter chat editor -->
-  <div class="chatter-chat-editor">
-    <button (click)="sendMessage()">Send message</button>
-  </div>
+  <chatter-message-editor (messageReady)="sendMessage($event)"></chatter-message-editor>
   <!-- ################################################### -->
 </div>
