@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -25,7 +24,6 @@ export class AuthService {
 
   constructor(
     private httpClient: ChatterHttpClient,
-    private route: ActivatedRoute,
     private jwtHelper: JwtHelperService,
     private routerLinksService: RouterLinksService,
     private websocketService: WebsocketService
@@ -50,7 +48,6 @@ export class AuthService {
     const decodedToken = this.jwtHelper.decodeToken(token);
     if (token && !this.isTokenExpired()) {
       this._user$.next(decodedToken.user);
-      console.log(decodedToken.user);
       this.websocketService.userId = decodedToken.user._id;
       this.websocketService.connect(decodedToken.user._id);
       return this.routerLinksService.navigateByUrl(routerLinks.dashboardPage);

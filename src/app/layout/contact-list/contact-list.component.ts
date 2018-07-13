@@ -1,16 +1,17 @@
 import {
   Component,
-  Input,
   OnDestroy,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  OnInit
 } from '@angular/core';
 import { IResponseData } from '../../models/response-data';
 import { IUser } from '../../auth/models/user.model';
 import { WebsocketService } from '../../websocket/websocket.service';
-import { tap, startWith } from '../../../../node_modules/rxjs/operators';
+import { tap, startWith, take } from '../../../../node_modules/rxjs/operators';
 import { Subscription } from '../../../../node_modules/rxjs';
 import { EWebSocketActions } from '../../websocket/enums/websocket-actions.enum';
+import { UsersService } from '../../users/users.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,11 +19,23 @@ import { EWebSocketActions } from '../../websocket/enums/websocket-actions.enum'
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnDestroy, OnChanges {
-  @Input() data: IResponseData<IUser>;
+export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
+  data: IResponseData<IUser>;
   private onMessageSub: Subscription;
 
-  constructor(private websocketService: WebsocketService) {}
+  constructor(
+    private websocketService: WebsocketService,
+    private usersService: UsersService
+  ) {}
+
+  ngOnInit() {
+    this.usersService.users$
+      .pipe(
+        take(1),
+        tap(response => (this.data = response))
+      )
+      .subscribe();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data) {
