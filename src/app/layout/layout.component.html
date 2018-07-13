@@ -1,20 +1,18 @@
 <mat-drawer-container>
 
-  <mat-drawer *ngIf="auth.user$ | async as user"
-              #drawer
+  <mat-drawer #drawer
               mode="side"
-              [opened]="true">
+              [opened]="auth.user$ | async">
 
     <span class="contact-header">
       Contacts
     </span>
 
-    <chatter-contact-list></chatter-contact-list>
+    <chatter-contact-list [data]="users"></chatter-contact-list>
 
   </mat-drawer>
 
-  <chatter-topbar (menuButtonClicked)="drawer && drawer.toggle()"
-                  *ngIf="auth.user$ | async"></chatter-topbar>
+  <chatter-topbar (menuButtonClicked)="drawer && drawer.toggle()"></chatter-topbar>
 
   <div class="layout-content">
 
