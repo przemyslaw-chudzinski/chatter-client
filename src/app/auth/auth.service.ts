@@ -12,7 +12,7 @@ import { RouterLinksService } from '../routes/router-links.service';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { IAuthResponse } from './models/auth-response.model';
 import { WebsocketService } from '../websocket/websocket.service';
-import { take } from '../../../node_modules/rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {

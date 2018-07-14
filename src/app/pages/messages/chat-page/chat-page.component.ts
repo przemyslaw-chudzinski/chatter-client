@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
-import { tap, switchMap } from '../../../../../node_modules/rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { tap, switchMap } from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
-import { IMessage } from '../../../layout/messages/models/message.model';
-import { Subscription } from '../../../../../node_modules/rxjs';
+import { Subscription } from 'rxjs';
 import { UsersService } from '../../../users/users.service';
 import { IUser } from '../../../auth/models/user.model';
 import { MessagesService } from '../../../messages/messages.service';
+import { IMessage } from '../../../messages/models/message.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'chatter-messages-index',
-  templateUrl: './messages-index.component.html',
-  styleUrls: ['./messages-index.component.scss']
+  selector: 'chatter-chat-page',
+  templateUrl: './chat-page.component.html',
+  styleUrls: ['./chat-page.component.scss']
 })
-export class MessagesIndexComponent implements OnInit, OnDestroy {
+export class ChatPageComponent implements OnInit, OnDestroy {
   messages: IMessage[] = [];
   private subscriptions: Subscription[] = [];
   contact: IUser;
@@ -55,6 +55,7 @@ export class MessagesIndexComponent implements OnInit, OnDestroy {
           tap(() => (this.messages = [])),
           switchMap(params => this.usersService.user$(params.id)),
           tap(contact => (this.contact = contact)),
+          tap(contact => this.websocketService.switchToContact(contact._id)),
           switchMap(contact => this.messagesService.getMessages$(contact._id)),
           tap(response => (this.messages = response.results))
         )

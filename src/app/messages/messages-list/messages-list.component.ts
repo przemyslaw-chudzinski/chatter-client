@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MessagesListComponent implements OnInit {
   @Input() messages: string[] = [];
+  @Input() loading: boolean;
   constructor() {}
 
   ngOnInit() {}

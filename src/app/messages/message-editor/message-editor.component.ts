@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IMessage } from '../models/message.model';
-import { AuthService } from '../../../auth/auth.service';
-import { take, tap } from '../../../../../node_modules/rxjs/operators';
+import { take, tap } from 'rxjs/operators';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   // tslint:disable-next-line:component-selector

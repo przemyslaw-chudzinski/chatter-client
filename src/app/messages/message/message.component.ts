@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IUser } from '../../../auth/models/user.model';
+import { IMessage } from '../models/message.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,8 +8,7 @@ import { IUser } from '../../../auth/models/user.model';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
-  @Input() message: string;
-  @Input() author: IUser;
+  @Input() message: IMessage;
   constructor() {}
 
   ngOnInit() {}

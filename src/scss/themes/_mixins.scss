@@ -1,0 +1,21 @@
+@mixin scroll($thubColor:#888, $trackColor: #f1f1f1) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $trackColor;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $thubColor;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}

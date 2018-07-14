@@ -3,7 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { IResponseData } from '../models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { UsersService } from '../users/users.service';
-import { take, tap, switchMap } from '../../../node_modules/rxjs/operators';
+import { take, tap, switchMap } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector

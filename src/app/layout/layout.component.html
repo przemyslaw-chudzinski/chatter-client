@@ -12,7 +12,8 @@
 
   </mat-drawer>
 
-  <chatter-topbar (menuButtonClicked)="drawer && drawer.toggle()"></chatter-topbar>
+  <chatter-topbar *ngIf="auth.user$ | async"
+                  (menuButtonClicked)="drawer && drawer.toggle()"></chatter-topbar>
 
   <div class="layout-content">
 

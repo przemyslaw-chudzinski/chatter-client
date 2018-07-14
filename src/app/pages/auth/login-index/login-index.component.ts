@@ -4,7 +4,7 @@ import { ForgotPasswordFormComponent } from '../../../forms/form-layers/forgot-p
 import { AuthService } from '../../../auth/auth.service';
 import { take, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { EAlertTypes } from '../../../layout/form-alerts/enums/alert-types.enum';
 
 @Component({

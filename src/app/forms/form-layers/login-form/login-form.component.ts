@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginFormService } from './login-form.service';
-import { FormGroup } from '../../../../../node_modules/@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormLayersBase } from '../form-layers-base';
 
 @Component({

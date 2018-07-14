@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'mixins';
 
 @include mat-core();
 
@@ -21,3 +22,5 @@ $warn: mat-color($chatter-app-warn);
 
 // Additional colors
 $success: mat-color($chatter-app-success);
+
+@include scroll($accent);

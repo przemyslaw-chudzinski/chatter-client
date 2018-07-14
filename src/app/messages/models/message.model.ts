@@ -1,4 +1,4 @@
-import { IUser } from '../../../auth/models/user.model';
+import { IUser } from '../../auth/models/user.model';
 
 export interface IMessage {
   _id?: string;

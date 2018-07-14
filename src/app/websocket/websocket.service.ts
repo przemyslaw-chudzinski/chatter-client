@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from '../../../node_modules/rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IWebSocketData } from './models/websocket-payload.model';
 import { EWebSocketActions } from './enums/websocket-actions.enum';
 
@@ -48,6 +48,17 @@ export class WebsocketService {
         userId: this._userId,
         contactId: contactId,
         data: message
+      });
+  }
+
+  switchToContact(contactId: string): void {
+    // tslint:disable-next-line:no-unused-expression
+    this._userId &&
+      contactId &&
+      this.send({
+        action: EWebSocketActions.SwitchedToContact,
+        contactId: contactId,
+        userId: this._userId
       });
   }
 

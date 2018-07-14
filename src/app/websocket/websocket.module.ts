@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { WebsocketService } from '../websocket/websocket.service';
+import { WebsocketService } from './websocket.service';
 
 @NgModule({
   imports: [CommonModule],

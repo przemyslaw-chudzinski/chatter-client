@@ -14,7 +14,8 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MessagesModule } from './messages/messages.module';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { MessagesModule } from './messages/messages.module';
     MatMenuModule,
     RouterModule,
     MatTabsModule,
-    MessagesModule
+    MatProgressSpinnerModule
   ],
   declarations: [
     LayoutComponent,
@@ -35,8 +36,9 @@ import { MessagesModule } from './messages/messages.module';
     ContactComponent,
     ContactListComponent,
     ButtonNotificationComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    SpinnerComponent
   ],
-  exports: [LayoutComponent, TopbarComponent, MessagesModule]
+  exports: [LayoutComponent, TopbarComponent, SpinnerComponent]
 })
 export class LayoutModule {}

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit {
+export class MessagePagesComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

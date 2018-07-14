@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
-import { Observable } from '../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { messagesEndpoints } from '../chatter-http/http-endpoints';
 

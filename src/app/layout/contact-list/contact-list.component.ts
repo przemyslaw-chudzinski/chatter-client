@@ -9,8 +9,8 @@ import {
 import { IResponseData } from '../../models/response-data';
 import { IUser } from '../../auth/models/user.model';
 import { WebsocketService } from '../../websocket/websocket.service';
-import { tap, startWith, take } from '../../../../node_modules/rxjs/operators';
-import { Subscription } from '../../../../node_modules/rxjs';
+import { tap, startWith, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { EWebSocketActions } from '../../websocket/enums/websocket-actions.enum';
 
 @Component({
