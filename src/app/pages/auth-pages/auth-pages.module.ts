@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginIndexComponent } from './login-index/login-index.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth.component';
+import { AuthPagesComponent } from './auth-pages.component';
 import { FormLayersModule } from '../../forms/form-layers/form-layers.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthModule as AuthModuleAlias } from '../../auth/auth.module';
 import { FormAlertsModule } from '../../layout/form-alerts/form-alerts.module';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AuthComponent,
+    component: AuthPagesComponent,
     children: [
       {
         path: '',
-        component: LoginIndexComponent
+        component: LoginPageComponent
       }
     ]
   }
@@ -34,6 +34,6 @@ const routes: Routes = [
     AuthModuleAlias,
     FormAlertsModule
   ],
-  declarations: [LoginIndexComponent, AuthComponent]
+  declarations: [LoginPageComponent, AuthPagesComponent]
 })
-export class AuthModule {}
+export class AuthPagesModule {}

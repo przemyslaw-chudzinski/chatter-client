@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: routerLinks.loginPage,
-    loadChildren: 'src/app/pages/auth/auth.module#AuthModule'
+    loadChildren: 'src/app/pages/auth-pages/auth-pages.module#AuthPagesModule'
   }
 ];
 

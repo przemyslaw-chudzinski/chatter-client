@@ -1,10 +1,10 @@
-import { AuthModule } from './auth.module';
+import { AuthPagesModule } from './auth-pages.module';
 
 describe('AuthModule', () => {
-  let authModule: AuthModule;
+  let authModule: AuthPagesModule;
 
   beforeEach(() => {
-    authModule = new AuthModule();
+    authModule = new AuthPagesModule();
   });
 
   it('should create an instance', () => {

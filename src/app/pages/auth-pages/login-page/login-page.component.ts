@@ -9,11 +9,11 @@ import { EAlertTypes } from '../../../layout/form-alerts/enums/alert-types.enum'
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'chatter-login-index',
-  templateUrl: './login-index.component.html',
-  styleUrls: ['./login-index.component.scss']
+  selector: 'chatter-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss']
 })
-export class LoginIndexComponent {
+export class LoginPageComponent {
   showLoginForm = true;
   alertMessage: string;
   alertVisible: boolean;
