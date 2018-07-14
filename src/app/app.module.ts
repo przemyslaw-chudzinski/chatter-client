@@ -26,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: routerLinks.dashboardPage,
-    loadChildren: 'src/app/pages/dashboard/dashboard.module#DashboardModule',
+    loadChildren:
+      'src/app/pages/dashboard-pages/dashboard-pages.module#DashboardPagesModule',
     canActivate: [AuthGuard]
   },
   {
