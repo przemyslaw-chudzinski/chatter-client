@@ -3,5 +3,5 @@
   <chatter-message *ngFor="let msg of messages"
                    [message]="msg"></chatter-message>
   <!-- ######################################### -->
-  <!-- <chatter-spinner></chatter-spinner> -->
+  <chatter-spinner *ngIf="loading"></chatter-spinner>
 </div>

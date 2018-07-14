@@ -5,9 +5,10 @@ import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageComponent } from './message/message.component';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
 import { FormsModule } from '@angular/forms';
+import { LayoutModule } from '../layout/layout.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LayoutModule],
   declarations: [
     MessagesListComponent,
     MessageComponent,

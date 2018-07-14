@@ -21,6 +21,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   contact: IUser;
 
+  messagesListLoading: boolean;
+  headerTitleLoading: boolean;
+
   constructor(
     private websocketService: WebsocketService,
     private route: ActivatedRoute,
@@ -52,12 +55,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
       this.route.params
         .pipe(
+          tap(() => (this.messagesListLoading = true)),
+          tap(() => (this.headerTitleLoading = true)),
           tap(() => (this.messages = [])),
           switchMap(params => this.usersService.user$(params.id)),
           tap(contact => (this.contact = contact)),
+          tap(() => (this.headerTitleLoading = false)),
           tap(contact => this.websocketService.switchToContact(contact._id)),
           switchMap(contact => this.messagesService.getMessages$(contact._id)),
-          tap(response => (this.messages = response.results))
+          tap(response => (this.messages = response.results)),
+          tap(() => (this.messagesListLoading = false))
         )
         .subscribe()
     );

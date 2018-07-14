@@ -4,6 +4,7 @@ import { MessagePagesComponent } from './message-pages.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MessagesModule } from '../../messages/messages.module';
+import { LayoutModule } from '../../layout/layout.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), MessagesModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MessagesModule,
+    LayoutModule
+  ],
   declarations: [MessagePagesComponent, ChatPageComponent]
 })
 export class MessagePagesModule {}

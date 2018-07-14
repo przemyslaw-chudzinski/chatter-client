@@ -3,4 +3,13 @@
   height: 60vh;
   overflow: auto;
   margin-bottom: 2rem;
+  position: relative;
+
+  chatter-spinner {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
