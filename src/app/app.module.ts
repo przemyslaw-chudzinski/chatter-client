@@ -31,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: routerLinks.messagesPage,
-    loadChildren: 'src/app/pages/messages/messages.module#MessagesModule',
+    loadChildren:
+      'src/app/pages/message-pages/message-pages.module#MessagePagesModule',
     canActivate: [AuthGuard]
   },
   {
