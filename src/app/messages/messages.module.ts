@@ -11,6 +11,8 @@ import { SpinnerModule } from '../spinner/spinner.module';
 import { MatButtonModule } from '../../../node_modules/@angular/material/button';
 import { MatIconModule } from '../../../node_modules/@angular/material/icon';
 import { MatMenuModule } from '../../../node_modules/@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditMessageDialogComponent } from './dialogs/edit-message-dialog/edit-message-dialog.component';
 
 @NgModule({
   imports: [
@@ -19,16 +21,19 @@ import { MatMenuModule } from '../../../node_modules/@angular/material/menu';
     SpinnerModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   declarations: [
     MessagesListComponent,
     MessageComponent,
     MessageEditorComponent,
     ScrollToBottomDirective,
-    MessageEditorDirective
+    MessageEditorDirective,
+    EditMessageDialogComponent
   ],
-  exports: [MessagesListComponent, MessageComponent, MessageEditorComponent]
+  exports: [MessagesListComponent, MessageComponent, MessageEditorComponent],
+  entryComponents: [EditMessageDialogComponent]
 })
 export class MessagesModule {
   static forRoot(): ModuleWithProviders {

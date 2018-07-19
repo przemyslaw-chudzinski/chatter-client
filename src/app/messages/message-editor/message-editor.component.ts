@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { IMessage } from '../models/message.model';
 import { take, tap } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
@@ -10,9 +10,17 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./message-editor.component.scss']
 })
 export class MessageEditorComponent implements OnInit {
+  @Input()
+  set value(value: string) {
+    this._value = value;
+  }
   @Output() messageReady = new EventEmitter<IMessage>();
 
-  value = '';
+  private _value = '';
+
+  get value(): string {
+    return this._value;
+  }
 
   constructor(private auth: AuthService) {}
 

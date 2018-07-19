@@ -2,5 +2,6 @@
      class="chatter-message-editor"
      contenteditable="true"
      (keyup)="keyupHandler($event)"
-     (keydown.enter)="sendMessage($event)">
+     (keydown.enter)="sendMessage($event)"
+     [innerHTML]="value">
 </div>
