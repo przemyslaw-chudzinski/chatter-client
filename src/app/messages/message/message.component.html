@@ -1,3 +1,4 @@
-<div class="chatter-chat-message">
+<div class="chatter-chat-message animated fadeIn"
+     *ngIf="message">
   <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong> {{ message.message }}
 </div>

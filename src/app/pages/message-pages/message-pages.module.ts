@@ -4,7 +4,7 @@ import { MessagePagesComponent } from './message-pages.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MessagesModule } from '../../messages/messages.module';
-import { LayoutModule } from '../../layout/layout.module';
+import { SpinnerModule } from '../../spinner/spinner.module';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MessagesModule,
-    LayoutModule
+    SpinnerModule
   ],
   declarations: [MessagePagesComponent, ChatPageComponent]
 })

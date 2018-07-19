@@ -5,16 +5,18 @@ import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageComponent } from './message/message.component';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
 import { FormsModule } from '@angular/forms';
-import { LayoutModule } from '../layout/layout.module';
 import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
+import { MessageEditorDirective } from './message-editor/message-editor.directive';
+import { SpinnerModule } from '../spinner/spinner.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, LayoutModule],
+  imports: [CommonModule, FormsModule, SpinnerModule],
   declarations: [
     MessagesListComponent,
     MessageComponent,
     MessageEditorComponent,
-    ScrollToBottomDirective
+    ScrollToBottomDirective,
+    MessageEditorDirective
   ],
   exports: [MessagesListComponent, MessageComponent, MessageEditorComponent]
 })

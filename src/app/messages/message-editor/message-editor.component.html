@@ -1,4 +1,6 @@
-<div class="chatter-message-editor"
+<div chatterMessageEditor
+     class="chatter-message-editor"
      contenteditable="true"
-     (keyup)="keyupHandler($event)">
+     (keyup)="keyupHandler($event)"
+     (keydown.enter)="sendMessage($event)">
 </div>

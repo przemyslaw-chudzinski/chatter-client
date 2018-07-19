@@ -77,6 +77,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   sendMessage(event: IMessage): void {
     // tslint:disable-next-line:no-unused-expression
     this.contact &&
+      event &&
+      event.message &&
       this.websocketService.sendMessage(event.message, this.contact._id);
     this.messages.push(event);
   }
