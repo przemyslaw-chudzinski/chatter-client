@@ -1,4 +1,7 @@
 .chatter-chat-message {
   padding: .5rem;
   border-bottom: 1px dotted rgba(#fff, .3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

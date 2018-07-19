@@ -8,9 +8,19 @@ import { FormsModule } from '@angular/forms';
 import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 import { MessageEditorDirective } from './message-editor/message-editor.directive';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { MatButtonModule } from '../../../node_modules/@angular/material/button';
+import { MatIconModule } from '../../../node_modules/@angular/material/icon';
+import { MatMenuModule } from '../../../node_modules/@angular/material/menu';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, SpinnerModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SpinnerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
+  ],
   declarations: [
     MessagesListComponent,
     MessageComponent,
