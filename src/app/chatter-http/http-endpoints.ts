@@ -9,10 +9,12 @@ export const authEndpoints = {
 
 export const usersEndpoints = {
   usersEndpoint: `${apiUrl}/users`,
-  userEndpoint: (userId: string): string => `${apiUrl}/users/${userId}`
+  userEndpoint: (userId: string): string => `${apiUrl}/user/${userId}`
 };
 
 export const messagesEndpoints = {
   messagesEndpoint: (recipientId: string): string =>
-    `${apiUrl}/messages/${recipientId}`
+    `${apiUrl}/messages/${recipientId}`,
+  messageEndpoint: (messageId: string): string =>
+    `${apiUrl}/messages/${messageId}`
 };

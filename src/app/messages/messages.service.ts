@@ -21,4 +21,12 @@ export class MessagesService {
       }
     );
   }
+
+  updateMessage$(messageId: string): Observable<any> {
+    return this.httpClient.post('', {
+      headers: {
+        Authorization: 'Bearer ' + AuthService.token()
+      }
+    });
+  }
 }

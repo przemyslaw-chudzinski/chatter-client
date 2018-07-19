@@ -1,7 +1,7 @@
 <div class="chatter-chat-message animated fadeIn"
      *ngIf="message">
   <div>
-    <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong> {{ message.message }}
+    <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong> {{ message.content }}
   </div>
   <div class="chatter-chat-message-actions">
     <button mat-icon-button

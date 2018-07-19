@@ -43,8 +43,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
               this.contact._id === event.contactId
             ) {
               const messagesToUpdate = [...this.messages];
+              console.log(event);
               messagesToUpdate.push({
-                message: event.data,
+                content: event.data,
                 author: this.contact
               });
               this.messages = messagesToUpdate;
@@ -78,8 +79,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-unused-expression
     this.contact &&
       event &&
-      event.message &&
-      this.websocketService.sendMessage(event.message, this.contact._id);
+      event.content &&
+      this.websocketService.sendMessage(event.content, this.contact._id);
     this.messages.push(event);
   }
 }

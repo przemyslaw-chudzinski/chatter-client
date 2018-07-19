@@ -28,7 +28,7 @@ export class MessageComponent implements OnInit {
   }
 
   showEditForm(): boolean {
-    return this.currentUser._id === this.message.authorId;
+    return this.currentUser._id === this.message.author._id;
   }
 
   editMessage(): void {
