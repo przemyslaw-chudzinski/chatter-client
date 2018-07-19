@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewChecked } from '@angular/core';
+import { ScrollToBottomDirective } from '../directives/scroll-to-bottom.directive';
+import { IMessage } from '../models/message.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -6,11 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './messages-list.component.html',
   styleUrls: ['./messages-list.component.scss']
 })
-export class MessagesListComponent implements OnInit {
-  @Input() messages: string[] = [];
+export class MessagesListComponent implements AfterViewChecked {
+  @Input() messages: IMessage[];
   @Input() loading: boolean;
+
+  @ViewChild(ScrollToBottomDirective, { read: ScrollToBottomDirective })
+  chatterScrollToBottom: ScrollToBottomDirective;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngAfterViewChecked() {
+    // tslint:disable-next-line:no-unused-expression
+    this.chatterScrollToBottom && this.chatterScrollToBottom.scrollToBottom();
+  }
 }

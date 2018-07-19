@@ -23,7 +23,6 @@ export class WebsocketService {
   }
 
   set userId(userId: string) {
-    console.log('set user id', userId);
     this._userId = userId;
   }
 

@@ -1,12 +1,23 @@
+// .chatter-message-editor {
+//   display: flex;
+//   textarea {
+//     width: 100%;
+//     height: 10rem;
+//     display: block;
+//     background-color: transparent;
+//     border: 1px solid rgba(#fff, .3);
+//     color: #fff;
+//     padding: 1rem;
+//   }
+// }
 .chatter-message-editor {
-  display: flex;
-  textarea {
-    width: 100%;
-    height: 10rem;
-    display: block;
-    background-color: transparent;
-    border: 1px solid rgba(#fff, .3);
-    color: #fff;
-    padding: 1rem;
-  }
+  // display: flex;
+  // width: 100%;
+  height: 5rem;
+  display: block;
+  background-color: transparent;
+  border: 1px solid rgba(#fff, .3);
+  color: #fff;
+  padding: 1rem;
+  overflow: auto;
 }

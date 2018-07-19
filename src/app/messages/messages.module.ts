@@ -6,13 +6,15 @@ import { MessageComponent } from './message/message.component';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutModule } from '../layout/layout.module';
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, LayoutModule],
   declarations: [
     MessagesListComponent,
     MessageComponent,
-    MessageEditorComponent
+    MessageEditorComponent,
+    ScrollToBottomDirective
   ],
   exports: [MessagesListComponent, MessageComponent, MessageEditorComponent]
 })

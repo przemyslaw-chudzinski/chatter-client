@@ -1,4 +1,5 @@
-<div class="chatter-chat-messages-list">
+<div class="chatter-chat-messages-list"
+     [chatterScrollToBottom]="messages">
   <!-- Single message -->
   <chatter-message *ngFor="let msg of messages"
                    [message]="msg"></chatter-message>
