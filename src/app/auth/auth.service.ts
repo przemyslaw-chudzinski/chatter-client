@@ -59,7 +59,7 @@ export class AuthService {
     // tslint:disable-next-line:no-unused-expression
     (token && !this.isTokenExpired() && this._user$.next(decodedToken.user)) ||
       null;
-    return decodedToken.user;
+    return (decodedToken && decodedToken.user) || null;
   }
 
   private saveToken(token: string): void {

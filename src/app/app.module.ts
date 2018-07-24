@@ -17,6 +17,7 @@ import { ChatterHttpModule } from './chatter-http/chatter-http.module';
 import { UsersModule } from './users/users.module';
 import { WebsocketModule } from './websocket/websocket.module';
 import { MessagesModule } from './messages/messages.module';
+import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
   },
   {
     path: routerLinks.loginPage,
-    loadChildren: 'src/app/pages/auth-pages/auth-pages.module#AuthPagesModule'
+    loadChildren: 'src/app/pages/auth-pages/auth-pages.module#AuthPagesModule',
+    canActivate: [UserNotLoggedGuard]
   }
 ];
 
