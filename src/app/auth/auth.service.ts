@@ -50,7 +50,7 @@ export class AuthService {
       this._user$.next(decodedToken.user);
       this.websocketService.userId = decodedToken.user._id;
       this.websocketService.connect(decodedToken.user._id);
-      return this.routerLinksService.navigateByUrl(routerLinks.dashboardPage);
+      return;
     }
     return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
   }

@@ -3,7 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { IResponseData } from '../models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { UsersService } from '../users/users.service';
-import { take, tap, switchMap, takeWhile } from 'rxjs/operators';
+import { tap, switchMap, takeWhile } from 'rxjs/operators';
 import { of } from '../../../node_modules/rxjs';
 
 @Component({
@@ -20,7 +20,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   constructor(public auth: AuthService, private usersService: UsersService) {}
 
   ngOnInit(): void {
-    console.log('layout init');
     this.auth.user$
       .pipe(
         takeWhile(() => this.alive),
