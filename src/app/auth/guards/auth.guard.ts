@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.user$.pipe(
       take(1),
-      tap(() => this.auth.init()),
+      tap(() => this.auth.initUser()),
       map(user => {
         if (user) {
           return true;

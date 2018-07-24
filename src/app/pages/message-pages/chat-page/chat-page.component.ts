@@ -36,9 +36,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.websocketService.onMessage$
         .pipe(
-          tap(event => console.log(event)),
           tap(event => {
             if (
+              event &&
               event.action === EWebSocketActions.MessageToContact &&
               this.contact &&
               this.contact._id === event.contactId

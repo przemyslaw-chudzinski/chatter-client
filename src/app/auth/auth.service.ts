@@ -44,15 +44,22 @@ export class AuthService {
   }
 
   init(): Promise<boolean> {
-    const token = AuthService.token();
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    if (token && !this.isTokenExpired()) {
-      this._user$.next(decodedToken.user);
-      this.websocketService.userId = decodedToken.user._id;
-      this.websocketService.connect(decodedToken.user._id);
+    const user = this.initUser();
+    if (user) {
+      this.websocketService.userId = user._id;
+      this.websocketService.connect(user._id);
       return;
     }
     return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
+  }
+
+  initUser(): IUser {
+    const token = AuthService.token();
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    // tslint:disable-next-line:no-unused-expression
+    (token && !this.isTokenExpired() && this._user$.next(decodedToken.user)) ||
+      null;
+    return decodedToken.user;
   }
 
   private saveToken(token: string): void {
