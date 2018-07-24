@@ -18,7 +18,6 @@ export class MessageComponent implements OnInit {
   constructor(private auth: AuthService, private dialog: MatDialog) {}
 
   ngOnInit() {
-    console.log(this.message);
     this.auth.user$
       .pipe(
         take(1),
