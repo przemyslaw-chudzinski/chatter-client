@@ -2,9 +2,9 @@
 
   <h4>Edit message</h4>
 
-  <chatter-message-editor (contentChanges)="contentChangesHandler($event)" [(value)]="message.content"></chatter-message-editor>
-
-  {{ messageCopy | json }}
+  <chatter-message-editor
+    (contentChanges)="contentChangesHandler($event)"
+    [(value)]="message.content"></chatter-message-editor>
 
 </mat-dialog-content>
 
