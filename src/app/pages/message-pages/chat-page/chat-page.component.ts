@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, takeWhile } from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -22,7 +22,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   contact: IUser;
 
   messagesListLoading: boolean;
+
   headerTitleLoading: boolean;
+
+  private alive = true;
 
   constructor(
     private websocketService: WebsocketService,
@@ -33,46 +36,46 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.websocketService.onMessage$
-        .pipe(
-          tap(event => {
-            if (
-              event &&
-              event.action === EWebSocketActions.MessageToContact &&
-              this.contact &&
-              this.contact._id === event.contactId
-            ) {
-              const messagesToUpdate = [...this.messages];
-              messagesToUpdate.push({
-                content: event.data,
-                author: this.contact
-              });
-              this.messages = messagesToUpdate;
-            }
-          })
-        )
-        .subscribe(),
+    this.websocketService.onMessage$
+      .pipe(
+        takeWhile(() => this.alive),
+        tap(event => {
+          if (
+            event &&
+            event.action === EWebSocketActions.MessageToContact &&
+            this.contact &&
+            this.contact._id === event.contactId
+          ) {
+            const messagesToUpdate = [...this.messages];
+            messagesToUpdate.push({
+              content: event.data,
+              author: this.contact
+            });
+            this.messages = messagesToUpdate;
+          }
+        })
+      )
+      .subscribe();
 
-      this.route.params
-        .pipe(
-          tap(() => (this.messagesListLoading = true)),
-          tap(() => (this.headerTitleLoading = true)),
-          tap(() => (this.messages = [])),
-          switchMap(params => this.usersService.user$(params.id)),
-          tap(contact => (this.contact = contact)),
-          tap(() => (this.headerTitleLoading = false)),
-          tap(contact => this.websocketService.switchToContact(contact._id)),
-          switchMap(contact => this.messagesService.getMessages$(contact._id)),
-          tap(response => (this.messages = response.results)),
-          tap(() => (this.messagesListLoading = false))
-        )
-        .subscribe()
-    );
+    this.route.params
+      .pipe(
+        takeWhile(() => this.alive),
+        tap(() => (this.messagesListLoading = true)),
+        tap(() => (this.headerTitleLoading = true)),
+        tap(() => (this.messages = [])),
+        switchMap(params => this.usersService.user$(params.id)),
+        tap(contact => (this.contact = contact)),
+        tap(() => (this.headerTitleLoading = false)),
+        tap(contact => this.websocketService.switchToContact(contact._id)),
+        switchMap(contact => this.messagesService.getMessages$(contact._id)),
+        tap(response => (this.messages = response.results)),
+        tap(() => (this.messagesListLoading = false))
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.alive = false;
   }
 
   sendMessage(event: IMessage): void {

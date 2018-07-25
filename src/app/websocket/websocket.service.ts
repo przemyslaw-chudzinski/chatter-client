@@ -42,6 +42,7 @@ export class WebsocketService {
   sendMessage(message: string, contactId: string): void {
     // tslint:disable-next-line:no-unused-expression
     this._userId &&
+      contactId &&
       this.send({
         action: EWebSocketActions.MessageToContact,
         userId: this._userId,

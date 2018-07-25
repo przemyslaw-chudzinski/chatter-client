@@ -1,4 +1,5 @@
-<div class="chater-contact animated fadeIn"
+<div *ngIf="contact"
+     class="chater-contact animated fadeIn"
      [routerLink]="['/messages', contact._id]"
      routerLinkActive="selected">
   <div class="chater-contact-avatar">
@@ -6,7 +7,11 @@
          alt="">
   </div>
   <div class="chater-contact-info">
-    <strong [innerText]="contact.firstName + ' ' + contact.lastName"></strong>
+    <strong [matBadge]="contact.newMessagesCount"
+            [matBadgeHidden]="!contact.newMessagesCount"
+            matBadgePosition="above after"
+            matBadgeOverlap="false"
+            matBadgeColor="primary">{{ contact.firstName }} {{ contact.lastName }}</strong>
     <span class="chatter-contact-available"
           *ngIf="contact.available"></span>
   </div>

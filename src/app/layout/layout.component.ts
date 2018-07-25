@@ -3,8 +3,9 @@ import { AuthService } from '../auth/auth.service';
 import { IResponseData } from '../models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { UsersService } from '../users/users.service';
-import { tap, switchMap, takeWhile } from 'rxjs/operators';
+import { tap, switchMap, takeWhile, map } from 'rxjs/operators';
 import { of } from '../../../node_modules/rxjs';
+import { IContact } from './contact-list/models/contact';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -13,7 +14,7 @@ import { of } from '../../../node_modules/rxjs';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  users: IResponseData<IUser>;
+  contacts: IResponseData<IContact>;
 
   private alive = true;
 
@@ -24,7 +25,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         switchMap(user => (user ? this.usersService.users$() : of(null))),
-        tap(users => (this.users = users))
+        map(users => users as IResponseData<IContact>),
+        map(users => {
+          users.results.map(c => (c.newMessagesCount = 0));
+          return users;
+        }),
+        tap(contacts => (this.contacts = contacts))
       )
       .subscribe();
   }

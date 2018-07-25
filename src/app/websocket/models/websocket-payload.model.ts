@@ -1,4 +1,5 @@
 import { EWebSocketActions } from '../enums/websocket-actions.enum';
+import { ENotifications } from '../enums/websocket-notifications.enum';
 
 export interface IWebSocketData {
   action: EWebSocketActions;
@@ -6,4 +7,5 @@ export interface IWebSocketData {
   contactId?: string;
   visibleContactsIds?: string[];
   data?: any;
+  type?: ENotifications;
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IUser } from '../../../auth/models/user.model';
+import { IContact } from '../models/contact';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,7 +8,7 @@ import { IUser } from '../../../auth/models/user.model';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  @Input() contact: IUser;
+  @Input() contact: IContact;
 
   constructor() {}
 }

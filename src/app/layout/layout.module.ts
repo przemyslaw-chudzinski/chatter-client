@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 // import { SpinnerComponent } from './spinner/spinner.component';
 // import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { SpinnerModule } from './spinner/spinner.module';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
@@ -28,9 +29,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatMenuModule,
     RouterModule,
-    MatTabsModule
+    MatTabsModule,
+    MatBadgeModule
     // MatProgressSpinnerModule,
-    // SpinnerModule
+    // SpinnerModule,
   ],
   declarations: [
     LayoutComponent,
