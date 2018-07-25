@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 import { IContact } from './contact-list/models/contact';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
@@ -26,7 +25,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
         switchMap(user => (user ? this.usersService.users$() : of(null))),
         map(users => users as IResponseData<IContact>),
         map(users => {
-          users.results.map(c => (c.newMessagesCount = 0));
+          if (users && users.results && users.results.length) {
+            users.results = users.results.map(c => {
+              c.newMessagesCount = 0;
+              return c;
+            });
+          }
           return users;
         }),
         tap(contacts => (this.contacts = contacts))
