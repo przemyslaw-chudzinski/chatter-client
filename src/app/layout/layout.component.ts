@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { IResponseData } from '../models/response-data';
-import { IUser } from '../auth/models/user.model';
 import { UsersService } from '../users/users.service';
 import { tap, switchMap, takeWhile, map } from 'rxjs/operators';
-import { of } from '../../../node_modules/rxjs';
+import { of } from 'rxjs';
 import { IContact } from './contact-list/models/contact';
 
 @Component({

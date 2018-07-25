@@ -30,7 +30,7 @@ export class LoginPageComponent {
     this.alertVisible = false;
   }
 
-  signIn(event: Event): void {
+  signIn(): void {
     this.alertVisible = false;
     if (this.chatterLoginForm.isValid) {
       this.auth
@@ -45,7 +45,7 @@ export class LoginPageComponent {
 
   private errorHandler(err: HttpErrorResponse): void {
     switch (err.status) {
-      case 400:
+      case 404:
         this.alertMessage = err.error.message;
         this.alertType = EAlertTypes.danger;
         this.alertVisible = true;
