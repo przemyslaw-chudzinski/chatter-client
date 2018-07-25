@@ -1,30 +1,52 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import {Component, Output, EventEmitter, Input, OnInit, OnDestroy} from '@angular/core';
 import { IMessage } from '../models/message.model';
-import { take, tap } from 'rxjs/operators';
+import { take, takeWhile, tap, map} from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
+import {Subject} from 'rxjs';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-message-editor',
   templateUrl: './message-editor.component.html',
   styleUrls: ['./message-editor.component.scss']
 })
-export class MessageEditorComponent {
-  @Input()
-  set value(value: string) {
+export class MessageEditorComponent implements OnInit, OnDestroy {
+  @Input() set value(value: string) {
     this._value = value;
-    this.content = value;
+    this.content$.next(this._value);
   }
-  @Output() messageReady = new EventEmitter<IMessage>();
-  private _value: string;
+
   get value(): string {
     return this._value;
   }
+
+  @Output() messageReady = new EventEmitter<IMessage>();
+
+  @Output() contentChanges = new EventEmitter<string>(null);
+
+  private _value: string;
+
+  private alive = true;
+
   private content = '';
+
+  content$ = new Subject<string>();
 
   constructor(private auth: AuthService) {}
 
-  sendMessage(event: Event): void {
+  ngOnInit() {
+    this.content$.pipe(
+      takeWhile(() => this.alive),
+      map(content => content as string),
+      tap(content => (this.content = content)),
+      tap(content => this.contentChanges.emit(content))
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
+  }
+
+  sendMessage(): void {
     this.auth.user$
       .pipe(
         take(1),
@@ -45,7 +67,7 @@ export class MessageEditorComponent {
 
   keyupHandler(event: any): void {
     if (event.code !== 'Enter') {
-      this.content = event.target.innerHTML;
+      this.content$.next(event.target.innerHTML);
     }
   }
 }

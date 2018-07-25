@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IMessage } from '../models/message.model';
 import { AuthService } from '../../auth/auth.service';
-import { take, tap } from '../../../../node_modules/rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { IUser } from '../../auth/models/user.model';
-import { MatDialog } from '../../../../node_modules/@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EditMessageDialogComponent } from '../dialogs/edit-message-dialog/edit-message-dialog.component';
 
 @Component({
@@ -33,9 +33,7 @@ export class MessageComponent implements OnInit {
   editMessage(): void {
     this.dialog.open(EditMessageDialogComponent, {
       minWidth: 600,
-      data: {
-        message: this.message
-      }
+      data: this.message
     });
   }
 }

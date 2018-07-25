@@ -3,6 +3,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import {IMessage} from '../../models/message.model';
+import {MessagesService} from '../../messages.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'chatter-edit-message-dialog',
@@ -10,16 +13,29 @@ import {
   styleUrls: ['./edit-message-dialog.component.scss']
 })
 export class EditMessageDialogComponent implements OnInit {
+  messageCopy: IMessage;
+
   constructor(
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public message: IMessage,
+    private messagesService: MessagesService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.messageCopy = {...this.message};
+  }
 
   cancel(): void {
     this.dialogRef.close();
   }
 
-  update(): void {}
+  update(): void {
+    this.messagesService.updateMessage$(this.messageCopy._id, this.message).pipe(
+      take(1)
+    ).subscribe();
+  }
+
+  contentChangesHandler(event: string): void {
+    this.messageCopy.content = event;
+  }
 }

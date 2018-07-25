@@ -13,6 +13,10 @@ export class ChatterHttpClient {
   post<T>(url: string, body: any, options = {}): Observable<T> {
     return this.httpClient.post<T>(url, body, options);
   }
+
+  put<T>(url: string, body: any, options = {}): Observable<T> {
+    return this.httpClient.put<T>(url, body, options);
+  }
 }
 
 /**
