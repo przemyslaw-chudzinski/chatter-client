@@ -2,8 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA
-} from '../../../../../node_modules/@angular/material/dialog';
-import { IMessage } from '../../models/message.model';
+} from '@angular/material/dialog';
 
 @Component({
   // tslint:disable-next-line:component-selector
