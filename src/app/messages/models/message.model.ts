@@ -4,7 +4,7 @@ export interface IMessage {
   _id?: string;
   content: string;
   createdAt?: string;
-  read?: boolean;
+  // read?: boolean;
   recipientId?: string;
   updatedAt?: string;
   authorId?: string;

@@ -1,9 +1,13 @@
 <div class="chatter-chat-message animated fadeIn"
      *ngIf="message">
   <div>
-    <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong> {{ message.content }}
+    <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong>
+    <span [innerHTML]="message.content"></span>
   </div>
   <div class="chatter-chat-message-actions">
+    <!-- <mat-chip-list>
+      <mat-chip matTooltip="Click it to mark as read">New!</mat-chip>
+    </mat-chip-list> -->
     <button mat-icon-button
             [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -12,7 +16,11 @@
       <button *ngIf="showEditForm()"
               mat-menu-item
               (click)="editMessage()">Edit</button>
-      <button mat-menu-item>Item</button>
+      <button mat-menu-item>Set as important</button>
+      <button mat-menu-item
+              *ngIf="message.read">Mark as unread</button>
+      <button mat-menu-item
+              *ngIf="!message.read">Mark as read</button>
     </mat-menu>
   </div>
 </div>

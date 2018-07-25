@@ -13,6 +13,8 @@ import { MatIconModule } from '../../../node_modules/@angular/material/icon';
 import { MatMenuModule } from '../../../node_modules/@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditMessageDialogComponent } from './dialogs/edit-message-dialog/edit-message-dialog.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { EditMessageDialogComponent } from './dialogs/edit-message-dialog/edit-m
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule,
+    MatTooltipModule
   ],
   declarations: [
     MessagesListComponent,
