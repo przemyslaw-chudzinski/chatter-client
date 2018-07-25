@@ -5,7 +5,6 @@ import {
 } from '@angular/material/dialog';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-edit-message-dialog',
   templateUrl: './edit-message-dialog.component.html',
   styleUrls: ['./edit-message-dialog.component.scss']
