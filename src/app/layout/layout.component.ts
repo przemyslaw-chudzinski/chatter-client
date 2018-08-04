@@ -4,7 +4,7 @@ import { IResponseData } from '../models/response-data';
 import { UsersService } from '../users/users.service';
 import { tap, switchMap, takeWhile, map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { IContact } from './contact-list/models/contact';
+import {IContact} from '../contact-list/models/contact';
 
 @Component({
   selector: 'chatter-layout',

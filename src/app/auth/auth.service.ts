@@ -56,7 +56,6 @@ export class AuthService {
   initUser(): IUser {
     const token = AuthService.token();
     const decodedToken = this.jwtHelper.decodeToken(token);
-    // tslint:disable-next-line:no-unused-expression
     (token && !this.isTokenExpired() && this._user$.next(decodedToken.user)) ||
       null;
     return (decodedToken && decodedToken.user) || null;

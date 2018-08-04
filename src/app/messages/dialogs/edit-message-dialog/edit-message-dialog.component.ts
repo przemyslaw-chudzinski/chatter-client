@@ -5,7 +5,7 @@ import {
 } from '@angular/material/dialog';
 import {IMessage} from '../../models/message.model';
 import {MessagesService} from '../../messages.service';
-import {take} from 'rxjs/operators';
+import {take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'chatter-edit-message-dialog',
@@ -14,6 +14,8 @@ import {take} from 'rxjs/operators';
 })
 export class EditMessageDialogComponent implements OnInit {
   messageCopy: IMessage;
+
+  loading: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
@@ -30,8 +32,11 @@ export class EditMessageDialogComponent implements OnInit {
   }
 
   update(): void {
-    this.messagesService.updateMessage$(this.messageCopy._id, this.message).pipe(
-      take(1)
+    this.loading = true;
+    this.messagesService.updateMessage$(this.messageCopy._id, this.messageCopy).pipe(
+      take(1),
+      tap(() => this.dialogRef.close()),
+      tap(() => this.loading = false)
     ).subscribe();
   }
 

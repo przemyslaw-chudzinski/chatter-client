@@ -6,18 +6,16 @@ import {
   Input,
   OnInit
 } from '@angular/core';
-import { IResponseData } from '../../models/response-data';
-import { IUser } from '../../auth/models/user.model';
-import { WebsocketService } from '../../websocket/websocket.service';
-import { tap, map, takeWhile, take } from 'rxjs/operators';
+import { IResponseData } from '../models/response-data';
+import { WebsocketService } from '../websocket/websocket.service';
+import { tap, map, takeWhile } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { EWebSocketActions } from '../../websocket/enums/websocket-actions.enum';
-import { ENotifications } from '../../websocket/enums/websocket-notifications.enum';
+import { EWebSocketActions } from '../websocket/enums/websocket-actions.enum';
+import { ENotifications } from '../websocket/enums/websocket-notifications.enum';
 import { IContact } from './models/contact';
-import { IWebSocketData } from '../../websocket/models/websocket-payload.model';
+import { IWebSocketData } from '../websocket/models/websocket-payload.model';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']

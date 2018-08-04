@@ -14,6 +14,7 @@ export class SpinnerComponent implements OnInit {
   @Input() mode: ProgressSpinnerMode = 'indeterminate';
   @Input() strokeWidth = 3;
   @Input() value: number;
+  @Input() showBackdrop: boolean;
 
   constructor() {}
 

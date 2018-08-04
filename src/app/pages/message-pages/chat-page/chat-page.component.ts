@@ -18,7 +18,6 @@ import { IMessage } from '../../../messages/models/message.model';
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
   messages: IMessage[] = [];
-  private subscriptions: Subscription[] = [];
   contact: IUser;
 
   messagesListLoading: boolean;
