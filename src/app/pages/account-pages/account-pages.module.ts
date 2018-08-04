@@ -4,6 +4,7 @@ import { UserSettingsPageComponent } from './user-settings-page/user-settings-pa
 import {RouterModule, Routes} from '@angular/router';
 import {AccountPagesComponent} from './account-pages.component';
 import {FormLayersModule} from '../../forms/form-layers/form-layers.module';
+import {MatButtonModule} from '@angular/material';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormLayersModule
+    FormLayersModule,
+    MatButtonModule
   ],
   declarations: [UserSettingsPageComponent, AccountPagesComponent]
 })

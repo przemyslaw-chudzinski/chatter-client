@@ -1,3 +1,40 @@
-<h3>Account settings</h3>
+<div *ngIf="auth.user$ | async as user; else loadingTpl">
 
-<chatter-user-settings-form></chatter-user-settings-form>
+  <h3>Account settings</h3>
+
+  <div>
+    <p>
+      <strong>Created at: </strong> {{ user.createdAt }}
+    </p>
+  </div>
+
+  <chatter-user-settings-form [user]="user"></chatter-user-settings-form>
+
+  <!-- Here will be component for upload user image -->
+  <div>
+    <img [src]="user.avatar" />
+  </div>
+  <!--**********************************************-->
+
+  <button
+    mat-raised-button
+    color="primary">Save</button>
+
+</div>
+
+<div>
+
+  <h3>Reset password</h3>
+
+  <chatter-reset-password-form></chatter-reset-password-form>
+
+  <button
+    mat-raised-button
+    color="primary">Save</button>
+
+</div>
+
+
+<ng-template #loadingTpl>
+  Loading...
+</ng-template>

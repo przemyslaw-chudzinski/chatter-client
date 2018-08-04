@@ -9,6 +9,8 @@ import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-passw
 import { ForgotPasswordFormService } from './forgot-password-form/forgot-password-form.service';
 import { UserSettingsFormComponent } from './user-settings-form/user-settings-form.component';
 import {UserSettingsFormService} from './user-settings-form/user-settings-form.service';
+import { ResetPasswordFormComponent } from './reset-password-form/reset-password-form.component';
+import {ResetPasswordFormService} from './reset-password-form/reset-password-form.service';
 
 @NgModule({
   imports: [
@@ -18,14 +20,14 @@ import {UserSettingsFormService} from './user-settings-form/user-settings-form.s
     MatFormFieldModule,
     MatInputModule
   ],
-  declarations: [LoginFormComponent, ForgotPasswordFormComponent, UserSettingsFormComponent],
-  exports: [LoginFormComponent, ForgotPasswordFormComponent, UserSettingsFormComponent]
+  declarations: [LoginFormComponent, ForgotPasswordFormComponent, UserSettingsFormComponent, ResetPasswordFormComponent],
+  exports: [LoginFormComponent, ForgotPasswordFormComponent, UserSettingsFormComponent, ResetPasswordFormComponent]
 })
 export class FormLayersModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FormLayersModule,
-      providers: [LoginFormService, ForgotPasswordFormService, UserSettingsFormService]
+      providers: [LoginFormService, ForgotPasswordFormService, UserSettingsFormService, ResetPasswordFormService]
     };
   }
 }

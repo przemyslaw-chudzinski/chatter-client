@@ -1,8 +1,9 @@
-<form>
+<form *ngIf="formGroup" [formGroup]="formGroup">
 
   <mat-form-field>
     <input
       matInput
+      formControlName="email"
       placeholder="Email"
       autocomplete="off">
   </mat-form-field>
@@ -10,6 +11,7 @@
   <mat-form-field>
     <input
       matInput
+      formControlName="firstName"
       placeholder="First Name"
       autocomplete="off">
   </mat-form-field>
@@ -17,6 +19,7 @@
   <mat-form-field>
     <input
       matInput
+      formControlName="lastName"
       placeholder="Last Name"
       autocomplete="off">
   </mat-form-field>
