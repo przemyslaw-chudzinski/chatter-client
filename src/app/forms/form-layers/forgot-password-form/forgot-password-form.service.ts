@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {FormLayerServiceContract} from '../form-layer-service.contract';
 
 @Injectable()
-export class ForgotPasswordFormService {
+export class ForgotPasswordFormService implements FormLayerServiceContract{
   constructor(protected fb: FormBuilder) {}
 
   init(): FormGroup {

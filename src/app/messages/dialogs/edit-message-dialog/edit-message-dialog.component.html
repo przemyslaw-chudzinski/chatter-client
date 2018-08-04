@@ -7,10 +7,6 @@
       (contentChanges)="contentChangesHandler($event)"
       [(value)]="message.content"></chatter-message-editor>
 
-    <chatter-spinner
-      [showBackdrop]="true"
-      *ngIf="!loading"></chatter-spinner>
-
   </mat-dialog-content>
 
   <mat-dialog-actions>
@@ -22,6 +18,9 @@
             (click)="cancel()">Cancel</button>
 
   </mat-dialog-actions>
+
+  <chatter-spinner *ngIf="loading"></chatter-spinner>
+
 </div>
 
 

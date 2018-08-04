@@ -2,5 +2,8 @@ export const routerLinks = {
   indexPage: '',
   dashboardPage: 'dashboard',
   loginPage: 'login',
-  messagesPage: 'messages'
+  messagesPage: 'messages',
+  accountPages: {
+    userAccount: 'account'
+  }
 };

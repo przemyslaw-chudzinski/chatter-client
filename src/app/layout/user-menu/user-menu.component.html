@@ -3,7 +3,7 @@
   <mat-icon>person</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>Account Settings</button>
+  <button mat-menu-item [routerLink]="['/account']">Account Settings</button>
   <button mat-menu-item
           (click)="logOut($event)">Log out</button>
 </mat-menu>

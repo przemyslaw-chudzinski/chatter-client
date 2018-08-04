@@ -33,6 +33,4 @@ export abstract class FormLayersBase {
   submitHandler(event: Event): void {
     this.enterDown.emit(null);
   }
-
-  constructor() {}
 }

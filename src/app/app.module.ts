@@ -41,6 +41,11 @@ const routes: Routes = [
     path: routerLinks.loginPage,
     loadChildren: 'src/app/pages/auth-pages/auth-pages.module#AuthPagesModule',
     canActivate: [UserNotLoggedGuard]
+  },
+  {
+    path: routerLinks.accountPages.userAccount,
+    loadChildren: 'src/app/pages/account-pages/account-pages.module#AccountPagesModule',
+    canActivate: [AuthGuard]
   }
 ];
 
