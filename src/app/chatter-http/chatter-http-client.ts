@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ChatterHttpClient {
+  private _defaultOptions = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem(environment.tokenKey)
+    }
+  };
+
   constructor(private httpClient: HttpClient) {}
 
-  get<T>(url: string, options: {}): Observable<T> {
+  get<T>(url: string, options = this._defaultOptions): Observable<T> {
     return this.httpClient.get<T>(url, options);
   }
 
-  post<T>(url: string, body: any, options = {}): Observable<T> {
+  post<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
     return this.httpClient.post<T>(url, body, options);
   }
 
-  put<T>(url: string, body: any, options = {}): Observable<T> {
+  put<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
     return this.httpClient.put<T>(url, body, options);
   }
 }
 
-/**
- * TODO:
- *
- * 1. Passing header with Authorization token
- *
- * 2. Make more generic
- */

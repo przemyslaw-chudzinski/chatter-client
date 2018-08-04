@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap, switchMap, takeWhile } from 'rxjs/operators';
+import {tap, switchMap, takeWhile, map} from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { UsersService } from '../../../users/users.service';
 import { IUser } from '../../../auth/models/user.model';
 import { MessagesService } from '../../../messages/messages.service';
 import { IMessage } from '../../../messages/models/message.model';
+import {ContactListService} from '../../../contact-list/contact-list.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -31,7 +32,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public auth: AuthService,
     private usersService: UsersService,
-    private messagesService: MessagesService
+    private messagesService: MessagesService,
+    private contactListService: ContactListService
   ) {}
 
   ngOnInit() {
@@ -66,7 +68,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         tap(contact => (this.contact = contact)),
         tap(() => (this.headerTitleLoading = false)),
         tap(contact => this.websocketService.switchToContact(contact._id)),
-        switchMap(contact => this.messagesService.getMessages$(contact._id)),
+        switchMap(contact => this.messagesService.getMessages$(contact._id).pipe(
+          tap(() => this.contactListService.resetUnreadMessages.emit(contact._id))
+        )),
         tap(response => (this.messages = response.results)),
         tap(() => (this.messagesListLoading = false))
       )
@@ -80,9 +84,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   sendMessage(event: IMessage): void {
     // tslint:disable-next-line:no-unused-expression
     this.contact &&
-      event &&
-      event.content &&
-      this.websocketService.sendMessage(event.content, this.contact._id);
+    event &&
+    event.content &&
+    this.websocketService.sendMessage(event.content, this.contact._id);
     this.messages.push(event);
   }
 }

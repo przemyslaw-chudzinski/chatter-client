@@ -14,6 +14,7 @@ import { EWebSocketActions } from '../websocket/enums/websocket-actions.enum';
 import { ENotifications } from '../websocket/enums/websocket-notifications.enum';
 import { IContact } from './models/contact';
 import { IWebSocketData } from '../websocket/models/websocket-payload.model';
+import {ContactListService} from './contact-list.service';
 
 @Component({
   selector: 'chatter-contact-list',
@@ -27,7 +28,10 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
 
   private alive = true;
 
-  constructor(private websocketService: WebsocketService) {}
+  constructor(
+    private websocketService: WebsocketService,
+    private contactListService: ContactListService
+  ) {}
 
   ngOnInit(): void {
     if (!this.onMessageSub) {
@@ -53,6 +57,23 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
           })
         )
         .subscribe();
+
+      /* Reset unread messages logic */
+      this.contactListService.resetUnreadMessages.pipe(
+        tap(contactId => {
+          if (contactId) {
+            // Fragment to refactoring
+            const dataToUpdate = { ...this.data };
+            dataToUpdate.results = dataToUpdate.results.map(item => {
+              if (item._id === contactId) {
+                item.newMessagesCount = null;
+              }
+              return item;
+            });
+            this.data = dataToUpdate;
+          }
+        })
+      ).subscribe();
     }
   }
 
