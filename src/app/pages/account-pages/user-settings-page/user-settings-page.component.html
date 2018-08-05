@@ -4,7 +4,10 @@
 
   <div>
     <p>
-      <strong>Created at: </strong> {{ user.createdAt }}
+      <strong>Created at: </strong> {{ user.createdAt | date }}
+    </p>
+    <p>
+      <strong>Updated at: </strong> {{ user.updatedAt | date }}
     </p>
   </div>
 
