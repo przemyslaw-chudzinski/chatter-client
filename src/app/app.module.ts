@@ -69,7 +69,7 @@ const routes: Routes = [
     WebsocketModule.forRoot(),
     MessagesModule.forRoot()
   ],
-  providers: [RouterLinksService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

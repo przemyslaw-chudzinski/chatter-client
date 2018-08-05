@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { IContact } from '../models/contact';
+import {RouterLinksService} from '../../routes/router-links.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
@@ -10,5 +10,5 @@ import { IContact } from '../models/contact';
 export class ContactComponent {
   @Input() contact: IContact;
 
-  constructor() {}
+  constructor(public routerLinksService: RouterLinksService) {}
 }

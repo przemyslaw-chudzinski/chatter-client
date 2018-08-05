@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <button mat-button
-          routerLink="/dashboard">
+          [routerLink]="['/', routerLinksService.links.dashboardPage]">
     <mat-icon>chat</mat-icon>
     <span>Chatter</span>
   </button>

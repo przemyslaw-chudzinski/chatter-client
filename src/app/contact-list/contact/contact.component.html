@@ -1,6 +1,6 @@
 <div *ngIf="contact"
      class="chater-contact animated fadeIn"
-     [routerLink]="['/messages', contact._id]"
+     [routerLink]="['/', routerLinksService.links.messagesPage, contact._id]"
      routerLinkActive="selected">
   <div class="chater-contact-avatar">
     <img src="http://placehold.it/50x50"

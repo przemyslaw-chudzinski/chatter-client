@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import {RouterLinksService} from '../../routes/router-links.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-user-menu',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent {
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    public routerLinksService: RouterLinksService
+  ) {}
 
-  logOut(event: Event): void {
+  logOut(): void {
     this.auth.logOut();
   }
 }

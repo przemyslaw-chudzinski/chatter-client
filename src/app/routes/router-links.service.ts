@@ -2,18 +2,28 @@ import { Injectable } from '@angular/core';
 import { routerLinks } from './router-links';
 import { Router, UrlTree, NavigationExtras } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RouterLinksService {
   constructor(private router: Router) {}
 
-  get routerLinks(): { [k: string]: string | object } {
+  get links(): { [k: string]: string | object } {
     return routerLinks;
   }
 
-  withSlash(routerLink: string): string {
+  /**
+   * @param routerLink
+   */
+  private withSlash(routerLink: string): string {
     return '/' + routerLink;
   }
 
+  /**
+   * @param url
+   * @param extras
+   * @param withSlash
+   */
   navigateByUrl(
     url: string | UrlTree,
     extras: NavigationExtras = { skipLocationChange: false },
@@ -23,6 +33,10 @@ export class RouterLinksService {
     return this.router.navigateByUrl(url, extras);
   }
 
+  /**
+   * @param commands
+   * @param extras
+   */
   navigate(
     commands: any[],
     extras: NavigationExtras = { skipLocationChange: false }
