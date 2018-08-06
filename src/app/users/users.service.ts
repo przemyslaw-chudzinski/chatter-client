@@ -11,11 +11,11 @@ export class UsersService {
     private httpClient: ChatterHttpClient
   ) {}
 
-  users$(): Observable<IResponseData<IUser>> {
+  loadUsers(): Observable<IResponseData<IUser>> {
     return this.httpClient.get<IResponseData<IUser>>(usersEndpoints.usersEndpoint);
   }
 
-  user$(userId = ''): Observable<IUser> {
+  loadUser(userId = ''): Observable<IUser> {
     if (userId === '') {
       throw new Error('userId is required');
     }

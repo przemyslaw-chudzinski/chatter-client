@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { IResponseData } from '../models/response-data';
-import { UsersService } from '../users/users.service';
-import { tap, switchMap, takeWhile, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {IContact} from '../contact-list/models/contact';
+import {select, Store} from '@ngrx/store';
+import {LoadUserAction} from '../users/users-store/users.actions';
+import {ChatterState} from '../chatter-store/chatter-store.state';
+import {selectUsers} from '../users/users-store/users.selectors';
 
 @Component({
   selector: 'chatter-layout',
@@ -12,30 +14,29 @@ import {IContact} from '../contact-list/models/contact';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  contacts: IResponseData<IContact>;
-
   private alive = true;
+  contacts$: Observable<IContact[]> = this.store.pipe(
+    select(selectUsers),
+    map(usersState => usersState.users),
+    map(users => users as IContact[]),
+    map(contacts => {
+      if (contacts && contacts.length) {
+        contacts = contacts.map(c => {
+          c.newMessagesCount = 0;
+          return c;
+        });
+      }
+      return contacts;
+    }),
+  );
 
-  constructor(public auth: AuthService, private usersService: UsersService) {}
+  constructor(
+    public auth: AuthService,
+    private store: Store<ChatterState>
+  ) {}
 
   ngOnInit(): void {
-    this.auth.user$
-      .pipe(
-        takeWhile(() => this.alive),
-        switchMap(user => (user ? this.usersService.users$() : of(null))),
-        map(users => users as IResponseData<IContact>),
-        map(users => {
-          if (users && users.results && users.results.length) {
-            users.results = users.results.map(c => {
-              c.newMessagesCount = 0;
-              return c;
-            });
-          }
-          return users;
-        }),
-        tap(contacts => (this.contacts = contacts))
-      )
-      .subscribe();
+    this.store.dispatch(new LoadUserAction());
   }
 
   ngOnDestroy() {

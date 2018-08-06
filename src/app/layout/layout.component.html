@@ -8,7 +8,7 @@
       Contacts
     </span>
 
-    <chatter-contact-list [data]="contacts"></chatter-contact-list>
+    <chatter-contact-list [contacts]="contacts$ | async"></chatter-contact-list>
 
   </mat-drawer>
 

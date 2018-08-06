@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '@angular/router';
-import {tap, switchMap, takeWhile, map} from 'rxjs/operators';
+import {tap, switchMap, takeWhile} from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
-import { Subscription } from 'rxjs';
 import { UsersService } from '../../../users/users.service';
 import { IUser } from '../../../auth/models/user.model';
 import { MessagesService } from '../../../messages/messages.service';
@@ -64,7 +63,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         tap(() => (this.messagesListLoading = true)),
         tap(() => (this.headerTitleLoading = true)),
         tap(() => (this.messages = [])),
-        switchMap(params => this.usersService.user$(params.id)),
+        switchMap(params => this.usersService.loadUser(params.id)),
         tap(contact => (this.contact = contact)),
         tap(() => (this.headerTitleLoading = false)),
         tap(contact => this.websocketService.switchToContact(contact._id)),

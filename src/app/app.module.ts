@@ -9,7 +9,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { FormLayersModule } from './forms/form-layers/form-layers.module';
 import { AuthGuard } from './auth/guards/auth.guard';
-import { RouterLinksService } from './routes/router-links.service';
 import { routerLinks } from './routes/router-links';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './auth/auth.service';
@@ -18,6 +17,7 @@ import { UsersModule } from './users/users.module';
 import { WebsocketModule } from './websocket/websocket.module';
 import { MessagesModule } from './messages/messages.module';
 import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
+import {ChatterStoreModule} from './chatter-store/chatter-store.module';
 
 const routes: Routes = [
   {
@@ -67,7 +67,8 @@ const routes: Routes = [
     ChatterHttpModule.forRoot(),
     UsersModule.forRoot(),
     WebsocketModule.forRoot(),
-    MessagesModule.forRoot()
+    MessagesModule.forRoot(),
+    ChatterStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

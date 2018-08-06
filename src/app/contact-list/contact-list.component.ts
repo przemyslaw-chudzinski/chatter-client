@@ -6,7 +6,6 @@ import {
   Input,
   OnInit
 } from '@angular/core';
-import { IResponseData } from '../models/response-data';
 import { WebsocketService } from '../websocket/websocket.service';
 import { tap, map, takeWhile } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -22,10 +21,8 @@ import {ContactListService} from './contact-list.service';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
-  @Input() data: IResponseData<IContact>;
-
+  @Input() contacts: IContact[];
   private onMessageSub: Subscription;
-
   private alive = true;
 
   constructor(
@@ -45,14 +42,14 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
               data.action === EWebSocketActions.NotifyContact &&
               data.type === ENotifications.NewMessage
             ) {
-              const dataToUpdate = { ...this.data };
-              dataToUpdate.results = dataToUpdate.results.map(item => {
+              let dataToUpdate = { ...this.contacts };
+              dataToUpdate = dataToUpdate.map(item => {
                 if (item._id === data.contactId) {
                   item.newMessagesCount++;
                 }
                 return item;
               });
-              this.data = dataToUpdate;
+              this.contacts = dataToUpdate;
             }
           })
         )
@@ -61,16 +58,20 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
       /* Reset unread messages logic */
       this.contactListService.resetUnreadMessages.pipe(
         tap(contactId => {
-          if (contactId) {
+          if (
+            contactId &&
+            this.contacts &&
+            this.contacts.length
+          ) {
             // Fragment to refactoring
-            const dataToUpdate = { ...this.data };
-            dataToUpdate.results = dataToUpdate.results.map(item => {
+            let dataToUpdate = { ...this.contacts };
+            dataToUpdate = dataToUpdate.map(item => {
               if (item._id === contactId) {
                 item.newMessagesCount = null;
               }
               return item;
             });
-            this.data = dataToUpdate;
+            this.contacts = dataToUpdate;
           }
         })
       ).subscribe();
@@ -78,7 +79,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data) {
+    if (changes.data && this.contacts && this.contacts.length) {
       if (!this.onMessageSub) {
         this.websocketService.onMessage$
           .pipe(
@@ -88,15 +89,15 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
                 data &&
                 data.action === EWebSocketActions.ContactStatusChanged
               ) {
-                if (this.data && this.data.results) {
-                  const dataToUpdate = { ...this.data };
-                  dataToUpdate.results = dataToUpdate.results.map(item => {
+                if (this.contacts && this.contacts.length) {
+                  let dataToUpdate = { ...this.contacts };
+                  dataToUpdate = dataToUpdate.map(item => {
                     data.visibleContactsIds.includes(item._id)
                       ? (item.available = true)
                       : (item.available = false);
                     return item;
                   });
-                  this.data = dataToUpdate;
+                  this.contacts = dataToUpdate;
                 }
               }
             })
