@@ -16,6 +16,5 @@ export const usersEndpoints = {
 export const messagesEndpoints = {
   messagesEndpoint: (recipientId: string): string =>
     `${apiUrl}/messages/${recipientId}`,
-  messageEndpoint: (messageId: string): string =>
-    `${apiUrl}/messages/${messageId}`
+  updateMessageEndpoint: `${apiUrl}/messages/update-message`
 };

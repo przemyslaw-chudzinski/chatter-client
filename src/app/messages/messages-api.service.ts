@@ -3,7 +3,7 @@ import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { Observable } from 'rxjs';
 import { messagesEndpoints } from '../chatter-http/http-endpoints';
 import {IMessage} from './models/message.model';
-import {IResponseData} from '../models/response-data';
+import {IResponseData} from '../chatter-http/models/response-data';
 
 @Injectable()
 export class MessagesApiService {
@@ -17,7 +17,7 @@ export class MessagesApiService {
     );
   }
 
-  updateMessage(messageId: string, message: IMessage): Observable<any> {
-    return this.httpClient.patch<any>(messagesEndpoints.messageEndpoint(messageId), message);
+  updateMessage(message: IMessage): Observable<IResponseData<IMessage>> {
+    return this.httpClient.patch<IResponseData<IMessage>>(messagesEndpoints.updateMessageEndpoint, message);
   }
 }

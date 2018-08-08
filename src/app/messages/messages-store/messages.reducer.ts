@@ -16,6 +16,17 @@ export const messagesReducer = (
         ...state,
         messages: null
       };
+    case messagesActionTypes.PushMessage:
+      let messages = [...state.messages];
+      messages.push(action.payload);
+      return {
+        ...state,
+        messages
+      };
+    case messagesActionTypes.UpdateMessageSuccess:
+      return {
+        ...state
+      };
     default:
       return state;
   }

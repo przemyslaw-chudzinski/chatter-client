@@ -2,17 +2,17 @@
 
   <div class="chatter-chat-header">
     <h4 class="animated fadeIn"
-        *ngIf="contact && !headerTitleLoading">{{ contact.firstName }} {{ contact.lastName }} - <small>{{ contact.email }}</small></h4>
-    <h4 *ngIf="headerTitleLoading"><chatter-spinner [diameter]="30"></chatter-spinner> Loading...</h4>
+        *ngIf="contact">{{ contact.firstName }} {{ contact.lastName }} - <small>{{ contact.email }}</small></h4>
+    <h4 *ngIf="!contact"><chatter-spinner [diameter]="30"></chatter-spinner> Loading...</h4>
   </div>
 
   <!-- Chatter Chat messages list -->
-  <chatter-messages-list [loading]="!(messages$ | async)"
-                         [messages]="messages$ | async"></chatter-messages-list>
+  <chatter-messages-list [loading]="!messages"
+                         [messages]="messages"></chatter-messages-list>
   <!-- ################################################### -->
 
   <!-- Chatter chat editor -->
-  <chatter-message-editor *ngIf="!messagesListLoading"
+  <chatter-message-editor *ngIf="messages"
                           (messageReady)="sendMessage($event)"></chatter-message-editor>
   <!-- ################################################### -->
 </div>

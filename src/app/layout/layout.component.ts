@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IContact} from '../contact-list/models/contact';
 import {select, Store} from '@ngrx/store';
-import {LoadUserAction} from '../users/users-store/users.actions';
+import {LoadUsersAction} from '../users/users-store/users.actions';
 import {ChatterState} from '../chatter-store/chatter-store.state';
 import {selectUsers} from '../users/users-store/users.selectors';
 
@@ -17,7 +17,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private alive = true;
   contacts$: Observable<IContact[]> = this.store.pipe(
     select(selectUsers),
-    map(usersState => usersState.users),
     map(users => users as IContact[]),
     map(contacts => {
       if (contacts && contacts.length) {
@@ -36,7 +35,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadUserAction());
+    this.store.dispatch(new LoadUsersAction());
   }
 
   ngOnDestroy() {

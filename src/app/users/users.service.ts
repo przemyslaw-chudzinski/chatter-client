@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { Observable } from 'rxjs';
-import { IResponseData } from '../models/response-data';
+import { IResponseData } from '../chatter-http/models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { usersEndpoints } from '../chatter-http/http-endpoints';
 

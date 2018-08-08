@@ -4,8 +4,9 @@ import {
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import {IMessage} from '../../models/message.model';
-import {MessagesApiService} from '../../messages-api.service';
-import {take, tap} from 'rxjs/operators';
+import {ChatterState} from '../../../chatter-store/chatter-store.state';
+import {Store} from '@ngrx/store';
+import {UpdateMessageAction} from '../../messages-store/messages.actions';
 
 @Component({
   selector: 'chatter-edit-message-dialog',
@@ -20,7 +21,7 @@ export class EditMessageDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public message: IMessage,
-    private messagesService: MessagesApiService
+    private store: Store<ChatterState>
   ) {}
 
   ngOnInit() {
@@ -33,11 +34,7 @@ export class EditMessageDialogComponent implements OnInit {
 
   update(): void {
     this.loading = true;
-    this.messagesService.updateMessage(this.messageCopy._id, this.messageCopy).pipe(
-      take(1),
-      tap(() => this.dialogRef.close()),
-      tap(() => this.loading = false)
-    ).subscribe();
+    this.store.dispatch(new UpdateMessageAction(this.messageCopy));
   }
 
   contentChangesHandler(event: string): void {

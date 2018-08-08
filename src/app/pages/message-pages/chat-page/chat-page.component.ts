@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '@angular/router';
-import {tap, switchMap, takeWhile, map} from 'rxjs/operators';
+import {tap, takeWhile} from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
-import { UsersService } from '../../../users/users.service';
 import { IUser } from '../../../auth/models/user.model';
 import { IMessage } from '../../../messages/models/message.model';
-import {ContactListService} from '../../../contact-list/contact-list.service';
 import {select, Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
-import {CleanMessagesStoreAction, LoadMessagesAction} from '../../../messages/messages-store/messages.actions';
+import {CleanMessagesStoreAction, LoadMessagesAction, PushMessageAction} from '../../../messages/messages-store/messages.actions';
 import {Observable} from 'rxjs';
+import {LoadUserAction} from '../../../users/users-store/users.actions';
 import {selectMessages} from '../../../messages/messages-store/messages.selectors';
+import {selectUser} from '../../../users/users-store/users.selectors';
 
 @Component({
   selector: 'chatter-chat-page',
@@ -20,32 +20,30 @@ import {selectMessages} from '../../../messages/messages-store/messages.selector
   styleUrls: ['./chat-page.component.scss']
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
-  messages: IMessage[] = [];
+  messages: IMessage[];
   contact: IUser;
-
-  messagesListLoading: boolean;
-
-  headerTitleLoading: boolean;
-
   private alive = true;
-
-  messages$: Observable<IMessage[]> = this.store.pipe(
-    select(selectMessages),
-    map(messagesState => messagesState.messages),
-    map(messages => messages as IMessage[]),
-    tap(messages => console.log(messages))
-  );
+  messages$: Observable<IMessage[]> = this.store.pipe(select(selectMessages));
+  user$: Observable<IUser> = this.store.pipe(select(selectUser));
 
   constructor(
     private websocketService: WebsocketService,
     private route: ActivatedRoute,
     public auth: AuthService,
-    private usersService: UsersService,
-    private contactListService: ContactListService,
     private store: Store<ChatterState>
   ) {}
 
   ngOnInit() {
+    this.user$.pipe(
+      takeWhile(() => this.alive),
+      tap(user => (this.contact = user))
+    ).subscribe();
+
+    this.messages$.pipe(
+      takeWhile(() => this.alive),
+      tap(messages => (this.messages = messages))
+    ).subscribe();
+
     this.websocketService.onMessage$
       .pipe(
         takeWhile(() => this.alive),
@@ -56,12 +54,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.contact &&
             this.contact._id === event.contactId
           ) {
-            const messagesToUpdate = [...this.messages];
-            messagesToUpdate.push({
+            this.store.dispatch(new PushMessageAction({
               content: event.data,
               author: this.contact
-            });
-            this.messages = messagesToUpdate;
+            }));
           }
         })
       )
@@ -70,16 +66,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.route.params
       .pipe(
         takeWhile(() => this.alive),
-        tap(() => (this.messagesListLoading = true)),
-        tap(() => (this.headerTitleLoading = true)),
+        tap(() => (this.contact = null)),
+        tap(() => (this.messages = null)),
         tap(() => this.store.dispatch(new CleanMessagesStoreAction())),
-        switchMap(params => this.usersService.loadUser(params.id)),
-        tap(contact => (this.contact = contact)),
-        tap(() => (this.headerTitleLoading = false)),
-        tap(contact => this.websocketService.switchToContact(contact._id)),
-        tap(contact => this.store.dispatch(new LoadMessagesAction(contact._id))),
-        tap(response => (this.messages = response.results)),
-        tap(() => (this.messagesListLoading = false))
+        tap(params => this.store.dispatch(new LoadUserAction(params.id))),
+        tap(params => this.websocketService.switchToContact(params.id)),
+        tap(params => this.store.dispatch(new LoadMessagesAction(params.id)))
       )
       .subscribe();
   }
@@ -89,11 +81,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(event: IMessage): void {
-    // tslint:disable-next-line:no-unused-expression
     this.contact &&
     event &&
     event.content &&
     this.websocketService.sendMessage(event.content, this.contact._id);
-    this.messages.push(event);
+    this.store.dispatch(new PushMessageAction(event));
   }
 }

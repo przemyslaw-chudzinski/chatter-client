@@ -3,7 +3,6 @@ import { ScrollToBottomDirective } from '../directives/scroll-to-bottom.directiv
 import { IMessage } from '../models/message.model';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-messages-list',
   templateUrl: './messages-list.component.html',
   styleUrls: ['./messages-list.component.scss']

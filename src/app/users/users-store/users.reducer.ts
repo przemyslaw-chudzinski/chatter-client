@@ -11,6 +11,11 @@ export const usersReducer = (
         ...state,
         users: action.payload
       };
+    case usersActionTypes.LoadUserSuccess:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }
