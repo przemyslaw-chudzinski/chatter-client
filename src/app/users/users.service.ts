@@ -21,4 +21,8 @@ export class UsersService {
     }
     return this.httpClient.get<IUser>(usersEndpoints.userEndpoint(userId));
   }
+
+  update(user: IUser): Observable<IUser> {
+    return this.httpClient.post<IUser>(usersEndpoints.updateProfileEndpoint, user);
+  }
 }

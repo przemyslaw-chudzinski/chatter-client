@@ -11,6 +11,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import {ContactListModule} from '../contact-list/contact-list.module';
+import {SpinnerModule} from '../spinner/spinner.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {ContactListModule} from '../contact-list/contact-list.module';
     MatButtonModule,
     MatMenuModule,
     RouterModule,
-    ContactListModule
+    ContactListModule,
+    SpinnerModule
   ],
   declarations: [
     LayoutComponent,

@@ -42,7 +42,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
               data.action === EWebSocketActions.NotifyContact &&
               data.type === ENotifications.NewMessage
             ) {
-              let dataToUpdate = { ...this.contacts };
+              let dataToUpdate = [ ...this.contacts ];
               dataToUpdate = dataToUpdate.map(item => {
                 if (item._id === data.contactId) {
                   item.newMessagesCount++;
@@ -64,7 +64,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
             this.contacts.length
           ) {
             // Fragment to refactoring
-            let dataToUpdate = { ...this.contacts };
+            let dataToUpdate = [ ...this.contacts ];
             dataToUpdate = dataToUpdate.map(item => {
               if (item._id === contactId) {
                 item.newMessagesCount = null;
@@ -79,7 +79,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data && this.contacts && this.contacts.length) {
+    if (changes.contacts) {
       if (!this.onMessageSub) {
         this.websocketService.onMessage$
           .pipe(
@@ -90,7 +90,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
                 data.action === EWebSocketActions.ContactStatusChanged
               ) {
                 if (this.contacts && this.contacts.length) {
-                  let dataToUpdate = { ...this.contacts };
+                  let dataToUpdate = [ ...this.contacts ];
                   dataToUpdate = dataToUpdate.map(item => {
                     data.visibleContactsIds.includes(item._id)
                       ? (item.available = true)

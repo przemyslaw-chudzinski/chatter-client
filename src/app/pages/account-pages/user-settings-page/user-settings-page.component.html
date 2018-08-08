@@ -1,8 +1,8 @@
-<div *ngIf="auth.user$ | async as user; else loadingTpl">
+<div>
 
   <h3>Account settings</h3>
 
-  <div>
+  <div *ngIf="user">
     <p>
       <strong>Created at: </strong> {{ user.createdAt | date }}
     </p>
@@ -11,17 +11,19 @@
     </p>
   </div>
 
-  <chatter-user-settings-form [user]="user"></chatter-user-settings-form>
+  <chatter-user-settings-form #userSettingsForm="user-settings-form"></chatter-user-settings-form>
+
+  <button
+    [disabled]="userSettingsForm.formGroup.invalid"
+    mat-raised-button
+    color="primary"
+    (click)="submit()">Save</button>
 
   <!-- Here will be component for upload user image -->
-  <div>
+  <div *ngIf="user && user.avatar">
     <img [src]="user.avatar" />
   </div>
   <!--**********************************************-->
-
-  <button
-    mat-raised-button
-    color="primary">Save</button>
 
 </div>
 
@@ -29,15 +31,10 @@
 
   <h3>Reset password</h3>
 
-  <chatter-reset-password-form></chatter-reset-password-form>
+  <chatter-reset-password-form #resetPasswordForm="reset-password-form"></chatter-reset-password-form>
 
   <button
     mat-raised-button
     color="primary">Save</button>
 
 </div>
-
-
-<ng-template #loadingTpl>
-  Loading...
-</ng-template>

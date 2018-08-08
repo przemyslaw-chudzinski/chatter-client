@@ -24,5 +24,9 @@ export class ChatterHttpClient {
   put<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
     return this.httpClient.put<T>(url, body, options);
   }
+
+  patch<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
+    return this.httpClient.patch<T>(url, body, options);
+  }
 }
 

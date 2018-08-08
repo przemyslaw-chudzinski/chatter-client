@@ -17,6 +17,6 @@ export class MessagesService {
   }
 
   updateMessage$(messageId: string, message: IMessage): Observable<any> {
-    return this.httpClient.put<any>(messagesEndpoints.messageEndpoint(messageId), message);
+    return this.httpClient.patch<any>(messagesEndpoints.messageEndpoint(messageId), message);
   }
 }

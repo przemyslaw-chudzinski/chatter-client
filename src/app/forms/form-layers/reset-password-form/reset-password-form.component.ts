@@ -5,7 +5,8 @@ import {FormLayersBase} from '../form-layers-base';
 @Component({
   selector: 'chatter-reset-password-form',
   templateUrl: './reset-password-form.component.html',
-  styleUrls: ['./reset-password-form.component.scss']
+  styleUrls: ['./reset-password-form.component.scss'],
+  exportAs: 'reset-password-form'
 })
 export class ResetPasswordFormComponent extends FormLayersBase implements OnInit {
 

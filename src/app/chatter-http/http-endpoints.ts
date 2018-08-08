@@ -9,7 +9,8 @@ export const authEndpoints = {
 
 export const usersEndpoints = {
   usersEndpoint: `${apiUrl}/users`,
-  userEndpoint: (userId: string): string => `${apiUrl}/user/${userId}`
+  userEndpoint: (userId: string): string => `${apiUrl}/user/${userId}`,
+  updateProfileEndpoint: `${apiUrl}/users/update-profile`
 };
 
 export const messagesEndpoints = {

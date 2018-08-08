@@ -7,4 +7,5 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
   available?: boolean;
+  avatar?: string;
 }
