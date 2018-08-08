@@ -4,7 +4,7 @@ import {
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import {IMessage} from '../../models/message.model';
-import {MessagesService} from '../../messages.service';
+import {MessagesApiService} from '../../messages-api.service';
 import {take, tap} from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,7 @@ export class EditMessageDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public message: IMessage,
-    private messagesService: MessagesService
+    private messagesService: MessagesApiService
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class EditMessageDialogComponent implements OnInit {
 
   update(): void {
     this.loading = true;
-    this.messagesService.updateMessage$(this.messageCopy._id, this.messageCopy).pipe(
+    this.messagesService.updateMessage(this.messageCopy._id, this.messageCopy).pipe(
       take(1),
       tap(() => this.dialogRef.close()),
       tap(() => this.loading = false)

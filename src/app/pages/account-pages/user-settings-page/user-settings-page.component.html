@@ -20,7 +20,7 @@
     (click)="submit()">Save</button>
 
   <!-- Here will be component for upload user image -->
-  <div *ngIf="user && user.avatar">
+  <div class="c-margin-top-1" *ngIf="user && user.avatar">
     <img [src]="user.avatar" />
   </div>
   <!--**********************************************-->
@@ -34,6 +34,7 @@
   <chatter-reset-password-form #resetPasswordForm="reset-password-form"></chatter-reset-password-form>
 
   <button
+    [disabled]="resetPasswordForm.formGroup.invalid"
     mat-raised-button
     color="primary">Save</button>
 

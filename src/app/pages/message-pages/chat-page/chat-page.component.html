@@ -7,8 +7,8 @@
   </div>
 
   <!-- Chatter Chat messages list -->
-  <chatter-messages-list [loading]="messagesListLoading"
-                         [messages]="messages"></chatter-messages-list>
+  <chatter-messages-list [loading]="!(messages$ | async)"
+                         [messages]="messages$ | async"></chatter-messages-list>
   <!-- ################################################### -->
 
   <!-- Chatter chat editor -->

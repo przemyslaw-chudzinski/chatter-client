@@ -1,9 +1,16 @@
 .edit-message-dialog {
   position: relative;
-    chatter-spinner {
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      left: 50%;
+  .dialog-loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dialog-loader-message {
+      margin-left: 1rem;
     }
+  }
 }
+
+

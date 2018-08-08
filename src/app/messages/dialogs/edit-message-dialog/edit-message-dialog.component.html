@@ -19,7 +19,12 @@
 
   </mat-dialog-actions>
 
-  <chatter-spinner *ngIf="loading"></chatter-spinner>
+  <div
+    class="dialog-loader animated fadeIn faster"
+    *ngIf="loading">
+    <chatter-spinner [diameter]="30"></chatter-spinner>
+    <span class="dialog-loader-message">Processing data...</span>
+  </div>
 
 </div>
 
