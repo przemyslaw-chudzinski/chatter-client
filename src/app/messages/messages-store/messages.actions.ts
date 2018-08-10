@@ -7,8 +7,6 @@ export enum messagesActionTypes {
   LoadMessagesError = '[Messages] Load Messages Error',
 
   UpdateMessage = '[Messages] Update Message',
-  UpdateMessageSuccess = '[Messages] Update Message Success',
-  UpdateMessageError = '[Messages] Update Message Error',
 
   CleanMessagesStore = '[Messages] Clean Messages Store',
 
@@ -50,16 +48,6 @@ export class UpdateMessageAction implements Action {
   readonly type = messagesActionTypes.UpdateMessage;
   constructor(public payload: IMessage) {}
 }
-
-export class UpdateMessageSuccessAction implements Action {
-  readonly type = messagesActionTypes.UpdateMessageSuccess;
-  constructor(public payload: IMessage) {}
-}
-
-export class UpdateMessageErrorAction implements Action {
-  readonly type = messagesActionTypes.UpdateMessageError;
-  constructor(public payload: any) {}
-}
 /***********************************************************/
 
 export type MessagesActions =
@@ -68,6 +56,4 @@ export type MessagesActions =
   | LoadMessagesErrorAction
   | CleanMessagesStoreAction
   | PushMessageAction
-  | UpdateMessageAction
-  | UpdateMessageSuccessAction
-  | UpdateMessageErrorAction;
+  | UpdateMessageAction;

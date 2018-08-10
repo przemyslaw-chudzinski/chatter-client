@@ -1,0 +1,23 @@
+@for $i from 1 through 5 {
+  .c-padding-top-#{$i} {
+    padding-top: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-padding-bottom-#{$i} {
+    padding-bottom: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-padding-left-#{$i} {
+    padding-left: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-padding-right-#{$i} {
+    padding-right: $i * 1rem !important;
+  }
+}

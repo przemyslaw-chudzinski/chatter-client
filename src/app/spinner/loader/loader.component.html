@@ -1,0 +1,11 @@
+<div
+  [ngClass]="class"
+  class="chatter-loader c-d-flex c-align-content-center">
+
+  <chatter-spinner [diameter]="30"></chatter-spinner>
+
+  <span
+    *ngIf="message"
+    class="chatter-loader-message c-margin-left-1">{{ message }}</span>
+
+</div>

@@ -23,9 +23,15 @@ export const messagesReducer = (
         ...state,
         messages
       };
-    case messagesActionTypes.UpdateMessageSuccess:
+    case messagesActionTypes.UpdateMessage:
+      let messages2 = [...state.messages];
+      const index = messages2.findIndex(i => i._id === action.payload._id);
+      if (index !== -1) {
+        messages2[index].content = action.payload.content;
+      }
       return {
-        ...state
+        ...state,
+        messages: messages2
       };
     default:
       return state;

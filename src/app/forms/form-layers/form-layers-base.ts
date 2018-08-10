@@ -26,6 +26,10 @@ export abstract class FormLayersBase {
     return this.formGroup.valid;
   }
 
+  get isInvalid(): boolean {
+    return this.formGroup.invalid;
+  }
+
   reset(): void {
     this._formGroup.reset();
   }

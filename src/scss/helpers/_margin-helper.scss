@@ -1,0 +1,23 @@
+@for $i from 1 through 5 {
+  .c-margin-top-#{$i} {
+    margin-top: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-margin-bottom-#{$i} {
+    margin-bottom: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-margin-left-#{$i} {
+    margin-left: $i * 1rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .c-margin-right-#{$i} {
+    margin-right: $i * 1rem !important;
+  }
+}

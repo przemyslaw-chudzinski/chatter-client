@@ -12,12 +12,16 @@
                              [type]="alertType"
                              [visible]="alertVisible"></chatter-form-alert-main>
 
-    <chatter-login-form #chatterLoginForm="chatter-login-form"
-                        (enterDown)="signIn()"></chatter-login-form>
+    <chatter-login-form
+      (onError)="onErrorHandler($event)"
+      (onReset)="alertVisible = false"
+      #chatterLoginForm="chatter-login-form"
+      (enterDown)="chatterLoginForm.signIn()"></chatter-login-form>
+
     <button mat-raised-button
             color="primary"
-            (click)="signIn($event)"
-            [disabled]="chatterLoginForm.formGroup.invalid">Sign in</button>
+            (click)="chatterLoginForm.signIn()"
+            [disabled]="chatterLoginForm.isInvalid">Sign in</button>
     <button mat-button
             (click)="toggleForms()">Forgot password?</button>
   </mat-card>
@@ -26,44 +30,23 @@
   <!-- Forgot password form -->
   <mat-card class="animated fadeIn"
             *ngIf="!showLoginForm">
+
     <h2>
       <mat-icon>chat</mat-icon>
       <span>Chatter - Reset password</span>
     </h2>
-    <chatter-forgot-password-form #chatterForgotPasswordForm="chatter-forgot-password-form"></chatter-forgot-password-form>
+
+    <chatter-forgot-password-form
+      #chatterForgotPasswordForm="chatter-forgot-password-form"></chatter-forgot-password-form>
+
     <button mat-raised-button
             color="primary"
-            [disabled]="chatterForgotPasswordForm.formGroup.invalid">Send email</button>
+            [disabled]="chatterForgotPasswordForm.isInvalid">Send email</button>
+
     <button mat-button
             (click)="toggleForms()">Back to sign in</button>
+
   </mat-card>
   <!-- ################################################################### -->
 
 </div>
-
-<!-- <br>
-<br>
-<mat-card>
-  <chatter-button>Simple button type</chatter-button>
-  <chatter-button color="primary">Simple button type</chatter-button>
-  <chatter-button color="warn">Simple button type</chatter-button>
-  <hr>
-  <chatter-button buttonType="raised">Simple button type</chatter-button>
-  <chatter-button buttonType="raised" color="primary">Simple button type</chatter-button>
-  <chatter-button buttonType="raised" color="warn">Simple button type</chatter-button>
-
-  <hr>
-  <chatter-button buttonType="fab">Simple button type</chatter-button>
-  <chatter-button buttonType="fab" color="primary">Simple button type</chatter-button>
-  <chatter-button buttonType="fab" color="warn">Simple button type</chatter-button>
-
-  <hr>
-  <chatter-button buttonType="miniFab">Simple button type</chatter-button>
-  <chatter-button buttonType="miniFab" color="primary">Simple button type</chatter-button>
-  <chatter-button buttonType="miniFab" color="warn">Simple button type</chatter-button>
-
-  <hr>
-  <chatter-button buttonType="icon" icon="notifications">Simple button type</chatter-button>
-  <chatter-button buttonType="icon" icon="notifications" color="primary">Simple button type</chatter-button>
-  <chatter-button buttonType="icon" icon="notifications" color="warn">Simple button type</chatter-button>
-</mat-card> -->

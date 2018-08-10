@@ -1,4 +1,6 @@
-<form [formGroup]="formGroup">
+<form
+  *ngIf="user"
+  [formGroup]="formGroup">
 
   <mat-form-field>
     <input

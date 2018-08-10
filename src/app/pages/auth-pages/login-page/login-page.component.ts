@@ -1,14 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { LoginFormComponent } from '../../../forms/form-layers/login-form/login-form.component';
-import { ForgotPasswordFormComponent } from '../../../forms/form-layers/forgot-password-form/forgot-password-form.component';
-import { AuthService } from '../../../auth/auth.service';
-import { take, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
-import { HttpErrorResponse } from '@angular/common/http';
-import { EAlertTypes } from '../../../layout/form-alerts/enums/alert-types.enum';
+import {Component} from '@angular/core';
+import {EAlertTypes} from '../../../layout/form-alerts/enums/alert-types.enum';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
@@ -19,38 +12,16 @@ export class LoginPageComponent {
   alertVisible: boolean;
   alertType: EAlertTypes;
 
-  @ViewChild('chatterLoginForm') chatterLoginForm: LoginFormComponent;
-  @ViewChild('chatterForgotPasswordForm')
-  chatterForgotPasswordForm: ForgotPasswordFormComponent;
-
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
   toggleForms(): void {
     this.showLoginForm = !this.showLoginForm;
     this.alertVisible = false;
   }
 
-  signIn(): void {
-    this.alertVisible = false;
-    if (this.chatterLoginForm.isValid) {
-      this.auth
-        .singIn(this.chatterLoginForm.formGroup.value)
-        .pipe(
-          take(1),
-          catchError(err => of(this.errorHandler(err)))
-        )
-        .subscribe();
-    }
-  }
-
-  private errorHandler(err: HttpErrorResponse): void {
-    switch (err.status) {
-      case 404:
-        this.alertMessage = err.error.message;
-        this.alertType = EAlertTypes.danger;
-        this.alertVisible = true;
-        this.chatterLoginForm.reset();
-        break;
-    }
+  onErrorHandler(message: string): void {
+    this.alertVisible = true;
+    this.alertMessage = message;
+    this.alertType = EAlertTypes.danger
   }
 }

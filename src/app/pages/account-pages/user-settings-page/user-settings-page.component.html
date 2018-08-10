@@ -2,26 +2,30 @@
 
   <h3>Account settings</h3>
 
-  <div *ngIf="user">
+  <div *ngIf="userSettingsForm.user as user; else loadingTpl">
+
     <p>
       <strong>Created at: </strong> {{ user.createdAt | date }}
     </p>
+
     <p>
       <strong>Updated at: </strong> {{ user.updatedAt | date }}
     </p>
+
   </div>
 
   <chatter-user-settings-form #userSettingsForm="user-settings-form"></chatter-user-settings-form>
 
   <button
-    [disabled]="userSettingsForm.formGroup.invalid"
+    *ngIf="userSettingsForm.user"
+    [disabled]="userSettingsForm.isInvalid"
     mat-raised-button
     color="primary"
-    (click)="submit()">Save</button>
+    (click)="userSettingsForm.saveUser()">Save</button>
 
   <!-- Here will be component for upload user image -->
-  <div class="c-margin-top-1" *ngIf="user && user.avatar">
-    <img [src]="user.avatar" />
+  <div class="c-margin-top-1" *ngIf="userSettingsForm.user as user">
+    <img *ngIf="user.avatar" [src]="user.avatar" />
   </div>
   <!--**********************************************-->
 
@@ -34,8 +38,13 @@
   <chatter-reset-password-form #resetPasswordForm="reset-password-form"></chatter-reset-password-form>
 
   <button
-    [disabled]="resetPasswordForm.formGroup.invalid"
+    [disabled]="resetPasswordForm.isInvalid"
     mat-raised-button
     color="primary">Save</button>
 
 </div>
+
+<ng-template #loadingTpl>
+  <chatter-loader
+    message="Processing data..."></chatter-loader>
+</ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA
@@ -7,6 +7,8 @@ import {IMessage} from '../../models/message.model';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {Store} from '@ngrx/store';
 import {UpdateMessageAction} from '../../messages-store/messages.actions';
+import {MessagesApiService} from '../../messages-api.service';
+import {take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'chatter-edit-message-dialog',
@@ -15,13 +17,13 @@ import {UpdateMessageAction} from '../../messages-store/messages.actions';
 })
 export class EditMessageDialogComponent implements OnInit {
   messageCopy: IMessage;
-
   loading: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public message: IMessage,
-    private store: Store<ChatterState>
+    private store: Store<ChatterState>,
+    private messagesApiService: MessagesApiService
   ) {}
 
   ngOnInit() {
@@ -34,7 +36,11 @@ export class EditMessageDialogComponent implements OnInit {
 
   update(): void {
     this.loading = true;
-    this.store.dispatch(new UpdateMessageAction(this.messageCopy));
+    this.messagesApiService.updateMessage(this.message).pipe(
+      take(1),
+      tap(response => this.store.dispatch(new UpdateMessageAction(this.messageCopy))),
+      tap(() => this.dialogRef.close())
+    ).subscribe();
   }
 
   contentChangesHandler(event: string): void {
