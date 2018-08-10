@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UserSettingsPageComponent } from './user-settings-page/user-settings-page.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AccountPagesComponent} from './account-pages.component';
-import {FormLayersModule} from '../../forms/form-layers/form-layers.module';
 import {MatButtonModule} from '@angular/material';
 import {SpinnerModule} from '../../spinner/spinner.module';
+import {ChatterFormLayersModule} from '../../chatter-forms/chatter-form-layers/chatter-form-layers.module';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormLayersModule,
+    ChatterFormLayersModule,
     MatButtonModule,
     SpinnerModule
   ],

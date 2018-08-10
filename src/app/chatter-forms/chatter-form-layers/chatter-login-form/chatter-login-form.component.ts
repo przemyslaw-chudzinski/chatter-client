@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { LoginFormService } from './login-form.service';
-import { FormLayersBase } from '../form-layers-base';
+import { ChatterLoginFormService } from './chatter-login-form.service';
+import { ChatterFormLayersBase } from '../chatter-form-layers-base';
 import {catchError, take, tap} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
 import {AuthService} from '../../../auth/auth.service';
@@ -8,17 +8,17 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'chatter-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
+  templateUrl: './chatter-login-form.component.html',
+  styleUrls: ['./chatter-login-form.component.scss'],
   exportAs: 'chatter-login-form'
 })
-export class LoginFormComponent extends FormLayersBase implements OnInit {
+export class ChatterLoginFormComponent extends ChatterFormLayersBase implements OnInit {
   @Output() onError = new EventEmitter<string>();
   @Output() onReset = new EventEmitter<null>();
   @Output() onSuccess = new EventEmitter<any>();
 
   constructor(
-    private loginFormService: LoginFormService,
+    private loginFormService: ChatterLoginFormService,
     private auth: AuthService
   ) {
     super();

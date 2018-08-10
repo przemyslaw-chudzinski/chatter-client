@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {UserSettingsFormService} from './user-settings-form.service';
-import {FormLayersBase} from '../form-layers-base';
+import {ChatteruserSettingsFormService} from './chatteruser-settings-form.service';
+import {ChatterFormLayersBase} from '../chatter-form-layers-base';
 import {take, tap} from 'rxjs/operators';
 import {UsersService} from '../../../users/users.service';
 import {IUser} from '../../../auth/models/user.model';
 
 @Component({
   selector: 'chatter-user-settings-form',
-  templateUrl: './user-settings-form.component.html',
-  styleUrls: ['./user-settings-form.component.scss'],
+  templateUrl: './chatter-user-settings-form.component.html',
+  styleUrls: ['./chatter-user-settings-form.component.scss'],
   exportAs: 'user-settings-form'
 })
-export class UserSettingsFormComponent extends FormLayersBase implements OnInit {
+export class ChatterUserSettingsFormComponent extends ChatterFormLayersBase implements OnInit {
   private _user: IUser;
 
   get user(): IUser {
@@ -19,7 +19,7 @@ export class UserSettingsFormComponent extends FormLayersBase implements OnInit 
   }
 
   constructor(
-    private userSettingsFormService: UserSettingsFormService,
+    private userSettingsFormService: ChatteruserSettingsFormService,
     private usersService: UsersService
   ) {
     super();

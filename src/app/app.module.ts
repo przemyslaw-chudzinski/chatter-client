@@ -7,7 +7,6 @@ import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
-import { FormLayersModule } from './forms/form-layers/form-layers.module';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { routerLinks } from './routes/router-links';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -18,6 +17,7 @@ import { WebsocketModule } from './websocket/websocket.module';
 import { MessagesModule } from './messages/messages.module';
 import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
 import {ChatterStoreModule} from './chatter-store/chatter-store.module';
+import {ChatterFormLayersModule} from './chatter-forms/chatter-form-layers/chatter-form-layers.module';
 
 const routes: Routes = [
   {
@@ -58,7 +58,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     AuthModule.forRoot(),
-    FormLayersModule.forRoot(),
+    ChatterFormLayersModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: AuthService.token

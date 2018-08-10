@@ -1,7 +1,7 @@
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Output, EventEmitter } from '@angular/core';
 
-export abstract class FormLayersBase {
+export abstract class ChatterFormLayersBase {
   @Output() enterDown = new EventEmitter<null>();
 
   private _formGroup: FormGroup;
