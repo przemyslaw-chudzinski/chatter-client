@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ChatterResetPasswordFormService} from './chatter-reset-password-form.service';
 import {ChatterFormLayersBase} from '../chatter-form-layers-base';
+import {AuthService} from '../../../auth/auth.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'chatter-reset-password-form',
@@ -9,16 +11,24 @@ import {ChatterFormLayersBase} from '../chatter-form-layers-base';
   exportAs: 'reset-password-form'
 })
 export class ChatterResetPasswordFormComponent extends ChatterFormLayersBase implements OnInit {
-  constructor(private resetPasswordService: ChatterResetPasswordFormService) {
+  @Output() onSubmit = new EventEmitter<any>();
+
+  constructor(
+    private chatterResetPasswordFormService: ChatterResetPasswordFormService,
+    private auth: AuthService
+  ) {
     super();
   }
 
   ngOnInit() {
-    this.formGroup = this.resetPasswordService.init();
+    this.formGroup = this.chatterResetPasswordFormService.init();
   }
 
   resetPassword(): void {
     console.log('sending request to db');
+    this.auth.resetPassword().pipe(
+      tap(response => this.onSubmit.emit(response))
+    ).subscribe();
   }
 
 }

@@ -87,4 +87,8 @@ export class AuthService {
       )
       .subscribe();
   }
+
+  resetPassword(): Observable<any> {
+    return this.httpClient.post('', null);
+  }
 }

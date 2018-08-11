@@ -40,7 +40,8 @@
   <button
     [disabled]="resetPasswordForm.isInvalid"
     mat-raised-button
-    color="primary">Save</button>
+    color="primary"
+    (click)="resetPasswordForm.resetPassword()">Save</button>
 
 </div>
 

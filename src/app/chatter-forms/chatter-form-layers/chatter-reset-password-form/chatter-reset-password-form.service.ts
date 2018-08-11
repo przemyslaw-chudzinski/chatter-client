@@ -9,7 +9,11 @@ export class ChatterResetPasswordFormService implements ChatterFormLayerServiceC
 
   init(): FormGroup {
     return this.fb.group({
-      password: [null, [Validators.required, Validators.minLength(6), ChatterValidators.testValidator]],
+      password: [null, [
+        Validators.required,
+        Validators.minLength(6),
+        ChatterValidators.testValidator
+      ]],
       cPassword: [null, [Validators.required]]
     });
   }
