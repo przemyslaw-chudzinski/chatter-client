@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthModule } from '../../auth/auth.module';
 import { FormAlertsModule } from '../../layout/form-alerts/form-alerts.module';
 import { LoginPageComponent } from './login-page/login-page.component';
-import {ChatterFormLayersModule} from '../../chatter-forms/chatter-form-layers/chatter-form-layers.module';
+import {FormLayersModule} from '../../form-layers/form-layers.module';
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ChatterFormLayersModule,
+    FormLayersModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,

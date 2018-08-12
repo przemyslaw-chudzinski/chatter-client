@@ -17,7 +17,7 @@ import { WebsocketModule } from './websocket/websocket.module';
 import { MessagesModule } from './messages/messages.module';
 import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
 import {ChatterStoreModule} from './chatter-store/chatter-store.module';
-import {ChatterFormLayersModule} from './chatter-forms/chatter-form-layers/chatter-form-layers.module';
+import {FormLayersModule} from './form-layers/form-layers.module';
 
 const routes: Routes = [
   {
@@ -58,7 +58,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     AuthModule.forRoot(),
-    ChatterFormLayersModule.forRoot(),
+    FormLayersModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: AuthService.token

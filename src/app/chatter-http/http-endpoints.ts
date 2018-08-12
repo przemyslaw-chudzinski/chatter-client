@@ -4,7 +4,8 @@ const apiVersion = 'v1';
 const apiUrl = environment.apiUrl + apiVersion;
 
 export const authEndpoints = {
-  signInEndpoint: `${apiUrl}/auth/sign-in`
+  signInEndpoint: `${apiUrl}/auth/sign-in`,
+  checkEmailEndpoint: `${apiUrl}/auth/check-email`
 };
 
 export const usersEndpoints = {
