@@ -1,0 +1,64 @@
+<div class="chatter-validator-feedback" [ngClass]="class">
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.hasError('required')"
+  >
+    Field is required
+  </mat-error>
+
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.getError('minlength') as error"
+  >
+    Field has to have at least {{ error.requiredLength }} characters
+  </mat-error>
+
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.getError('rules')?.lowercase"
+  >
+    Field has to contain lowercase letters
+  </mat-error>
+
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.getError('rules')?.uppercase"
+  >
+    Field has to contain uppercase letters
+  </mat-error>
+
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.getError('rules')?.number"
+  >
+    Password has to contain numbers
+  </mat-error>
+
+  <mat-error
+    *ngIf="
+(control.touched || control.dirty)
+&& control.getError('rules')?.special"
+  >
+    Field has to contain special characters
+  </mat-error>
+
+  <mat-error
+    *ngIf="control.hasError('isTaken')"
+  >
+    Field is already taken
+  </mat-error>
+
+  <mat-error
+    *ngIf="control.touched || control.dirty && control.hasError('email')"
+  >
+    Field has wrong email pattern
+  </mat-error>
+
+  <ng-content></ng-content>
+
+</div>

@@ -14,7 +14,7 @@ export class ResetPasswordFormService extends FormLayerServiceAbstract{
       password: [null, [
         Validators.required,
         Validators.minLength(6),
-        PasswordValidator.validatePassword({lowercase: true, special: false, number: true, uppercase: true})
+        PasswordValidator.validatePassword({lowercase: true, special: true, number: true, uppercase: true})
       ]],
       cPassword: [null, [Validators.required]]
     });

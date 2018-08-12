@@ -13,6 +13,8 @@ import {ResetPasswordFormService} from './forms/reset-password-form/reset-passwo
 import {UserSettingsFormService} from './forms/user-settings-form/user-settings-form.service';
 import {MatchFieldsDirective} from './validators/match-fields.directive';
 import {ValidatorsService} from './validators/validators.service';
+import {SpinnerModule} from '../spinner/spinner.module';
+import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
 
 @NgModule({
   imports: [
@@ -20,21 +22,24 @@ import {ValidatorsService} from './validators/validators.service';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    SpinnerModule
   ],
   declarations: [
     LoginFormComponent,
     ForgotPasswordFormComponent,
     UserSettingsFormComponent,
     ResetPasswordFormComponent,
-    MatchFieldsDirective
+    MatchFieldsDirective,
+    ValidationFeedbackComponent
   ],
   exports: [
     LoginFormComponent,
     ForgotPasswordFormComponent,
     UserSettingsFormComponent,
     ResetPasswordFormComponent,
-    MatchFieldsDirective
+    MatchFieldsDirective,
+    ValidationFeedbackComponent
   ]
 })
 export class FormLayersModule {

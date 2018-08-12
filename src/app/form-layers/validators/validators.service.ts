@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ChatterHttpClient} from '../../chatter-http/chatter-http-client';
 import {Observable} from 'rxjs';
-import {authEndpoints} from '../../chatter-http/http-endpoints';
+import {validatorEndpoints} from '../../chatter-http/http-endpoints';
 import {ValidationErrors} from '@angular/forms';
 
 @Injectable()
@@ -11,6 +11,6 @@ export class ValidatorsService {
   ) {}
 
   checkEmail(email: string): Observable<ValidationErrors | null> {
-    return this.httpClient.post(authEndpoints.checkEmailEndpoint, email);
+    return this.httpClient.post(validatorEndpoints.checkEmailEndpoint, {email});
   }
 }

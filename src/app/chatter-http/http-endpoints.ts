@@ -4,8 +4,7 @@ const apiVersion = 'v1';
 const apiUrl = environment.apiUrl + apiVersion;
 
 export const authEndpoints = {
-  signInEndpoint: `${apiUrl}/auth/sign-in`,
-  checkEmailEndpoint: `${apiUrl}/auth/check-email`
+  signInEndpoint: `${apiUrl}/auth/sign-in`
 };
 
 export const usersEndpoints = {
@@ -19,4 +18,8 @@ export const messagesEndpoints = {
   messagesEndpoint: (recipientId: string): string =>
     `${apiUrl}/messages/${recipientId}`,
   updateMessageEndpoint: `${apiUrl}/messages/update-message`
+};
+
+export const validatorEndpoints = {
+  checkEmailEndpoint: `${apiUrl}/validator/check-email`
 };
