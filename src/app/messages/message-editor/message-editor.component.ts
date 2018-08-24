@@ -14,69 +14,55 @@ export class MessageEditorComponent implements OnInit, OnDestroy {
     this._value = value;
     this.content$.next(this._value);
   }
+  @Output() messageReady = new EventEmitter<IMessage>();
+  @Output() contentChanges = new EventEmitter<string>(null);
+  private _value: string;
+  private _alive = true;
+  private _content = '';
+  content$ = new Subject<string>();
 
   get value(): string {
     return this._value;
   }
 
-  @Output() messageReady = new EventEmitter<IMessage>();
-
-  @Output() contentChanges = new EventEmitter<string>(null);
-
-  private _value: string;
-
-  private alive = true;
-
-  private content = '';
-
-  content$ = new Subject<string>();
-
   constructor(private auth: AuthService) {}
 
   ngOnInit() {
     this.content$.pipe(
-      takeWhile(() => this.alive),
+      takeWhile(() => this._alive),
       map(content => content as string),
-      tap(content => (this.content = content)),
+      tap(content => (this._content = content)),
       tap(content => this.contentChanges.emit(content))
     ).subscribe();
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this._alive = false;
   }
 
-  sendMessage(): void {
+  keyDownEnterHandler(): void {
     this.auth.user$
       .pipe(
         take(1),
-        tap(() => (this.content = this.content.trim())),
+        tap(() => (this._content = this._content.trim())),
         tap(
           user =>
             user &&
-            this.content &&
+            this._content &&
             this.messageReady.emit({
-              content: this.content.trim(),
+              content: this._content.trim(),
               author: user
             })
         ),
-        tap(() => (this.content = ''))
+        tap(() => (this._content = ''))
       )
       .subscribe();
   }
 
 
-  keyupHandler(event: any): void {
+  keyUpHandler(event: any): void {
     if (event.code !== 'Enter') {
-      // TODO: Parsing message here
-      // console.log('filtering');
-      // console.log('search', event.target.innerHTML.includes('dupa'));
-      event.target.innerHTML.includes('dupa') && event.target.innerHTML.replace('dupa', 'cycki');
-      if (event.target.innerHTML.includes('dupa')) {
-        event.target.innerHTML = event.target.innerHTML.replace('dupa', 'cycki');
-        // console.log('replaced', event.target.innerHTML);
-      }
-      this.content$.next(event.target.innerHTML);
+      this.content$.next(event.target['innerHTML']);
     }
   }
 }

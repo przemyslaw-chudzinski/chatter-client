@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'chatter-loader',
@@ -8,6 +8,4 @@ import {Component, Input, OnInit} from '@angular/core';
 export class LoaderComponent {
   @Input() message: string;
   @Input() class: string;
-
-  constructor() { }
 }

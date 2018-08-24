@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {FormLayerServiceAbstract} from '../../form-layer-service.abstract';
 
 @Injectable()
-export class LoginFormService extends FormLayerServiceAbstract{
+export class LoginFormService extends FormLayerServiceAbstract {
   constructor(protected fb: FormBuilder) {
     super();
   }

@@ -1,7 +1,7 @@
 <div chatterMessageEditor
      class="chatter-message-editor"
      contenteditable="true"
-     (keyup)="keyupHandler($event)"
-     (keydown.enter)="sendMessage($event)"
+     (keyup)="keyUpHandler($event)"
+     (keydown.enter)="keyDownEnterHandler($event)"
      [innerHTML]="value">
 </div>

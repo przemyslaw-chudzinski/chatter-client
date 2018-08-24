@@ -23,7 +23,7 @@ import {ContactListService} from './contact-list.service';
 export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   @Input() contacts: IContact[];
   private onMessageSub: Subscription;
-  private alive = true;
+  private _alive = true;
 
   constructor(
     private websocketService: WebsocketService,
@@ -34,7 +34,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
     if (!this.onMessageSub) {
       this.websocketService.onMessage$
         .pipe(
-          takeWhile(() => this.alive),
+          takeWhile(() => this._alive),
           map(data => data as IWebSocketData),
           tap(data => {
             if (
@@ -110,6 +110,6 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   ngOnDestroy() {
     // tslint:disable-next-line:no-unused-expression
     this.onMessageSub && this.onMessageSub.unsubscribe();
-    this.alive = false;
+    this._alive = false;
   }
 }
