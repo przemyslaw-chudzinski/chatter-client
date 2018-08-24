@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/internal/operators/map';
-import { tap } from 'rxjs/internal/operators/tap';
 import {Observable, BehaviorSubject} from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from '../../environments/environment';
 import { IUser } from './models/user.model';
 import { authEndpoints } from '../chatter-http/http-endpoints';
 import { IAuthBody } from './models/auth-body.model';
@@ -12,92 +8,64 @@ import { RouterLinksService } from '../routes/router-links.service';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { IAuthResponse } from './models/auth-response.model';
 import { WebsocketService } from '../websocket/websocket.service';
-import { take } from 'rxjs/operators';
+import { take, map, tap } from 'rxjs/operators';
+import {decodedToken, removeToken, saveToken, token, tokenExpired} from '../helpers/helpers';
 
 @Injectable()
 export class AuthService {
   user$ = new BehaviorSubject<IUser>(null);
 
   constructor(
-    private httpClient: ChatterHttpClient,
-    private jwtHelper: JwtHelperService,
-    private routerLinksService: RouterLinksService,
-    private websocketService: WebsocketService
+    private _httpClient: ChatterHttpClient,
+    private _routerLinksService: RouterLinksService,
+    private _websocketService: WebsocketService
   ) {
     this.init();
-  }
-
-  static token(): string {
-    return localStorage.getItem(environment.tokenKey);
-  }
-
-  static removeToken(): void {
-    localStorage.removeItem(environment.tokenKey);
-  }
-
-  static saveToken(token: string): void {
-    localStorage.setItem(environment.tokenKey, token);
-  }
-
-  isTokenExpired(): boolean {
-    return this.jwtHelper.isTokenExpired(AuthService.token());
   }
 
   init(): void {
     this.initUser();
     this.user$.pipe(
-      tap(user => {
-        if (user) {
-          this.websocketService.userId = user._id;
-          this.websocketService.connect(user._id);
-        }
-        // this.routerLinksService.navigateByUrl(routerLinks.loginPage);
-      })
+      tap(user => user && (this._websocketService.userId = user._id)),
+      tap(user => user && this._websocketService.connect(user._id))
     ).subscribe();
-    // if (user) {
-    //   this.websocketService.userId = user._id;
-    //   this.websocketService.connect(user._id);
-    //   return;
-    // }
-    // return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
   }
 
   initUser(): IUser {
-    const token = AuthService.token();
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    token && !this.isTokenExpired() && this.user$.next(decodedToken.user) || null;
-    return (decodedToken && decodedToken.user) || null;
+    const _decodedToken = decodedToken();
+    token && !tokenExpired() && this.user$.next(_decodedToken.user) || null;
+    return (_decodedToken && _decodedToken.user) || null;
   }
 
   singIn(body: IAuthBody): Observable<IUser> {
-    return this.httpClient
+    return this._httpClient
       .post<IAuthResponse>(authEndpoints.signInEndpoint, body)
       .pipe(
         map(response => response as IAuthResponse),
-        tap(response => AuthService.saveToken(response.token)),
+        tap(response => saveToken(response.token)),
         map(response => response.user),
         tap(user => this.user$.next(user)),
         tap(() =>
-          this.routerLinksService.navigateByUrl(routerLinks.dashboardPage)
+          this._routerLinksService.navigateByUrl(routerLinks.dashboardPage)
         ),
-        tap(user => (this.websocketService.userId = user._id)),
-        tap(user => this.websocketService.connect(user._id))
+        tap(user => (this._websocketService.userId = user._id)),
+        tap(user => this._websocketService.connect(user._id))
       );
   }
 
   logOut(): void {
-    AuthService.removeToken();
-    this.routerLinksService.navigateByUrl(routerLinks.loginPage);
+    removeToken();
+    this._routerLinksService.navigateByUrl(routerLinks.loginPage);
     this.user$
       .pipe(
         take(1),
-        tap(user => user && this.websocketService.disconnect(user._id)),
+        tap(user => user && this._websocketService.disconnect(user._id)),
         tap(() => this.user$.next(null))
       )
       .subscribe();
   }
 
   resetPassword(): Observable<any> {
-    return this.httpClient.post('', null);
+    return this._httpClient.post('', null);
   }
 }
