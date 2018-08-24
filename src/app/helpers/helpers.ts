@@ -26,4 +26,4 @@ export const tokenExpired = (_token?: string): boolean => jwtHelper.isTokenExpir
 /**
  * @desc It returns decoded token
  */
-export const decodedToken = (): any => jwtHelper.decodeToken(token());
+export const decodedToken = (_token?: string): any => jwtHelper.decodeToken(_token || token());
