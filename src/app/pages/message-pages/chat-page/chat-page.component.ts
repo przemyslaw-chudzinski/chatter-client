@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../../websocket/websocket.service';
 import { ActivatedRoute } from '@angular/router';
-import {tap, takeWhile} from 'rxjs/operators';
+import {tap, takeWhile, switchMap} from 'rxjs/operators';
 import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
 import { AuthService } from '../../../auth/auth.service';
 import { IUser } from '../../../auth/models/user.model';
@@ -25,6 +25,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private alive = true;
   messages$: Observable<IMessage[]> = this.store.pipe(select(selectMessages));
   user$: Observable<IUser> = this.store.pipe(select(selectUser));
+  private _params;
 
   constructor(
     private websocketService: WebsocketService,
@@ -69,9 +70,11 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         tap(() => (this.contact = null)),
         tap(() => (this.messages = null)),
         tap(() => this.store.dispatch(new CleanMessagesStoreAction())),
-        tap(params => this.store.dispatch(new LoadUserAction(params.id))),
-        tap(params => this.websocketService.switchToContact(params.id)),
-        tap(params => this.store.dispatch(new LoadMessagesAction(params.id)))
+        tap(params => params && this.store.dispatch(new LoadUserAction(params.id))),
+        tap(params => params && this.store.dispatch(new LoadMessagesAction(params.id))),
+        tap(params => (this._params = params)),
+        switchMap(() => this.websocketService.onOpen),
+        tap(() => this.websocketService.switchToContact(this._params.id))
       )
       .subscribe();
   }

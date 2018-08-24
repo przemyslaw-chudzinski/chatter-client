@@ -65,8 +65,17 @@ export class MessageEditorComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+
   keyupHandler(event: any): void {
     if (event.code !== 'Enter') {
+      // TODO: Parsing message here
+      // console.log('filtering');
+      // console.log('search', event.target.innerHTML.includes('dupa'));
+      event.target.innerHTML.includes('dupa') && event.target.innerHTML.replace('dupa', 'cycki');
+      if (event.target.innerHTML.includes('dupa')) {
+        event.target.innerHTML = event.target.innerHTML.replace('dupa', 'cycki');
+        // console.log('replaced', event.target.innerHTML);
+      }
       this.content$.next(event.target.innerHTML);
     }
   }

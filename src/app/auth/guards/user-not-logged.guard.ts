@@ -10,9 +10,7 @@ import { RouterLinksService } from '../../routes/router-links.service';
 import { take, map, tap } from '../../../../node_modules/rxjs/operators';
 import { routerLinks } from '../../routes/router-links';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserNotLoggedGuard implements CanActivate {
   constructor(
     private auth: AuthService,

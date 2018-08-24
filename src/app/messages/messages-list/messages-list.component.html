@@ -1,8 +1,22 @@
 <div class="chatter-chat-messages-list"
      [chatterScrollToBottom]="messages">
+
   <!-- Single message -->
   <chatter-message *ngFor="let msg of messages"
                    [message]="msg"></chatter-message>
+
   <!-- ######################################### -->
   <chatter-spinner *ngIf="loading"></chatter-spinner>
+
+  <div
+    class="chatter-chat-messages-no-message c-d-flex c-justify-content-center c-align-content-center c-text-center"
+    *ngIf="messages && !messages.length">
+
+    <div class="c-d-flex c-justify-content-center c-flex-wrap ">
+      <mat-icon>chat</mat-icon>
+      <span class="c-d-block c-width-100">No messages yet</span>
+    </div>
+
+  </div>
+
 </div>

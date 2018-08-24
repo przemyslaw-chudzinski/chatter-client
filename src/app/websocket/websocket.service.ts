@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IWebSocketData } from './models/websocket-payload.model';
 import { EWebSocketActions } from './enums/websocket-actions.enum';
@@ -11,14 +11,15 @@ export class WebsocketService {
   >(null);
   private _userId: string;
 
+  onOpen = new EventEmitter<any>();
+
   get onMessage$(): Observable<any> {
     return this._onMessage$;
   }
 
   constructor() {
     if (!WebSocket) {
-      // tslint:disable-next-line:quotemark
-      throw new Error("Your browser doesn't support WebSocket");
+      throw new Error('Your browser doesn\'t support WebSocket');
     }
   }
 
@@ -30,6 +31,8 @@ export class WebsocketService {
     this._ws = new WebSocket('ws://localhost:8000');
     this._ws.onopen = this.onOpenHandler.bind(this, userId);
     this._ws.onmessage = this.onMessageHandler.bind(this);
+    this._ws.onerror = () => console.log('on error');
+    this._ws.onclose = () => console.log('on close');
   }
 
   disconnect(userId: string): void {
@@ -41,6 +44,7 @@ export class WebsocketService {
 
   sendMessage(message: string, contactId: string): void {
     // tslint:disable-next-line:no-unused-expression
+    this.onOpen.emit();
     this._userId &&
       contactId &&
       this.send({
@@ -63,6 +67,7 @@ export class WebsocketService {
   }
 
   private onOpenHandler(userId: string, event: any): void {
+    // this._opend = true;
     this.send({
       action: EWebSocketActions.UserLogged,
       userId: userId

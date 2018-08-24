@@ -13,9 +13,7 @@ export class ValidationFeedbackComponent implements OnInit {
 
   constructor(
     @Optional() private formGroup: FormGroupDirective
-  ) {
-    console.log(formGroup);
-  }
+  ) {}
 
   ngOnInit() {
     if (!this.control && this.formGroup && this.controlName) {

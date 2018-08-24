@@ -54,7 +54,7 @@
   </mat-error>
 
   <mat-error
-    *ngIf="control.touched || control.dirty && control.hasError('email')"
+    *ngIf="(control.touched || control.dirty) && control.hasError('email')"
   >
     Field has wrong email pattern
   </mat-error>

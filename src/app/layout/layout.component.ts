@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { map } from 'rxjs/operators';
+import {map, takeWhile, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IContact} from '../contact-list/models/contact';
 import {select, Store} from '@ngrx/store';
@@ -35,7 +35,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadUsersAction());
+    this.auth.user$.pipe(
+      takeWhile(() => this.alive),
+      tap(user => user && this.store.dispatch(new LoadUsersAction()))
+    ).subscribe();
   }
 
   ngOnDestroy() {

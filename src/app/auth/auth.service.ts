@@ -43,14 +43,23 @@ export class AuthService {
     return this.jwtHelper.isTokenExpired(AuthService.token());
   }
 
-  init(): Promise<boolean> {
-    const user = this.initUser();
-    if (user) {
-      this.websocketService.userId = user._id;
-      this.websocketService.connect(user._id);
-      return;
-    }
-    return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
+  init(): void {
+    this.initUser();
+    this.user$.pipe(
+      tap(user => {
+        if (user) {
+          this.websocketService.userId = user._id;
+          this.websocketService.connect(user._id);
+        }
+        // this.routerLinksService.navigateByUrl(routerLinks.loginPage);
+      })
+    ).subscribe();
+    // if (user) {
+    //   this.websocketService.userId = user._id;
+    //   this.websocketService.connect(user._id);
+    //   return;
+    // }
+    // return this.routerLinksService.navigateByUrl(routerLinks.loginPage);
   }
 
   initUser(): IUser {
