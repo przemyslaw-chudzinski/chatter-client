@@ -37,7 +37,7 @@ export class AuthService {
     return (_decodedToken && _decodedToken.user) || null;
   }
 
-  singIn(body: IAuthBody): Observable<IUser> {
+  signIn(body: IAuthBody): Observable<IUser> {
     return this._httpClient
       .post<IAuthResponse>(authEndpoints.signInEndpoint, body)
       .pipe(

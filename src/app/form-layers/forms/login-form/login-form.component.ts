@@ -32,7 +32,7 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
     this.onReset.emit();
     if (this.isValid) {
       this.auth
-        .singIn(this.formGroup.value)
+        .signIn(this.formGroup.value)
         .pipe(
           take(1),
           tap(response => this.onSuccess.emit(response)),
