@@ -2,8 +2,7 @@ import {AuthService} from './auth.service';
 import {ChatterHttpClient} from '../chatter-http/chatter-http-client';
 import {WebsocketService} from '../websocket/websocket.service';
 import {saveToken, token} from '../helpers/helpers';
-import {empty, of} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {empty} from 'rxjs';
 
 describe('auth service', () => {
 
