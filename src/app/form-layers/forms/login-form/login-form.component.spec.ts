@@ -55,12 +55,13 @@ describe('LoginFormComponent', () => {
 
   it('should create formGroup', () => {
     const service = TestBed.get(LoginFormService);
-    spyOn(service, 'init').and.returnValue(new FormGroup({
+    const formGroup = new FormGroup({
       email: new FormControl(null),
       password: new FormControl(null)
-    }));
+    });
+    spyOn(service, 'init').and.returnValue(formGroup);
 
-    expect(component.formGroup).not.toBeNull();
+    expect(component.formGroup).not.toBe(formGroup);
   });
 
 });
