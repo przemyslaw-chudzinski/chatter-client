@@ -8,6 +8,6 @@ import { LoaderComponent } from './loader/loader.component';
 @NgModule({
   imports: [CommonModule, MatProgressSpinnerModule],
   declarations: [SpinnerComponent, BackdropComponent, LoaderComponent],
-  exports: [SpinnerComponent,LoaderComponent]
+  exports: [SpinnerComponent, LoaderComponent]
 })
 export class SpinnerModule {}
