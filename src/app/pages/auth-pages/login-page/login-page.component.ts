@@ -22,6 +22,6 @@ export class LoginPageComponent {
   onErrorHandler(message: string): void {
     this.alertVisible = true;
     this.alertMessage = message;
-    this.alertType = EAlertTypes.danger
+    this.alertType = EAlertTypes.danger;
   }
 }

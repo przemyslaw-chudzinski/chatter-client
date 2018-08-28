@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import {RouterLinksService} from '../../routes/router-links.service';
+import {routerLinks} from '../../routes/router-links';
 
 @Component({
   selector: 'chatter-user-menu',
@@ -8,9 +8,9 @@ import {RouterLinksService} from '../../routes/router-links.service';
   styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent {
+  links = routerLinks;
   constructor(
-    private auth: AuthService,
-    public routerLinksService: RouterLinksService
+    private auth: AuthService
   ) {}
 
   logOut(): void {

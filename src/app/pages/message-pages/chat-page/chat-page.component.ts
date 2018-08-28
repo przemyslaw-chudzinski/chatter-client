@@ -23,18 +23,19 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   messages: IMessage[];
   contact: IUser;
   private alive = true;
-  messages$: Observable<IMessage[]> = this.store.pipe(select(selectMessages));
-  user$: Observable<IUser> = this.store.pipe(select(selectUser));
+  messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
+  user$: Observable<IUser> = this._store.pipe(select(selectUser));
   private _params;
 
   constructor(
-    private websocketService: WebsocketService,
-    private route: ActivatedRoute,
+    private _websocketService: WebsocketService,
+    private _route: ActivatedRoute,
     public auth: AuthService,
-    private store: Store<ChatterState>
+    private _store: Store<ChatterState>
   ) {}
 
   ngOnInit() {
+
     this.user$.pipe(
       takeWhile(() => this.alive),
       tap(user => (this.contact = user))
@@ -45,17 +46,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
       tap(messages => (this.messages = messages))
     ).subscribe();
 
-    this.websocketService.onMessage$
+    this._websocketService.onMessage$
       .pipe(
         takeWhile(() => this.alive),
         tap(event => {
           if (
             event &&
-            event.action === EWebSocketActions.MessageToContact &&
+            event._action === EWebSocketActions.MessageToContact &&
             this.contact &&
             this.contact._id === event.contactId
           ) {
-            this.store.dispatch(new PushMessageAction({
+            this._store.dispatch(new PushMessageAction({
               content: event.data,
               author: this.contact
             }));
@@ -64,17 +65,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.route.params
+    this._route.params
       .pipe(
         takeWhile(() => this.alive),
         tap(() => (this.contact = null)),
         tap(() => (this.messages = null)),
-        tap(() => this.store.dispatch(new CleanMessagesStoreAction())),
-        tap(params => params && this.store.dispatch(new LoadUserAction(params.id))),
-        tap(params => params && this.store.dispatch(new LoadMessagesAction(params.id))),
+        tap(() => this._store.dispatch(new CleanMessagesStoreAction())),
+        tap(params => params && this._store.dispatch(new LoadUserAction(params.id))),
+        tap(params => params && this._store.dispatch(new LoadMessagesAction(params.id))),
         tap(params => (this._params = params)),
-        switchMap(() => this.websocketService.onOpen),
-        tap(() => this.websocketService.switchToContact(this._params.id))
+        switchMap(() => this._websocketService.onOpen),
+        tap(() => this._websocketService.switchToContact(this._params.id))
       )
       .subscribe();
   }
@@ -87,7 +88,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.contact &&
     event &&
     event.content &&
-    this.websocketService.sendMessage(event.content, this.contact._id);
-    this.store.dispatch(new PushMessageAction(event));
+    this._websocketService.sendMessage(event.content, this.contact._id);
+    this._store.dispatch(new PushMessageAction(event));
   }
 }

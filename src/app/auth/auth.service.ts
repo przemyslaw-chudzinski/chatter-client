@@ -4,12 +4,12 @@ import { IUser } from './models/user.model';
 import { authEndpoints } from '../chatter-http/http-endpoints';
 import { IAuthBody } from './models/auth-body.model';
 import { routerLinks } from '../routes/router-links';
-import { RouterLinksService } from '../routes/router-links.service';
 import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { IAuthResponse } from './models/auth-response.model';
 import { WebsocketService } from '../websocket/websocket.service';
 import { take, map, tap } from 'rxjs/operators';
 import {decodedToken, removeToken, saveToken, token, tokenExpired} from '../helpers/helpers';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(
     private _httpClient: ChatterHttpClient,
-    private _routerLinksService: RouterLinksService,
+    private _router: Router,
     private _websocketService: WebsocketService
   ) {
     this.init();
@@ -46,7 +46,7 @@ export class AuthService {
         map(response => response.user),
         tap(user => this.user$.next(user)),
         tap(() =>
-          this._routerLinksService.navigateByUrl(routerLinks.dashboardPage)
+          this._router.navigateByUrl(routerLinks.dashboardPage)
         ),
         tap(user => (this._websocketService.userId = user._id)),
         tap(user => this._websocketService.connect(user._id))
@@ -55,7 +55,7 @@ export class AuthService {
 
   logOut(): void {
     removeToken();
-    this._routerLinksService.navigateByUrl(routerLinks.loginPage);
+    this._router.navigateByUrl(routerLinks.loginPage);
     this.user$
       .pipe(
         take(1),

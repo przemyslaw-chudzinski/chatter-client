@@ -14,14 +14,8 @@ import {Router} from '@angular/router';
 import {RouterStub} from '../../../../stumbs/router.stumb';
 import {WebsocketService} from '../../../websocket/websocket.service';
 import {WebsocketModule} from '../../../websocket/websocket.module';
-
-export class StoreStumb<T> {
-  dispatch(): void {}
-}
-
-export class MatDialogRefStumb {
-  close(): void {}
-}
+import {MatDialogRefStumb} from '../../../../stumbs/MatDialogRefStumb';
+import {StoreStumb} from '../../../../stumbs/StoreStumb';
 
 describe('EditMessageDialogComponent', () => {
 

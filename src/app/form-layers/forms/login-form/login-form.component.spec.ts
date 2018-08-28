@@ -8,7 +8,6 @@ import {AuthService} from '../../../auth/auth.service';
 import {ChatterHttpClient} from '../../../chatter-http/chatter-http-client';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule} from '@angular/router';
-import {RouterLinksService} from '../../../routes/router-links.service';
 import {WebsocketService} from '../../../websocket/websocket.service';
 import {WebsocketModule} from '../../../websocket/websocket.module';
 import {RouterStub} from '../../../../stumbs/router.stumb';
@@ -35,7 +34,6 @@ describe('LoginFormComponent', () => {
         AuthService,
         ChatterHttpClient,
         HttpClient,
-        RouterLinksService,
         {
           provide: Router,
           useClass: RouterStub

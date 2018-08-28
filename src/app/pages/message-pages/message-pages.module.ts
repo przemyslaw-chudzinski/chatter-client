@@ -5,6 +5,7 @@ import { ChatPageComponent } from './chat-page/chat-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MessagesModule } from '../../messages/messages.module';
 import { SpinnerModule } from '../../spinner/spinner.module';
+import {routerLinks} from '../../routes/router-links';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
       {
         path: ':id',
         component: ChatPageComponent
+      },
+      {
+        path: '',
+        redirectTo: '/' + routerLinks.dashboardPage,
+        pathMatch: 'full'
       }
     ]
   }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {RouterLinksService} from '../../routes/router-links.service';
+import {routerLinks} from '../../routes/router-links';
 
 @Component({
   selector: 'chatter-topbar',
@@ -7,6 +7,7 @@ import {RouterLinksService} from '../../routes/router-links.service';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+  links = routerLinks;
   @Output() menuButtonClicked: EventEmitter<null> = new EventEmitter<null>();
-  constructor(public routerLinksService: RouterLinksService) {}
+  constructor() {}
 }
