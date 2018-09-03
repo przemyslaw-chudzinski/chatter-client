@@ -1,11 +1,11 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { IWebSocketData } from './models/websocket-payload.model';
 import { EWebSocketActions } from './enums/websocket-actions.enum';
 
 @Injectable()
 export class WebsocketService {
-  private _ws: WebSocket;
+  private _ws: WebSocket = null;
   private _onMessage$: BehaviorSubject<IWebSocketData> = new BehaviorSubject<
     IWebSocketData
   >(null);
@@ -18,24 +18,24 @@ export class WebsocketService {
   }
 
   constructor() {
+    console.log('ws constructor');
     if (!WebSocket) {
       throw new Error('Your browser doesn\'t support WebSocket');
     }
   }
 
-  set userId(userId: string) {
-    this._userId = userId;
-  }
-
   connect(userId: string): void {
-    this._ws = new WebSocket('ws://localhost:8000');
-    this._ws.onopen = this.onOpenHandler.bind(this, userId);
-    this._ws.onmessage = this.onMessageHandler.bind(this);
+    console.log('connect');
+    this._userId = userId;
+    this._ws = this._ws || new WebSocket('ws://localhost:8000');
+    this._ws.onopen = this._ws && this.onOpenHandler.bind(this, userId);
+    this._ws.onmessage = this._ws && this.onMessageHandler.bind(this);
     this._ws.onerror = () => console.log('on error');
     this._ws.onclose = () => console.log('on close');
   }
 
   disconnect(userId: string): void {
+    console.log('disconnect');
     this.send({
       action: EWebSocketActions.UserLoggedOut,
       userId: userId
@@ -43,8 +43,8 @@ export class WebsocketService {
   }
 
   sendMessage(message: string, contactId: string): void {
-    // tslint:disable-next-line:no-unused-expression
-    this.onOpen.emit();
+    console.log('sendMessage');
+    this._ws &&
     this._userId &&
       contactId &&
       this.send({
@@ -56,7 +56,8 @@ export class WebsocketService {
   }
 
   switchToContact(contactId: string): void {
-    // tslint:disable-next-line:no-unused-expression
+    console.log('switchToContact', contactId);
+    this._ws &&
     this._userId &&
       contactId &&
       this.send({
@@ -67,7 +68,8 @@ export class WebsocketService {
   }
 
   private onOpenHandler(userId: string, event: any): void {
-    // this._opend = true;
+    console.log('onOpenHandler xdxdxd', userId);
+    this.onOpen.emit({userId});
     this.send({
       action: EWebSocketActions.UserLogged,
       userId: userId
@@ -75,11 +77,13 @@ export class WebsocketService {
   }
 
   private onMessageHandler(event: any): void {
+    console.log('onMessageHandler');
     const data = JSON.parse(event.data);
     this._onMessage$.next(data);
   }
 
   private send(data: IWebSocketData): void {
+    console.log('send');
     if (typeof data === 'object') {
       this._ws.send(JSON.stringify(data));
     } else {

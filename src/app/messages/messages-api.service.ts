@@ -17,7 +17,7 @@ export class MessagesApiService {
     );
   }
 
-  updateMessage(message: IMessage): Observable<IResponseData<IMessage>> {
-    return this.httpClient.patch<IResponseData<IMessage>>(messagesEndpoints.updateMessageEndpoint, message);
+  updateMessage(body: IMessage): Observable<IResponseData<IMessage>> {
+    return this.httpClient.patch<IResponseData<IMessage>>(messagesEndpoints.updateMessageEndpoint, body);
   }
 }

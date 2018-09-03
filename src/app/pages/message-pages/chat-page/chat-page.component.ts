@@ -25,7 +25,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private alive = true;
   messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
   user$: Observable<IUser> = this._store.pipe(select(selectUser));
-  private _params;
 
   constructor(
     private _websocketService: WebsocketService,
@@ -35,6 +34,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
+    this._websocketService.onOpen.pipe(
+      takeWhile(() => this.alive),
+      switchMap(() => this._route.params),
+      tap(() => (this.contact = null)),
+      tap(() => (this.messages = null)),
+      tap(() => this._store.dispatch(new CleanMessagesStoreAction())),
+      tap(params => params && this._store.dispatch(new LoadUserAction(params.id))),
+      tap(params => params && this._store.dispatch(new LoadMessagesAction(params.id))),
+      tap(params => params && this._websocketService.switchToContact(params.id))
+    ).subscribe();
 
     this.user$.pipe(
       takeWhile(() => this.alive),
@@ -49,6 +59,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this._websocketService.onMessage$
       .pipe(
         takeWhile(() => this.alive),
+        tap(x => console.log(x)),
         tap(event => {
           if (
             event &&
@@ -58,24 +69,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
           ) {
             this._store.dispatch(new PushMessageAction({
               content: event.data,
-              author: this.contact
+              author: event.contactId
             }));
           }
         })
-      )
-      .subscribe();
-
-    this._route.params
-      .pipe(
-        takeWhile(() => this.alive),
-        tap(() => (this.contact = null)),
-        tap(() => (this.messages = null)),
-        tap(() => this._store.dispatch(new CleanMessagesStoreAction())),
-        tap(params => params && this._store.dispatch(new LoadUserAction(params.id))),
-        tap(params => params && this._store.dispatch(new LoadMessagesAction(params.id))),
-        tap(params => (this._params = params)),
-        switchMap(() => this._websocketService.onOpen),
-        tap(() => this._websocketService.switchToContact(this._params.id))
       )
       .subscribe();
   }
@@ -85,9 +82,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(event: IMessage): void {
-    this.contact &&
-    event &&
-    event.content &&
+    this.contact && event && event.content &&
     this._websocketService.sendMessage(event.content, this.contact._id);
     this._store.dispatch(new PushMessageAction(event));
   }

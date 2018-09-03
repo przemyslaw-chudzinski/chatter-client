@@ -7,6 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {LoadUsersAction} from '../users/users-store/users.actions';
 import {ChatterState} from '../chatter-store/chatter-store.state';
 import {selectUsers} from '../users/users-store/users.selectors';
+import {WebsocketService} from '../websocket/websocket.service';
 
 @Component({
   selector: 'chatter-layout',
@@ -15,7 +16,8 @@ import {selectUsers} from '../users/users-store/users.selectors';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   private alive = true;
-  contacts$: Observable<IContact[]> = this.store.pipe(
+
+  contacts$: Observable<IContact[]> = this._store.pipe(
     select(selectUsers),
     map(users => users as IContact[]),
     map(contacts => {
@@ -31,13 +33,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     public auth: AuthService,
-    private store: Store<ChatterState>
+    private _store: Store<ChatterState>,
+    private _websocketService: WebsocketService
   ) {}
 
   ngOnInit(): void {
     this.auth.user$.pipe(
       takeWhile(() => this.alive),
-      tap(user => user && this.store.dispatch(new LoadUsersAction()))
+      tap(user => user && this._store.dispatch(new LoadUsersAction())),
+      tap(user => user && this._websocketService.connect(user._id))
     ).subscribe();
   }
 

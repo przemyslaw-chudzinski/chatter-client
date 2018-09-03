@@ -25,10 +25,6 @@ export class AuthService {
 
   init(): void {
     this.initUser();
-    this.user$.pipe(
-      tap(user => user && (this._websocketService.userId = user._id)),
-      tap(user => user && this._websocketService.connect(user._id))
-    ).subscribe();
   }
 
   initUser(): IUser {
@@ -47,9 +43,7 @@ export class AuthService {
         tap(user => this.user$.next(user)),
         tap(() =>
           this._router.navigateByUrl(routerLinks.dashboardPage)
-        ),
-        tap(user => (this._websocketService.userId = user._id)),
-        tap(user => this._websocketService.connect(user._id))
+        )
       );
   }
 
