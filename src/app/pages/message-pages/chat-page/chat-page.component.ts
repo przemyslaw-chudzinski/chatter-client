@@ -63,13 +63,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         tap(event => {
           if (
             event &&
-            event._action === EWebSocketActions.MessageToContact &&
+            event.action === EWebSocketActions.MessageToContact &&
             this.contact &&
             this.contact._id === event.contactId
           ) {
+            // console.log('should push message ');
             this._store.dispatch(new PushMessageAction({
               content: event.data,
-              author: event.contactId
+              author: this.contact
             }));
           }
         })
