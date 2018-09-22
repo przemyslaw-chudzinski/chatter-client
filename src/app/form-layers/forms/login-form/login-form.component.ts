@@ -13,7 +13,7 @@ import {HttpErrorResponse} from '@angular/common/http';
   exportAs: 'chatter-login-form'
 })
 export class LoginFormComponent extends FormLayersAbstract implements OnInit {
-  @Output() onError = new EventEmitter<string>();
+  @Output() onError = new EventEmitter<any>();
   @Output() onReset = new EventEmitter<null>();
   @Output() onSuccess = new EventEmitter<any>();
 
@@ -36,7 +36,7 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
         .pipe(
           take(1),
           tap(response => this.onSuccess.emit(response)),
-          catchError((err: HttpErrorResponse) => of(this.onError.emit(err.error.message)))
+          catchError((err: HttpErrorResponse) => of(this.onError.emit(err)))
         )
         .subscribe();
     }

@@ -41,6 +41,7 @@ export class AuthService {
         tap(response => saveToken(response.token)),
         map(response => response.user),
         tap(user => this.user$.next(user)),
+        tap(user => user && this._websocketService.connect(user._id)),
         tap(() =>
           this._router.navigateByUrl(routerLinks.dashboardPage)
         )
@@ -53,7 +54,7 @@ export class AuthService {
     this.user$
       .pipe(
         take(1),
-        tap(user => user && this._websocketService.disconnect(user._id)),
+        tap(user => this._websocketService.disconnect(user._id)),
         tap(() => this.user$.next(null))
       )
       .subscribe();
