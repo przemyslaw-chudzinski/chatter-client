@@ -8,5 +8,5 @@ export interface IMessage {
   recipientId?: string;
   updatedAt?: string;
   authorId?: string;
-  author: IUser;
+  author?: IUser;
 }

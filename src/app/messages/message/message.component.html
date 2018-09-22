@@ -5,9 +5,13 @@
     <span [innerHTML]="message.content"></span>
   </div>
   <div class="chatter-chat-message-actions">
-    <!-- <mat-chip-list>
-      <mat-chip matTooltip="Click it to mark as read">New!</mat-chip>
-    </mat-chip-list> -->
+     <mat-chip-list>
+      <mat-chip
+        *ngIf="message.updatedAt"
+        [matTooltip]="message.updatedAt | date">
+        Edited
+      </mat-chip>
+    </mat-chip-list>
     <button mat-icon-button
             [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -15,12 +19,11 @@
     <mat-menu #menu="matMenu">
       <button *ngIf="showEditForm()"
               mat-menu-item
-              (click)="editMessage()">Edit</button>
+              (click)="editMessage()">
+        Edit
+      </button>
       <button mat-menu-item>Set as important</button>
-      <button mat-menu-item
-              *ngIf="message.read">Mark as unread</button>
-      <button mat-menu-item
-              *ngIf="!message.read">Mark as read</button>
+
     </mat-menu>
   </div>
 </div>

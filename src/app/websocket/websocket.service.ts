@@ -1,7 +1,9 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import { IWebSocketData } from './models/websocket-payload.model';
-import { EWebSocketActions } from './enums/websocket-actions.enum';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {IWebSocketData} from './models/websocket-payload.model';
+import {EWebSocketActions} from './enums/websocket-actions.enum';
+import {IWebsocketState} from './models/websocket-state.model';
+import {IMessage} from '../messages/models/message.model';
 
 @Injectable()
 export class WebsocketService {
@@ -10,8 +12,11 @@ export class WebsocketService {
     IWebSocketData
   >(null);
   private _userId: string;
+  private _state = new Subject<IWebsocketState>();
 
-  onOpen = new EventEmitter<any>();
+  get state$(): Observable<IWebsocketState> {
+    return this._state.asObservable();
+  }
 
   get onMessage$(): Observable<any> {
     return this._onMessage$;
@@ -40,14 +45,11 @@ export class WebsocketService {
     this._ws = null;
   }
 
-  sendMessage(message: string, contactId: string): void {
+  sendMessage(message: IMessage): void {
     this._ws &&
     this._userId &&
-      contactId &&
       this.send({
         action: EWebSocketActions.MessageToContact,
-        userId: this._userId,
-        contactId: contactId,
         data: message
       });
   }
@@ -71,9 +73,17 @@ export class WebsocketService {
     });
   }
 
+  messageUpdated(message: IMessage): void {
+    console.log('messageUpdated');
+    this.send({
+      action: EWebSocketActions.MessageUpdated,
+      data: message
+    });
+  }
+
   private onOpenHandler(userId: string, event: any): void {
     console.log('onOpenHandler');
-    this.onOpen.emit({userId});
+    this._state.next({connectedUserId: userId, connected: true});
     this.emitUserLogged(userId);
   }
 

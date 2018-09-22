@@ -9,6 +9,7 @@ import {Store} from '@ngrx/store';
 import {UpdateMessageAction} from '../../messages-store/messages.actions';
 import {MessagesApiService} from '../../messages-api.service';
 import {take, tap} from 'rxjs/operators';
+import {WebsocketService} from '../../../websocket/websocket.service';
 
 @Component({
   selector: 'chatter-edit-message-dialog',
@@ -23,7 +24,8 @@ export class EditMessageDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditMessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public message: IMessage,
     private store: Store<ChatterState>,
-    private messagesApiService: MessagesApiService
+    private messagesApiService: MessagesApiService,
+    private _websocketService: WebsocketService
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class EditMessageDialogComponent implements OnInit {
     this.messagesApiService.updateMessage(this.messageCopy).pipe(
       take(1),
       tap(() => this.store.dispatch(new UpdateMessageAction(this.messageCopy))),
+      tap(() => this._websocketService.messageUpdated(this.messageCopy)),
       tap(() => this.dialogRef.close())
     ).subscribe();
   }

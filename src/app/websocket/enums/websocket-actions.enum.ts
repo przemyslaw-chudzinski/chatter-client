@@ -4,5 +4,6 @@ export enum EWebSocketActions {
   ContactStatusChanged = 'CONTACT_STATUS_CHANGED',
   MessageToContact = 'MESSAGE_TO_CONTACT',
   SwitchedToContact = 'SWITCHED_TO_CONTACT',
-  NotifyContact = 'NOTIFY_CONTACT'
+  NotifyContact = 'NOTIFY_CONTACT',
+  MessageUpdated = 'MESSAGE_UPDATED'
 }

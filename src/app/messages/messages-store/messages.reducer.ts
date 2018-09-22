@@ -29,6 +29,7 @@ export const messagesReducer = (
       const index = messages2.findIndex(i => i._id === action.payload._id);
       if (index !== -1) {
         messages2[index].content = action.payload.content;
+        messages2[index].updatedAt = action.payload.updatedAt;
       }
       return {
         ...state,

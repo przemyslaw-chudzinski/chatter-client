@@ -17,7 +17,8 @@ export const usersEndpoints = {
 export const messagesEndpoints = {
   messagesEndpoint: (recipientId: string): string =>
     `${apiUrl}/messages/${recipientId}`,
-  updateMessageEndpoint: `${apiUrl}/messages/update-message`
+  updateMessageEndpoint: `${apiUrl}/messages/update-message`,
+  saveMessageEndpoint: `${apiUrl}/messages`
 };
 
 export const validatorEndpoints = {
