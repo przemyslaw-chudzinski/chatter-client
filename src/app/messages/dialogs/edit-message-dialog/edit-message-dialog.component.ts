@@ -38,6 +38,7 @@ export class EditMessageDialogComponent implements OnInit {
 
   update(): void {
     this.loading = true;
+    delete this.messageCopy.author;
     this.messagesApiService.updateMessage(this.messageCopy).pipe(
       take(1),
       tap(() => this.store.dispatch(new UpdateMessageAction(this.messageCopy))),

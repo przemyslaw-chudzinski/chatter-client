@@ -17,7 +17,6 @@ export const messagesReducer = (
         messages: null
       };
     case messagesActionTypes.PushMessage:
-      console.log('PushMessage');
       let messages = [...state.messages];
       messages.push(action.payload);
       return {
