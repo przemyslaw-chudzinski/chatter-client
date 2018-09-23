@@ -8,19 +8,23 @@
 
   <!-- Chatter Chat messages list -->
   <chatter-messages-list [loading]="!messages"
-                         [messages]="messages"></chatter-messages-list>
+                         [messages]="messages">
+  </chatter-messages-list>
   <!-- ################################################### -->
 
   <!-- Chatter chat editor -->
   <chatter-message-editor *ngIf="messages"
-                          (messageReady)="sendMessage($event)"></chatter-message-editor>
+                          [loading]="sending"
+                          (messageReady)="sendMessage($event)">
+  </chatter-message-editor>
   <!-- ################################################### -->
 </div>
 
 <ng-template #headerLoaderTpl>
   <chatter-loader
     class="c-margin-top-1 c-margin-bottom-1"
-    message="Processing data..."></chatter-loader>
+    message="Processing data...">
+  </chatter-loader>
 </ng-template>
 
 <!-- <chatter-spinner></chatter-spinner> -->

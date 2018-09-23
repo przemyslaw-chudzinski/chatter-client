@@ -32,6 +32,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private alive = true;
   messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
   user$: Observable<IUser> = this._store.pipe(select(selectUser));
+  sending: boolean;
 
   constructor(
     private _websocketService: WebsocketService,
@@ -104,6 +105,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   sendMessage(event: IMessage): void {
     if (this.contact && event && event.content) {
       event.recipientId = this._contactId;
+      this.sending = true;
       this
         ._messagesApiService
         .saveMessage({recipientId: this._contactId, content: event.content})
@@ -116,7 +118,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             return message;
           }),
           tap(x => console.log(x)),
-          tap(message => this._store.dispatch(new PushMessageAction(message)))
+          tap(message => this._store.dispatch(new PushMessageAction(message))),
+          tap(() => (this.sending = false))
         )
         .subscribe();
     }

@@ -14,6 +14,7 @@ export class MessageEditorComponent implements OnInit, OnDestroy {
     this._value = value;
     this.content$.next(this._value);
   }
+  @Input() loading: boolean;
   @Output() messageReady = new EventEmitter<IMessage>();
   @Output() contentChanges = new EventEmitter<string>(null);
   private _value: string;

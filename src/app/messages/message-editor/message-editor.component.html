@@ -5,3 +5,9 @@
      (keydown.enter)="keyDownEnterHandler($event)"
      [innerHTML]="value">
 </div>
+
+<chatter-loader
+  *ngIf="loading"
+  class="c-margin-top-1 c-margin-bottom-1"
+  message="Sending data...">
+</chatter-loader>
