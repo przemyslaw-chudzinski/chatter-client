@@ -12,6 +12,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import {ContactListModule} from '../contact-list/contact-list.module';
 import {SpinnerModule} from '../spinner/spinner.module';
+import { UserAvatarComponent } from './user-avatar/user-avatar.component';
+import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 
 @NgModule({
   imports: [
@@ -29,7 +31,9 @@ import {SpinnerModule} from '../spinner/spinner.module';
     LayoutComponent,
     TopbarComponent,
     ButtonNotificationComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    UserAvatarComponent,
+    TopbarUserInfoComponent
   ],
   exports: [LayoutComponent, TopbarComponent]
 })

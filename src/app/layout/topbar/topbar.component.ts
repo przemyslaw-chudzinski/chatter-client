@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {routerLinks} from '../../routes/router-links';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'chatter-topbar',
@@ -9,5 +10,5 @@ import {routerLinks} from '../../routes/router-links';
 export class TopbarComponent {
   links = routerLinks;
   @Output() menuButtonClicked: EventEmitter<null> = new EventEmitter<null>();
-  constructor() {}
+  constructor(public auth: AuthService) {}
 }

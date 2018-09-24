@@ -7,31 +7,31 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditMessageDialogComponent } from '../dialogs/edit-message-dialog/edit-message-dialog.component';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
+  private _currentUser: IUser;
   @Input() message: IMessage;
-  private currentUser: IUser;
-  constructor(private auth: AuthService, private dialog: MatDialog) {}
+
+  constructor(private _auth: AuthService, private _dialog: MatDialog) {}
 
   ngOnInit() {
-    this.auth.user$
+    this._auth.user$
       .pipe(
         take(1),
-        tap(user => (this.currentUser = user))
+        tap(user => (this._currentUser = user))
       )
       .subscribe();
   }
 
   showEditForm(): boolean {
-    return this.currentUser._id === this.message.author._id;
+    return this._currentUser._id === this.message.author._id;
   }
 
   editMessage(): void {
-    this.dialog.open(EditMessageDialogComponent, {
+    this._dialog.open(EditMessageDialogComponent, {
       minWidth: 600,
       data: this.message
     });
