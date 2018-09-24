@@ -12,7 +12,7 @@ export class WebsocketService {
     IWebSocketData
   >(null);
   private _userId: string;
-  private _state = new Subject<IWebsocketState>();
+  private _state = new BehaviorSubject<IWebsocketState>(null);
 
   get state$(): Observable<IWebsocketState> {
     return this._state.asObservable();
@@ -55,6 +55,7 @@ export class WebsocketService {
   }
 
   switchToContact(contactId: string): void {
+    console.log('switch to contact');
     this._ws &&
     this._userId &&
       contactId &&
