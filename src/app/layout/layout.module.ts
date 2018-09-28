@@ -14,6 +14,7 @@ import {ContactListModule} from '../contact-list/contact-list.module';
 import {SpinnerModule} from '../spinner/spinner.module';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
+import { LoaderBtnDirective } from './directives/loader-btn.directive';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-i
     MatMenuModule,
     RouterModule,
     ContactListModule,
-    SpinnerModule
+    SpinnerModule,
+
   ],
   declarations: [
     LayoutComponent,
@@ -33,8 +35,9 @@ import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-i
     ButtonNotificationComponent,
     UserMenuComponent,
     UserAvatarComponent,
-    TopbarUserInfoComponent
+    TopbarUserInfoComponent,
+    LoaderBtnDirective
   ],
-  exports: [LayoutComponent, TopbarComponent]
+  exports: [LayoutComponent, TopbarComponent, LoaderBtnDirective]
 })
 export class LayoutModule {}

@@ -21,7 +21,11 @@
     <button mat-raised-button
             color="primary"
             (click)="chatterLoginForm.signIn()"
-            [disabled]="chatterLoginForm.isInvalid">Sign in</button>
+            chatterLoaderBtn
+            [loadingState]="chatterLoginForm.isSending"
+            [disabled]="chatterLoginForm.isInvalid">
+      Sign in
+    </button>
     <button mat-button
             (click)="toggleForms()">Forgot password?</button>
   </mat-card>

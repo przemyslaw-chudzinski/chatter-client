@@ -4,6 +4,7 @@ import {FormLayersAbstract} from '../../form-layers.abstract';
 import {take, tap} from 'rxjs/operators';
 import {UsersService} from '../../../users/users.service';
 import {IUser} from '../../../auth/models/user.model';
+import {NotificationsService} from '../../../notifications/notifications.service';
 
 @Component({
   selector: 'chatter-user-settings-form',
@@ -13,22 +14,28 @@ import {IUser} from '../../../auth/models/user.model';
 })
 export class UserSettingsFormComponent extends FormLayersAbstract implements OnInit {
   private _user: IUser;
+  private _isSending: boolean;
 
   get user(): IUser {
     return this._user;
   }
 
+  get isSending(): boolean {
+    return this._isSending;
+  }
+
   constructor(
-    private userSettingsFormService: UserSettingsFormService,
-    private usersService: UsersService
+    private _userSettingsFormService: UserSettingsFormService,
+    private _usersService: UsersService,
+    private _notificationsService: NotificationsService
   ) {
     super();
   }
 
   ngOnInit() {
-    this.formGroup = this.userSettingsFormService.init();
+    this.formGroup = this._userSettingsFormService.init();
 
-    this.usersService
+    this._usersService
       .loadLoggedUser()
       .pipe(
         take(1),
@@ -39,10 +46,14 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
   }
 
   saveUser(): void {
-    this.usersService.update(this.formGroup.value)
+    this._isSending = true;
+    this._usersService.update(this.formGroup.value)
       .pipe(
         take(1),
-        tap(user => (this._user = user))
+        tap(user => (this._user = user)),
+        tap(() => (this._isSending = false)),
+        tap(() => this._notificationsService.open('Settings saved', 'Got it'))
+        // tap(() => this._notificationsService.openPrimary())
       )
       .subscribe();
   }

@@ -6,6 +6,7 @@ import {AccountPagesComponent} from './account-pages.component';
 import {MatButtonModule} from '@angular/material';
 import {SpinnerModule} from '../../spinner/spinner.module';
 import {FormLayersModule} from '../../form-layers/form-layers.module';
+import {LayoutModule} from '../../layout/layout.module';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormLayersModule,
     MatButtonModule,
-    SpinnerModule
+    SpinnerModule,
+    LayoutModule
   ],
   declarations: [UserSettingsPageComponent, AccountPagesComponent]
 })

@@ -14,14 +14,20 @@
 
   </div>
 
-  <chatter-user-settings-form #userSettingsForm="user-settings-form"></chatter-user-settings-form>
+  <chatter-user-settings-form
+    #userSettingsForm="user-settings-form">
+  </chatter-user-settings-form>
 
   <button
     *ngIf="userSettingsForm.user"
     [disabled]="userSettingsForm.isInvalid"
     mat-raised-button
     color="primary"
-    (click)="userSettingsForm.saveUser()">Save</button>
+    chatterLoaderBtn
+    [loadingState]="userSettingsForm.isSending"
+    (click)="userSettingsForm.saveUser()">
+    Save
+  </button>
 
   <!-- Here will be component for upload user image -->
   <div class="c-margin-top-1" *ngIf="userSettingsForm.user as user">

@@ -16,6 +16,11 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
   @Output() onError = new EventEmitter<any>();
   @Output() onReset = new EventEmitter<null>();
   @Output() onSuccess = new EventEmitter<any>();
+  private _isSending: boolean;
+
+  get isSending(): boolean {
+    return this._isSending;
+  }
 
   constructor(
     private loginFormService: LoginFormService,
@@ -29,6 +34,7 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
   }
 
   signIn(): void {
+    this._isSending = true;
     this.onReset.emit();
     if (this.isValid) {
       this.auth
@@ -36,6 +42,7 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
         .pipe(
           take(1),
           tap(response => this.onSuccess.emit(response)),
+          tap(() => (this._isSending = false)),
           catchError((err: HttpErrorResponse) => of(this.onError.emit(err)))
         )
         .subscribe();

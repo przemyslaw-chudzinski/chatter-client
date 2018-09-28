@@ -18,6 +18,7 @@ import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
 import {ChatterStoreModule} from './chatter-store/chatter-store.module';
 import {FormLayersModule} from './form-layers/form-layers.module';
 import {token} from './helpers/helpers';
+import {NotificationsModule} from './notifications/notifications.module';
 
 const routes: Routes = [
   {
@@ -68,7 +69,8 @@ const routes: Routes = [
     UsersModule.forRoot(),
     WebsocketModule.forRoot(),
     MessagesModule.forRoot(),
-    ChatterStoreModule
+    ChatterStoreModule,
+    NotificationsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
