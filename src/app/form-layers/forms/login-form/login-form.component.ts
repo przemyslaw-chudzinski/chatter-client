@@ -43,7 +43,10 @@ export class LoginFormComponent extends FormLayersAbstract implements OnInit {
           take(1),
           tap(response => this.onSuccess.emit(response)),
           tap(() => (this._isSending = false)),
-          catchError((err: HttpErrorResponse) => of(this.onError.emit(err)))
+          catchError((err: HttpErrorResponse) => of(this.onError.emit(err.error.message))
+            .pipe(
+              tap(() => (this._isSending = false))
+            )),
         )
         .subscribe();
     }

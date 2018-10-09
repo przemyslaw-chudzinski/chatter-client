@@ -6,7 +6,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { ButtonNotificationComponent } from './button-notification/button-notification.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
@@ -15,6 +14,7 @@ import {SpinnerModule} from '../spinner/spinner.module';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 import { LoaderBtnDirective } from './directives/loader-btn.directive';
+import {CardModule} from './card/card.module';
 
 @NgModule({
   imports: [
@@ -26,18 +26,21 @@ import { LoaderBtnDirective } from './directives/loader-btn.directive';
     MatMenuModule,
     RouterModule,
     ContactListModule,
-    SpinnerModule,
-
+    SpinnerModule
   ],
   declarations: [
     LayoutComponent,
     TopbarComponent,
-    ButtonNotificationComponent,
     UserMenuComponent,
     UserAvatarComponent,
     TopbarUserInfoComponent,
     LoaderBtnDirective
   ],
-  exports: [LayoutComponent, TopbarComponent, LoaderBtnDirective]
+  exports: [
+    LayoutComponent,
+    TopbarComponent,
+    LoaderBtnDirective,
+    CardModule
+  ]
 })
 export class LayoutModule {}

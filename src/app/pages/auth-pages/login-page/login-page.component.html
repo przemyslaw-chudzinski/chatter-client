@@ -1,8 +1,9 @@
 <div class="chatter-login-form  c-margin-top-4">
 
   <!-- Login form -->
-  <mat-card class="animated fadeIn"
-            *ngIf="showLoginForm">
+  <chatter-card
+    [loadingState]="chatterLoginForm.isSending"
+    *ngIf="showLoginForm">
     <h2>
       <mat-icon>chat</mat-icon>
       <span>Chatter - Sign In</span>
@@ -10,15 +11,18 @@
 
     <chatter-form-alert-main [message]="alertMessage"
                              [type]="alertType"
-                             [visible]="alertVisible"></chatter-form-alert-main>
+                             [visible]="alertVisible">
+    </chatter-form-alert-main>
 
     <chatter-login-form
       (onError)="onErrorHandler($event)"
       (onReset)="alertVisible = false"
       #chatterLoginForm="chatter-login-form"
-      (enterDown)="chatterLoginForm.signIn()"></chatter-login-form>
+      (enterDown)="chatterLoginForm.signIn()">
+    </chatter-login-form>
 
-    <button mat-raised-button
+    <button outsideContent
+            mat-raised-button
             color="primary"
             (click)="chatterLoginForm.signIn()"
             chatterLoaderBtn
@@ -26,14 +30,18 @@
             [disabled]="chatterLoginForm.isInvalid">
       Sign in
     </button>
-    <button mat-button
-            (click)="toggleForms()">Forgot password?</button>
-  </mat-card>
+
+    <button outsideContent
+            mat-button
+            (click)="toggleForms()">
+      Forgot password?
+    </button>
+
+  </chatter-card>
   <!-- ################################################################### -->
 
   <!-- Forgot password form -->
-  <mat-card class="animated fadeIn"
-            *ngIf="!showLoginForm">
+  <chatter-card *ngIf="!showLoginForm">
 
     <h2>
       <mat-icon>chat</mat-icon>
@@ -41,16 +49,23 @@
     </h2>
 
     <chatter-forgot-password-form
-      #chatterForgotPasswordForm="chatter-forgot-password-form"></chatter-forgot-password-form>
+      #chatterForgotPasswordForm="chatter-forgot-password-form">
+    </chatter-forgot-password-form>
 
-    <button mat-raised-button
+    <button outsideContent
+            mat-raised-button
             color="primary"
-            [disabled]="chatterForgotPasswordForm.isInvalid">Send email</button>
+            [disabled]="chatterForgotPasswordForm.isInvalid">
+      Send email
+    </button>
 
-    <button mat-button
-            (click)="toggleForms()">Back to sign in</button>
+    <button outsideContent
+            mat-button
+            (click)="toggleForms()">
+      Back to sign in
+    </button>
 
-  </mat-card>
+  </chatter-card>
   <!-- ################################################################### -->
 
 </div>
