@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {IChannel} from '../models/channel.model';
+import {MatDialog} from '@angular/material';
+import {CreateGroupConversationDialogComponent} from '../dialogs/create-group-conversation-dialog/create-group-conversation-dialog.component';
 
 @Component({
   selector: 'chatter-channels-list',
   templateUrl: './channels-list.component.html',
   styleUrls: ['./channels-list.component.scss']
 })
-export class ChannelsListComponent implements OnInit {
+export class ChannelsListComponent {
+  @Input() channels: IChannel[] = null;
 
-  constructor() { }
+  constructor(private _dialog: MatDialog) { }
 
-  ngOnInit() {
+  createGroupConversation(): void {
+    this._dialog.open(CreateGroupConversationDialogComponent, { width: 900 });
   }
 
 }

@@ -15,6 +15,8 @@ import {MatchFieldsDirective} from './validators/match-fields.directive';
 import {ValidatorsService} from './validators/validators.service';
 import {SpinnerModule} from '../spinner/spinner.module';
 import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
+import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
+import {MatAutocompleteModule, MatChipsModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { ValidationFeedbackComponent } from './validation-feedback/validation-fe
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    SpinnerModule
+    SpinnerModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   declarations: [
     LoginFormComponent,
@@ -31,7 +35,8 @@ import { ValidationFeedbackComponent } from './validation-feedback/validation-fe
     UserSettingsFormComponent,
     ResetPasswordFormComponent,
     MatchFieldsDirective,
-    ValidationFeedbackComponent
+    ValidationFeedbackComponent,
+    CreateGroupConversationFormComponent
   ],
   exports: [
     LoginFormComponent,
@@ -39,7 +44,8 @@ import { ValidationFeedbackComponent } from './validation-feedback/validation-fe
     UserSettingsFormComponent,
     ResetPasswordFormComponent,
     MatchFieldsDirective,
-    ValidationFeedbackComponent
+    ValidationFeedbackComponent,
+    CreateGroupConversationFormComponent
   ]
 })
 export class FormLayersModule {
