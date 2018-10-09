@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { IContact } from '../models/contact';
 import {routerLinks} from '../../routes/router-links';
 
@@ -10,5 +10,4 @@ import {routerLinks} from '../../routes/router-links';
 export class ContactComponent {
   @Input() contact: IContact;
   links = routerLinks;
-  constructor() {}
 }

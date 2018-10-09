@@ -18,7 +18,9 @@ export const messagesEndpoints = {
   messagesEndpoint: (recipientId: string): string =>
     `${apiUrl}/messages/${recipientId}`,
   updateMessageEndpoint: `${apiUrl}/messages/update-message`,
-  saveMessageEndpoint: `${apiUrl}/messages`
+  saveMessageEndpoint: `${apiUrl}/messages`,
+  unreadMessagesEndpoint: `${apiUrl}/messages/unread-messages`,
+  resetUnreadMessagesEndpoint: (contactId: string): string => `${apiUrl}/messages/reset-unread/${contactId}`
 };
 
 export const validatorEndpoints = {

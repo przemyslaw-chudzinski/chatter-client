@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { messagesEndpoints } from '../chatter-http/http-endpoints';
 import {IMessage} from './models/message.model';
 import {IResponseData} from '../chatter-http/models/response-data';
+import {IUnreadMessage} from './models/unread-message.model';
 
 @Injectable()
 export class MessagesApiService {
@@ -23,6 +24,14 @@ export class MessagesApiService {
 
   saveMessage(body: IMessage): Observable<IResponseData<IMessage>> {
     return this._httpClient.post<IResponseData<IMessage>>(messagesEndpoints.saveMessageEndpoint, body);
+  }
+
+  getUnreadMessages(): Observable<IUnreadMessage[]> {
+    return this._httpClient.get<IUnreadMessage[]>(messagesEndpoints.unreadMessagesEndpoint);
+  }
+
+  resetUnreadMessages(contactId: string): Observable<any> {
+    return this._httpClient.patch<any>(messagesEndpoints.resetUnreadMessagesEndpoint(contactId), null);
   }
 
 }

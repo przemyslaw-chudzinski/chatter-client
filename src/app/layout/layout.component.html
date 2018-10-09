@@ -8,12 +8,16 @@
       Contacts
     </span>
 
-    <chatter-contact-list [contacts]="contacts$ | async"></chatter-contact-list>
+    <chatter-contact-list
+      [unreadMessagesData]="unreadMessagesData"
+      [contacts]="contacts$ | async">
+    </chatter-contact-list>
 
   </mat-drawer>
 
   <chatter-topbar *ngIf="auth.user$ | async"
-                  (menuButtonClicked)="drawer && drawer.toggle()"></chatter-topbar>
+                  (menuButtonClicked)="drawer && drawer.toggle()">
+  </chatter-topbar>
 
   <div class="layout-content">
 

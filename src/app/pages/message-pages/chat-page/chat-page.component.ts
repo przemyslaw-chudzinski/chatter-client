@@ -54,6 +54,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         tap(params => params && this._store.dispatch(new LoadUserAction(params.id))),
         tap(params => params && this._store.dispatch(new LoadMessagesAction(params.id))),
         tap(params => (this._contactId = params.id)),
+        switchMap(params => this._messagesApiService.resetUnreadMessages(params.id)),
         switchMap(() => this._websocketService.state$),
         tap(state => state && state.connected && this._websocketService.switchToContact(this._contactId))
       )

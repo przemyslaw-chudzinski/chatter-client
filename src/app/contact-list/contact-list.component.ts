@@ -14,6 +14,7 @@ import { ENotifications } from '../websocket/enums/websocket-notifications.enum'
 import { IContact } from './models/contact';
 import { IWebSocketData } from '../websocket/models/websocket-payload.model';
 import {ContactListService} from './contact-list.service';
+import {IUnreadMessage} from '../messages/models/unread-message.model';
 
 @Component({
   selector: 'chatter-contact-list',
@@ -22,6 +23,7 @@ import {ContactListService} from './contact-list.service';
 })
 export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   @Input() contacts: IContact[];
+  @Input() unreadMessagesData: IUnreadMessage[];
   private onMessageSub: Subscription;
   private _alive = true;
 
@@ -105,10 +107,22 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
           .subscribe();
       }
     }
+
+    if (this.unreadMessagesData && this.unreadMessagesData.length && this.contacts.length) {
+      let dataToUpdate = [ ...this.contacts ];
+      dataToUpdate = dataToUpdate.map(contact => {
+        this.unreadMessagesData.forEach(item => {
+          if (item.authorId === contact._id) {
+            contact.newMessagesCount = item.count;
+          }
+        });
+        return contact;
+      });
+      this.contacts = dataToUpdate;
+    }
   }
 
   ngOnDestroy() {
-    // tslint:disable-next-line:no-unused-expression
     this.onMessageSub && this.onMessageSub.unsubscribe();
     this._alive = false;
   }
