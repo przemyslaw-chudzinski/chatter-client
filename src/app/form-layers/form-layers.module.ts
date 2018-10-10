@@ -16,7 +16,7 @@ import {ValidatorsService} from './validators/validators.service';
 import {SpinnerModule} from '../spinner/spinner.module';
 import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
 import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
-import {MatAutocompleteModule, MatChipsModule} from '@angular/material';
+import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -27,7 +27,8 @@ import {MatAutocompleteModule, MatChipsModule} from '@angular/material';
     MatInputModule,
     SpinnerModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatIconModule
   ],
   declarations: [
     LoginFormComponent,

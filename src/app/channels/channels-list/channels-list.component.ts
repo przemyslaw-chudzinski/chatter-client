@@ -14,7 +14,7 @@ export class ChannelsListComponent {
   constructor(private _dialog: MatDialog) { }
 
   createGroupConversation(): void {
-    this._dialog.open(CreateGroupConversationDialogComponent, { width: 900 });
+    this._dialog.open(CreateGroupConversationDialogComponent, { width: '60rem' });
   }
 
 }
