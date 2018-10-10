@@ -17,6 +17,7 @@ import {SpinnerModule} from '../spinner/spinner.module';
 import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
 import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
 import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/material';
+import { AutocompleteControlComponent } from './custom-controls/autocomplete-control/autocomplete-control.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/mat
     ResetPasswordFormComponent,
     MatchFieldsDirective,
     ValidationFeedbackComponent,
-    CreateGroupConversationFormComponent
+    CreateGroupConversationFormComponent,
+    AutocompleteControlComponent
   ],
   exports: [
     LoginFormComponent,
