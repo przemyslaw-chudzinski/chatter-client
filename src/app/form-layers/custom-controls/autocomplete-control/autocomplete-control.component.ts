@@ -1,8 +1,9 @@
-import {Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, forwardRef, Input, TemplateRef, ViewChild} from '@angular/core';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {IAutocompleteData} from '../../models/autocomplete-data.model';
 import {MatAutocompleteSelectedEvent} from '@angular/material';
 import {AutocompleteControlDirective} from './autocomplete-control.directive';
+import {ControlValueAccessorAbstract} from '../control-value-accessor.abstract';
 
 export const AUTOCOMPLETE_CONTROL_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -16,7 +17,7 @@ export const AUTOCOMPLETE_CONTROL_VALUE_ACCESSOR = {
   styleUrls: ['./autocomplete-control.component.scss'],
   providers: [AUTOCOMPLETE_CONTROL_VALUE_ACCESSOR]
 })
-export class AutocompleteControlComponent implements ControlValueAccessor  {
+export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
   @Input() removable = true;
   @Input() chipsTpl: TemplateRef<any> = null;
   @Input() autocompleteItemTpl: TemplateRef<any> = null;
@@ -25,34 +26,14 @@ export class AutocompleteControlComponent implements ControlValueAccessor  {
     this._autocompleteData = data;
     this.currentAutocompleteData = data;
   }
-  @Output() onChange = new EventEmitter<any>();
 
-  private _value: any[] = [];
-  private _onChange: (value: any) => void;
   private _autocompleteData: any[] = [];
   @ViewChild(AutocompleteControlDirective, {read: AutocompleteControlDirective}) private _input: AutocompleteControlDirective;
   selectedItems: IAutocompleteData[] = [];
   currentAutocompleteData: any[] = [];
 
-  get value(): any[] {
-    return this._value || [];
-  }
-
-  set value(value: any[]) {
-    this._value = value;
-    this._onChange(this._value);
-  }
-
-  registerOnChange(fn: (value: any[]) => void): void {
-    this._onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {}
-
-  setDisabledState(isDisabled: boolean): void {}
-
   writeValue(value: any[]): void {
-    this._value = value;
+    this.setValue(value);
     if (value && value.length) {
       const _selectedItems = this.currentAutocompleteData.filter(item => value.includes(this._mapData(item).value));
       this.selectedItems = _selectedItems.map(item => this._mapData(item));
@@ -70,20 +51,16 @@ export class AutocompleteControlComponent implements ControlValueAccessor  {
       this.currentAutocompleteData = _currentAutocompleteData;
     }
     this._input.focus();
-    if (!this.value || !this.value.length) {
-      this.currentAutocompleteData = [...this._autocompleteData];
-    } else {
-      this.currentAutocompleteData = [...this._autocompleteData].filter(i => !this.value.includes(this._mapData(i).value));
-    }
+    this._clearAutocompleteList(this.value);
   }
 
   optionSelectedHandler(event: MatAutocompleteSelectedEvent): void {
-    this.selectedItems.push(this._mapData(event.option.value));
-    const _value = this.value && [...this.value] || [];
-    _value.push(this._mapData(event.option.value).value);
+    const _mappedItem = this._mapData(event.option.value);
+    const _value = [...this.value] || [];
+    this.selectedItems.push(_mappedItem);
+    _value.push(_mappedItem.value);
     this.value = _value;
     this._input.clearInput();
-
     this._clearAutocompleteList(this.value);
   }
 
@@ -96,12 +73,12 @@ export class AutocompleteControlComponent implements ControlValueAccessor  {
 
   filterData(value: string): void {
     if (!this.value || !this.value.length) {
+      this.value = this.value || [];
       this.currentAutocompleteData = [...this._autocompleteData];
     }
     const filterValue = value.toLowerCase();
     this.currentAutocompleteData = this._autocompleteData.filter(item =>
       this._mapData(item).label.toLowerCase().indexOf(filterValue) === 0 && !this.value.includes(this._mapData(item).value));
-    console.log('current autocomplet data', this.currentAutocompleteData);
   }
 
   private _remove(item: IAutocompleteData, stack: any[]): void {
@@ -125,7 +102,10 @@ export class AutocompleteControlComponent implements ControlValueAccessor  {
   }
 
   private _clearAutocompleteList(value: any[]): void {
-    const _currentAutocompleteData = this.currentAutocompleteData.filter(item => !value.includes(this._mapData(item).value));
-    this.currentAutocompleteData = _currentAutocompleteData;
+    if (!value || !value.length) {
+      this.currentAutocompleteData = [...this._autocompleteData];
+    } else {
+      this.currentAutocompleteData = [...this._autocompleteData].filter(i => !value.includes(this._mapData(i).value));
+    }
   }
 }
