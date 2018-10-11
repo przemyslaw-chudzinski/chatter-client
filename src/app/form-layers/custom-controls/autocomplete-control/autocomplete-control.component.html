@@ -27,6 +27,7 @@
 
     <input placeholder="Provide users for group conversation"
            chatterAutocompleteControl
+           (click)="openAutocomplete()"
            (onChangeText)="filterData($event)"
            [matAutocomplete]="auto"
            [matChipInputFor]="chipList">

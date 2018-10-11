@@ -1,7 +1,7 @@
 import {Component, forwardRef, Input, TemplateRef, ViewChild} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {IAutocompleteData} from '../../models/autocomplete-data.model';
-import {MatAutocompleteSelectedEvent} from '@angular/material';
+import {MatAutocompleteSelectedEvent, MatAutocompleteTrigger} from '@angular/material';
 import {AutocompleteControlDirective} from './autocomplete-control.directive';
 import {ControlValueAccessorAbstract} from '../control-value-accessor.abstract';
 
@@ -26,9 +26,9 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
     this._autocompleteData = data;
     this.currentAutocompleteData = data;
   }
-
   private _autocompleteData: any[] = [];
   @ViewChild(AutocompleteControlDirective, {read: AutocompleteControlDirective}) private _input: AutocompleteControlDirective;
+  @ViewChild(MatAutocompleteTrigger, {read: MatAutocompleteTrigger}) private _autocomplete: MatAutocompleteTrigger;
   selectedItems: IAutocompleteData[] = [];
   currentAutocompleteData: any[] = [];
 
@@ -52,6 +52,7 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
     }
     this._input.focus();
     this._clearAutocompleteList(this.value);
+    this.openAutocomplete();
   }
 
   optionSelectedHandler(event: MatAutocompleteSelectedEvent): void {
@@ -63,6 +64,7 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
     this.value = _value;
     this._input.clearInput();
     this._clearAutocompleteList(this.value);
+    this.openAutocomplete();
   }
 
   getContext(item: IAutocompleteData): any {
@@ -80,6 +82,10 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
     const filterValue = value.toLowerCase();
     this.currentAutocompleteData = this._autocompleteData.filter(item =>
       this._mapData(item).label.toLowerCase().indexOf(filterValue) === 0 && !this.value.includes(this._mapData(item).value));
+  }
+
+  openAutocomplete(): void {
+    this._autocomplete.openPanel();
   }
 
   private _remove(item: IAutocompleteData, stack: any[]): void {
