@@ -18,6 +18,7 @@ import { ValidationFeedbackComponent } from './validation-feedback/validation-fe
 import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
 import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/material';
 import { AutocompleteControlComponent } from './custom-controls/autocomplete-control/autocomplete-control.component';
+import { AutocompleteControlDirective } from './custom-controls/autocomplete-control/autocomplete-control.directive';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { AutocompleteControlComponent } from './custom-controls/autocomplete-con
     MatchFieldsDirective,
     ValidationFeedbackComponent,
     CreateGroupConversationFormComponent,
-    AutocompleteControlComponent
+    AutocompleteControlComponent,
+    AutocompleteControlDirective
   ],
   exports: [
     LoginFormComponent,
