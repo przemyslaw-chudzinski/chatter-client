@@ -56,6 +56,7 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
 
   optionSelectedHandler(event: MatAutocompleteSelectedEvent): void {
     const _mappedItem = this._mapData(event.option.value);
+    this.value = this.value || [];
     const _value = [...this.value] || [];
     this.selectedItems.push(_mappedItem);
     _value.push(_mappedItem.value);
