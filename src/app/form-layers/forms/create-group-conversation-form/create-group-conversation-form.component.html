@@ -1,0 +1,36 @@
+<form
+  [formGroup]="formGroup"
+  *ngIf="users$ | async as users; else noUsers">
+
+  <mat-form-field>
+
+    <input matInput
+           formControlName="name"
+           placeholder="Write a name of group">
+
+  </mat-form-field>
+
+  <chatter-autocomplete-control formControlName="members"
+                                [autocompleteItemTpl]="autocompleteItemTpl"
+                                [mapValuesTo]="mapValuesTo"
+                                [autocompleteData]="users">
+  </chatter-autocomplete-control>
+
+</form>
+
+<ng-template #noUsers>
+
+  System has only one user in this case you can not create group chat
+
+</ng-template>
+
+<ng-template #autocompleteItemTpl let-item="item">
+
+  <img class="user-avatar-option"
+       aria-hidden
+       [src]="item.avatar"
+       height="25">
+
+  <span>{{ item.firstName }} {{ item.lastName }}</span>
+
+</ng-template>

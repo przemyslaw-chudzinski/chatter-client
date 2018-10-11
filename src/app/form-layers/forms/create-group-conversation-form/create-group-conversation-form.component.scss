@@ -1,0 +1,10 @@
+form {
+  display: flex;
+  flex-flow: column;
+}
+
+.user-avatar-option {
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 50%;
+}

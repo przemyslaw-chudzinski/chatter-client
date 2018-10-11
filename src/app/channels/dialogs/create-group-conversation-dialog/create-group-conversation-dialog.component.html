@@ -1,0 +1,29 @@
+<div class="create-group-converstion-dialog">
+
+  <mat-dialog-content>
+
+    <h4>Create group conversation</h4>
+
+    <chatter-create-group-conversation-form #form="create-group-conversation-form"></chatter-create-group-conversation-form>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+
+    <button
+      mat-raised-button
+      [disabled]="form.isInvalid"
+      (click)="form.submit()"
+      color="primary">
+      Create
+    </button>
+
+    <button mat-button
+            (click)="dialogRef.close()">
+      Cancel
+    </button>
+
+  </mat-dialog-actions>
+
+</div>
+

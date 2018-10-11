@@ -1,0 +1,55 @@
+<mat-form-field>
+
+  <mat-chip-list #chipList>
+
+    <mat-chip *ngFor="let item of selectedItems"
+              (removed)="remove(item)"
+              [removable]="removable">
+
+     <ng-container *ngIf="!chipsTpl">
+
+       <span>{{ item.label }}</span>
+
+       <mat-icon *ngIf="removable"
+                 matChipRemove>
+         cancel
+       </mat-icon>
+
+     </ng-container>
+
+      <ng-container *ngIf="chipsTpl">
+
+        <ng-container *ngTemplateOutlet="chipsTpl; context: getContext(item)"></ng-container>
+
+      </ng-container>
+
+    </mat-chip>
+
+    <input placeholder="Provide users for group conversation"
+           chatterAutocompleteControl
+           (onChangeText)="filterData($event)"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipList">
+
+  </mat-chip-list>
+
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete"
+                  (optionSelected)="optionSelectedHandler($event)">
+
+  <mat-option *ngFor="let item of currentAutocompleteData"
+              [value]="item">
+
+    <span *ngIf="!autocompleteItemTpl">{{ item.label }}</span>
+
+    <ng-container *ngIf="autocompleteItemTpl">
+
+      <ng-container *ngTemplateOutlet="autocompleteItemTpl; context: getContext(item)"></ng-container>
+
+    </ng-container>
+
+  </mat-option>
+
+</mat-autocomplete>
+

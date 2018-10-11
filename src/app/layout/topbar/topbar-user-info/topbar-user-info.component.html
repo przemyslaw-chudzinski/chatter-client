@@ -1,0 +1,4 @@
+<div class="chatter-topbar-user-info">
+  <chatter-user-avatar [user]="user"></chatter-user-avatar>
+  <span *ngIf="user">{{ user.firstName }} {{ user.lastName }}</span>
+</div>

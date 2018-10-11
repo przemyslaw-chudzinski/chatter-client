@@ -1,0 +1,28 @@
+<mat-card>
+
+  <mat-progress-bar
+    *ngIf="loadingState"
+    mode="indeterminate">
+  </mat-progress-bar>
+
+  <mat-card-content>
+
+    <ng-content></ng-content>
+
+  </mat-card-content>
+
+  <ng-content select="[outsideContent]"></ng-content>
+
+  <mat-card-actions>
+
+    <ng-content select="[cardActions]"></ng-content>
+
+  </mat-card-actions>
+
+  <mat-card-footer>
+
+    <ng-content select="[cardFooter]"></ng-content>
+
+  </mat-card-footer>
+
+</mat-card>
