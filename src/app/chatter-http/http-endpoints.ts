@@ -26,3 +26,7 @@ export const messagesEndpoints = {
 export const validatorEndpoints = {
   checkEmailEndpoint: `${apiUrl}/validator/check-email`
 };
+
+export const channelsEndpoints = {
+  channelEndpoint: `${apiUrl}/channels`
+};

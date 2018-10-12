@@ -1,0 +1,14 @@
+.create-group-conversation-dialog {
+  position: relative;
+  .dialog-loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dialog-loader-message {
+      margin-left: 1rem;
+    }
+  }
+}

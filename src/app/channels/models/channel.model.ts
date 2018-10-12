@@ -1,5 +1,7 @@
 export interface IChannel {
   _id: string;
   name: string;
-  description: string;
+  members: object[];
+  authorId: string;
+  createdAt: string;
 }

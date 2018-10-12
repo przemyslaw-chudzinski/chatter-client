@@ -10,6 +10,9 @@ import {selectUsers} from '../users/users-store/users.selectors';
 import {WebsocketService} from '../websocket/websocket.service';
 import {MessagesApiService} from '../messages/messages-api.service';
 import {IUnreadMessage} from '../messages/models/unread-message.model';
+import {IChannel} from '../channels/models/channel.model';
+import {selectChannels} from '../channels/channels-store/channels.selectors';
+import {LoadChannelsAction} from '../channels/channels-store/channels.actions';
 
 @Component({
   selector: 'chatter-layout',
@@ -34,6 +37,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }),
   );
 
+  channels$: Observable<IChannel[]> = this._store.pipe(
+    select(selectChannels)
+  );
+
   constructor(
     public auth: AuthService,
     private _store: Store<ChatterState>,
@@ -45,6 +52,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.auth.user$.pipe(
       takeWhile(() => this.alive),
       tap(user => user && this._store.dispatch(new LoadUsersAction())),
+      tap(user => user && this._store.dispatch(new LoadChannelsAction())),
       tap(user => user && this._websocketService.connect(user._id))
     ).subscribe();
 

@@ -3,6 +3,7 @@ import { Output, EventEmitter } from '@angular/core';
 
 export abstract class FormLayersAbstract {
   @Output() enterDown = new EventEmitter<null>();
+  @Output() submitted = new EventEmitter<any>();
 
   private _formGroup: FormGroup;
 

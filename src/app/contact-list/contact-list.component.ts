@@ -15,6 +15,7 @@ import { IContact } from './models/contact';
 import { IWebSocketData } from '../websocket/models/websocket-payload.model';
 import {ContactListService} from './contact-list.service';
 import {IUnreadMessage} from '../messages/models/unread-message.model';
+import {IChannel} from '../channels/models/channel.model';
 
 @Component({
   selector: 'chatter-contact-list',
@@ -23,6 +24,7 @@ import {IUnreadMessage} from '../messages/models/unread-message.model';
 })
 export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   @Input() contacts: IContact[];
+  @Input() channels: IChannel[];
   @Input() unreadMessagesData: IUnreadMessage[];
   private onMessageSub: Subscription;
   private _alive = true;

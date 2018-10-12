@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {IUser} from '../../../auth/models/user.model';
 import {select, Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {selectUsers} from '../../../users/users-store/users.selectors';
-import { FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {FormLayersAbstract} from '../../form-layers.abstract';
 import {IAutocompleteData} from '../../models/autocomplete-data.model';
+import {ChannelsApiService} from '../../../channels/channels-api.service';
+import {catchError, take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'chatter-create-group-conversation-form',
@@ -20,26 +22,33 @@ export class CreateGroupConversationFormComponent extends FormLayersAbstract imp
     select(selectUsers)
   );
 
-  get members(): any {
-    return this.formGroup.get('members');
-  }
-
   constructor(
     private _store: Store<ChatterState>,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _channelsApiService: ChannelsApiService
   ) {
     super();
   }
 
   ngOnInit() {
     this.formGroup = this._fb.group({
-      name: [null, []],
-      members: [null, []]
+      name: [null, [Validators.required, Validators.minLength(4)]],
+      memberIds: [null, [Validators.required]]
     });
   }
 
   submit(): void {
-    console.log(this.value);
+    this.isValid && this._channelsApiService.saveChannel(this.value)
+      .pipe(
+        take(1),
+        tap(x => console.log(x)),
+        tap(res => this.submitted.emit(res)),
+        catchError(err => {
+          this.submitted.emit(err);
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   mapValuesTo(item: IUser): IAutocompleteData {

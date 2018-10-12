@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {IWebSocketData} from './models/websocket-payload.model';
 import {EWebSocketActions} from './enums/websocket-actions.enum';
 import {IWebsocketState} from './models/websocket-state.model';
-import {IMessage} from '../messages/models/message.model';
 
 @Injectable()
 export class WebsocketService {
@@ -45,17 +44,7 @@ export class WebsocketService {
     this._ws = null;
   }
 
-  sendMessage(message: IMessage): void {
-    this._ws &&
-    this._userId &&
-      this.send({
-        action: EWebSocketActions.MessageToContact,
-        data: message
-      });
-  }
-
   switchToContact(contactId: string): void {
-    console.log('switch to contact');
     this._ws &&
     this._userId &&
       contactId &&
@@ -67,29 +56,18 @@ export class WebsocketService {
   }
 
   emitUserLogged(userId): void {
-    console.log('emitUserLogged', userId);
     this.send({
       action: EWebSocketActions.UserLogged,
       userId: userId
     });
   }
 
-  messageUpdated(message: IMessage): void {
-    console.log('messageUpdated');
-    this.send({
-      action: EWebSocketActions.MessageUpdated,
-      data: message
-    });
-  }
-
   private onOpenHandler(userId: string, event: any): void {
-    console.log('onOpenHandler');
     this._state.next({connectedUserId: userId, connected: true});
     this.emitUserLogged(userId);
   }
 
   private onMessageHandler(event: any): void {
-    console.log(event.data);
     const data = JSON.parse(event.data);
     this._onMessage$.next(data);
   }

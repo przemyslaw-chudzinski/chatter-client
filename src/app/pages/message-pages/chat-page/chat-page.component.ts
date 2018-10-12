@@ -113,7 +113,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         .pipe(
           take(1),
           map(response => response.data),
-          tap(message => this._websocketService.sendMessage(message)),
+          // tap(message => this._websocketService.sendMessage(message)),
           map(message => {
             message.author = event.author;
             return message;

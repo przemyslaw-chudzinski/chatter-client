@@ -10,6 +10,7 @@
 
     <chatter-contact-list
       [unreadMessagesData]="unreadMessagesData"
+      [channels]="channels$ | async"
       [contacts]="contacts$ | async">
     </chatter-contact-list>
 

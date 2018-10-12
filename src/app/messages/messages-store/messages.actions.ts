@@ -51,7 +51,7 @@ export class UpdateMessageAction implements Action {
 /***********************************************************/
 
 export type MessagesActions =
-  |LoadMessagesAction
+  | LoadMessagesAction
   | LoadMessagesSuccessAction
   | LoadMessagesErrorAction
   | CleanMessagesStoreAction

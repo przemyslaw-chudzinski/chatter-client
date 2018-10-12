@@ -1,10 +1,10 @@
-<div class="create-group-converstion-dialog">
+<div class="create-group-conversation-dialog">
 
   <mat-dialog-content>
 
     <h4>Create group conversation</h4>
 
-    <chatter-create-group-conversation-form #form="create-group-conversation-form"></chatter-create-group-conversation-form>
+    <chatter-create-group-conversation-form (submitted)="submittedHandler($event)"></chatter-create-group-conversation-form>
 
   </mat-dialog-content>
 
@@ -13,7 +13,7 @@
     <button
       mat-raised-button
       [disabled]="form.isInvalid"
-      (click)="form.submit()"
+      (click)="submit()"
       color="primary">
       Create
     </button>
@@ -24,6 +24,11 @@
     </button>
 
   </mat-dialog-actions>
+
+  <div class="dialog-loader animated fadeIn faster"
+       *ngIf="loading">
+    <chatter-loader message="Processing data..."></chatter-loader>
+  </div>
 
 </div>
 
