@@ -9,7 +9,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from '@angular/cdk/a11y';
 import {PortalModule} from '@angular/cdk/portal';
 import { NotificationsDropdownContentComponent } from './notifications-dropdown/notifications-dropdown-content/notifications-dropdown-content.component';
-import {CardModule} from '../layout/card/card.module';
+import {CardModule} from '../ui/card/card.module';
 
 @NgModule({
   imports: [

@@ -10,6 +10,7 @@ import { FormAlertsModule } from '../../layout/form-alerts/form-alerts.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {FormLayersModule} from '../../form-layers/form-layers.module';
 import {LayoutModule} from '../../layout/layout.module';
+import {UiModule} from '../../ui/ui.module';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     MatIconModule,
     AuthModule,
     FormAlertsModule,
-    LayoutModule
+    LayoutModule,
+    UiModule
   ],
   declarations: [
     LoginPageComponent,

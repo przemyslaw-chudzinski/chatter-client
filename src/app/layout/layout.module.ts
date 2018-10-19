@@ -14,7 +14,6 @@ import {SpinnerModule} from '../spinner/spinner.module';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 import { LoaderBtnDirective } from './directives/loader-btn.directive';
-import {CardModule} from './card/card.module';
 import {NotificationsModule} from '../notifications/notifications.module';
 
 @NgModule({
@@ -41,8 +40,7 @@ import {NotificationsModule} from '../notifications/notifications.module';
   exports: [
     LayoutComponent,
     TopbarComponent,
-    LoaderBtnDirective,
-    CardModule
+    LoaderBtnDirective
   ]
 })
 export class LayoutModule {}
