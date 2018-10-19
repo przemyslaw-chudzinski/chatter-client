@@ -30,3 +30,7 @@ export const validatorEndpoints = {
 export const channelsEndpoints = {
   channelEndpoint: `${apiUrl}/channels`
 };
+
+export const notificationsEndpoints = {
+  notificationsEndpoint: `${apiUrl}/notifications`
+};

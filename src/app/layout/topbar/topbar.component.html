@@ -9,6 +9,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span class="topbar-spacer"></span>
-  <chatter-topbar-user-info [user]="auth.user$ | async"></chatter-topbar-user-info>
+  <!--<chatter-notifications-button></chatter-notifications-button>-->
+  <chatter-notifications-dropdown></chatter-notifications-dropdown>
   <chatter-user-menu></chatter-user-menu>
 </mat-toolbar>

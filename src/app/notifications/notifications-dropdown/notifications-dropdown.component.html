@@ -1,0 +1,23 @@
+<button mat-icon-button cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="open()">
+  <mat-icon matBadge="8"
+            matBadgePosition="above after"
+            matBadgeColor="accent">
+    notifications
+  </mat-icon>
+</button>
+
+<div class="portal-outlet-wrapper"
+     [@transformMenu]="dropdownAnimationState" (@transformMenu.done)="handleClosingDone($event)">
+
+  <ng-template cdkPortalOutlet
+               cdkConnectedOverlay
+               cdkConnectedOverlayBackdropClass="dropdown-backdrop"
+               (backdropClick)="close()"
+               cdkConnectedOverlayHasBackdrop
+               [cdkConnectedOverlayOrigin]="trigger"
+               [cdkConnectedOverlayOpen]="isOpen">
+  </ng-template>
+
+</div>
+
+

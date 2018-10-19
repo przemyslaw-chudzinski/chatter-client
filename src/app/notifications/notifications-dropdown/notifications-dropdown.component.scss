@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  position: relative;
+
+  .portal-outlet-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

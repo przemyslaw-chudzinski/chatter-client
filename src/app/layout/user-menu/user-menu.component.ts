@@ -10,7 +10,7 @@ import {routerLinks} from '../../routes/router-links';
 export class UserMenuComponent {
   links = routerLinks;
   constructor(
-    private auth: AuthService
+    public auth: AuthService
   ) {}
 
   logOut(): void {

@@ -15,6 +15,7 @@ import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 import { LoaderBtnDirective } from './directives/loader-btn.directive';
 import {CardModule} from './card/card.module';
+import {NotificationsModule} from '../notifications/notifications.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {CardModule} from './card/card.module';
     MatMenuModule,
     RouterModule,
     ContactListModule,
-    SpinnerModule
+    SpinnerModule,
+    NotificationsModule
   ],
   declarations: [
     LayoutComponent,

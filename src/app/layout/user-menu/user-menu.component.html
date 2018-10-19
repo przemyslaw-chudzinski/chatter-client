@@ -1,9 +1,11 @@
-<button mat-icon-button
-        [matMenuTriggerFor]="menu">
-  <mat-icon>person</mat-icon>
-</button>
+<chatter-topbar-user-info [matMenuTriggerFor]="menu"
+                          [user]="auth.user$ | async">
+</chatter-topbar-user-info>
+
 <mat-menu #menu="matMenu">
   <button mat-menu-item [routerLink]="['/', links.accountPages.userAccount]">Account Settings</button>
   <button mat-menu-item
-          (click)="logOut($event)">Log out</button>
+          (click)="logOut($event)">
+    Log out
+  </button>
 </mat-menu>
