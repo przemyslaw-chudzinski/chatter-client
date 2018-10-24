@@ -13,12 +13,12 @@ import {ResetPasswordFormService} from './forms/reset-password-form/reset-passwo
 import {UserSettingsFormService} from './forms/user-settings-form/user-settings-form.service';
 import {MatchFieldsDirective} from './validators/match-fields.directive';
 import {ValidatorsService} from './validators/validators.service';
-import {SpinnerModule} from '../spinner/spinner.module';
 import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
 import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
 import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/material';
 import { AutocompleteControlComponent } from './custom-controls/autocomplete-control/autocomplete-control.component';
 import { AutocompleteControlDirective } from './custom-controls/autocomplete-control/autocomplete-control.directive';
+import {UiModule} from '../ui/ui.module';
 
 @NgModule({
   imports: [
@@ -27,10 +27,10 @@ import { AutocompleteControlDirective } from './custom-controls/autocomplete-con
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    SpinnerModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatIconModule
+    MatIconModule,
+    UiModule
   ],
   declarations: [
     LoginFormComponent,

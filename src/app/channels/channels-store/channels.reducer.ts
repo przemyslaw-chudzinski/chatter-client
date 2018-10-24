@@ -4,7 +4,7 @@ import {ChannelsActions, channelsActionTypes} from './channels.actions';
 export const channelsReducer = (
   state: ChannelsState = new ChannelsState(),
   action: ChannelsActions
-) => {
+): ChannelsState => {
   switch (action.type) {
     case channelsActionTypes.LoadChannelsSuccess:
       return {

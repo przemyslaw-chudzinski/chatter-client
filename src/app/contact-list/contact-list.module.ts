@@ -7,6 +7,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
 import {RouterModule} from '@angular/router';
 import {ChannelsModule} from '../channels/channels.module';
+import {UiModule} from '../ui/ui.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {ChannelsModule} from '../channels/channels.module';
     MatTabsModule,
     MatBadgeModule,
     RouterModule,
-    ChannelsModule
+    ChannelsModule,
+    UiModule
   ],
   declarations: [ContactListComponent, ContactComponent],
   exports: [ContactListComponent, ContactComponent],

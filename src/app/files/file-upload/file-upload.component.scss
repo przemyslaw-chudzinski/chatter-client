@@ -1,0 +1,10 @@
+.file-upload {
+  border: 1px dashed #fff;
+  width: inherit;
+  display: flex;
+  cursor: pointer;
+  transition: all .4s;
+  &:hover {
+    border-color: rgba(#fff, .5);
+  }
+}

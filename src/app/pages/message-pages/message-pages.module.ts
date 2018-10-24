@@ -4,8 +4,9 @@ import { MessagePagesComponent } from './message-pages.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MessagesModule } from '../../messages/messages.module';
-import { SpinnerModule } from '../../spinner/spinner.module';
 import {routerLinks} from '../../routes/router-links';
+import {UiModule} from '../../ui/ui.module';
+import {FilesModule} from '../../files/files.module';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MessagesModule,
-    SpinnerModule
+    UiModule,
+    FilesModule
   ],
   declarations: [MessagePagesComponent, ChatPageComponent]
 })

@@ -1,11 +1,17 @@
 <chatter-topbar-user-info [matMenuTriggerFor]="menu"
-                          [user]="auth.user$ | async">
+                          [user]="user">
 </chatter-topbar-user-info>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item [routerLink]="['/', links.accountPages.userAccount]">Account Settings</button>
+
   <button mat-menu-item
-          (click)="logOut($event)">
+          [routerLink]="['/', links.accountPages.userAccount]">
+    Account Settings
+  </button>
+
+  <button mat-menu-item
+          (click)="auth.logOut()">
     Log out
   </button>
+
 </mat-menu>

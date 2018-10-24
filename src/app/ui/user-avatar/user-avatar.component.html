@@ -1,0 +1,12 @@
+<span
+  class="chatter-user-avatar"
+  *ngIf="user && user.avatar && user.avatar.original; else defaultImage">
+    <img [src]="user.avatar.original.url" alt="">
+  </span>
+
+<ng-template #defaultImage>
+  <span
+    class="chatter-user-avatar">
+    <img src="http://placehold.it/100x100" alt="">
+  </span>
+</ng-template>

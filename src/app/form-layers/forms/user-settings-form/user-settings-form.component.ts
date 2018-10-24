@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserSettingsFormService} from './user-settings-form.service';
 import {FormLayersAbstract} from '../../form-layers.abstract';
 import {take, tap} from 'rxjs/operators';
-import {UsersService} from '../../../users/users.service';
+import {UsersApiService} from '../../../users/users-api.service';
 import {IUser} from '../../../auth/models/user.model';
 import {NotificationsService} from '../../../notifications/notifications.service';
 
@@ -26,7 +26,7 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
 
   constructor(
     private _userSettingsFormService: UserSettingsFormService,
-    private _usersService: UsersService,
+    private _usersService: UsersApiService,
     private _notificationsService: NotificationsService
   ) {
     super();

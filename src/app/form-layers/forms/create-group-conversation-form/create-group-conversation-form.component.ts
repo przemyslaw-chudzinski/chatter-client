@@ -9,6 +9,7 @@ import {FormLayersAbstract} from '../../form-layers.abstract';
 import {IAutocompleteData} from '../../models/autocomplete-data.model';
 import {ChannelsApiService} from '../../../channels/channels-api.service';
 import {catchError, take, tap} from 'rxjs/operators';
+import {hasLength} from '../../validators/hasLength/has-length.validator';
 
 @Component({
   selector: 'chatter-create-group-conversation-form',
@@ -33,7 +34,7 @@ export class CreateGroupConversationFormComponent extends FormLayersAbstract imp
   ngOnInit() {
     this.formGroup = this._fb.group({
       name: [null, [Validators.required, Validators.minLength(4)]],
-      memberIds: [null, [Validators.required]]
+      memberIds: [null, [Validators.required, hasLength(2, null)]]
     });
   }
 

@@ -13,6 +13,7 @@ import {IUnreadMessage} from '../messages/models/unread-message.model';
 import {IChannel} from '../channels/models/channel.model';
 import {selectChannels} from '../channels/channels-store/channels.selectors';
 import {LoadChannelsAction} from '../channels/channels-store/channels.actions';
+import {LoadNotificationsNumberAction} from '../notifications/notifications-store/notifications-store.actions';
 
 @Component({
   selector: 'chatter-layout',
@@ -53,6 +54,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       takeWhile(() => this.alive),
       tap(user => user && this._store.dispatch(new LoadUsersAction())),
       tap(user => user && this._store.dispatch(new LoadChannelsAction())),
+      tap(user => user && this._store.dispatch(new LoadNotificationsNumberAction())),
       tap(user => user && this._websocketService.connect(user._id))
     ).subscribe();
 

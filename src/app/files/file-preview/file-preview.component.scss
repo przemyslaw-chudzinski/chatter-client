@@ -1,0 +1,29 @@
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin: .5rem;
+}
+
+.file-preview-container {
+  width: 10rem;
+  border: 1px solid rgba(#fff, .5);
+}
+
+.file-preview-section {
+
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: auto;
+    max-height: 10rem;
+  }
+}
+
+.file-preview-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -4,29 +4,34 @@ import { Observable } from 'rxjs';
 import { IResponseData } from '../chatter-http/models/response-data';
 import { IUser } from '../auth/models/user.model';
 import { usersEndpoints } from '../chatter-http/http-endpoints';
+import {IFile} from '../files/models/file.model';
 
 @Injectable()
-export class UsersService {
+export class UsersApiService {
   constructor(
-    private httpClient: ChatterHttpClient
+    private _httpClient: ChatterHttpClient
   ) {}
 
   loadUsers(): Observable<IResponseData<IUser>> {
-    return this.httpClient.get<IResponseData<IUser>>(usersEndpoints.usersEndpoint);
+    return this._httpClient.get<IResponseData<IUser>>(usersEndpoints.usersEndpoint);
   }
 
   loadUser(userId = ''): Observable<IUser> {
     if (userId === '') {
       throw new Error('userId is required');
     }
-    return this.httpClient.get<IUser>(usersEndpoints.userEndpoint(userId));
+    return this._httpClient.get<IUser>(usersEndpoints.userEndpoint(userId));
   }
 
   update(user: IUser): Observable<IUser> {
-    return this.httpClient.post<IUser>(usersEndpoints.updateProfileEndpoint, user);
+    return this._httpClient.post<IUser>(usersEndpoints.updateProfileEndpoint, user);
   }
 
   loadLoggedUser(): Observable<IUser> {
-    return this.httpClient.get(usersEndpoints.loggedUserEndpoint);
+    return this._httpClient.get(usersEndpoints.loggedUserEndpoint);
+  }
+
+  loadAvatar(): Observable<IFile> {
+    return this._httpClient.get(usersEndpoints.userAvatarEndpoint);
   }
 }

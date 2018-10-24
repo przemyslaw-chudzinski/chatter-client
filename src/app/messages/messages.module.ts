@@ -7,7 +7,6 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
 import { FormsModule } from '@angular/forms';
 import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 import { MessageEditorDirective } from './message-editor/message-editor.directive';
-import { SpinnerModule } from '../spinner/spinner.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -17,12 +16,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MessagesStoreModule} from './messages-store/messages-store.module';
 import {MessagesEventsService} from './messages-events.service';
+import {UiModule} from '../ui/ui.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    SpinnerModule,
+    UiModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

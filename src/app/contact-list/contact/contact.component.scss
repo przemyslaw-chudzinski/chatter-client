@@ -1,11 +1,11 @@
 @import '../../../scss/themes/variables';
-.chater-contact {
+.chatter-contact {
   color: $blue-gray-100;
   display: flex;
   padding: 1rem 1rem;
   font-size: .8rem;
   cursor: pointer;
-  .chater-contact-avatar {
+  .chatter-contact-avatar {
     margin-right: 1rem;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
       border-radius: 50%;
     }
   }
-  .chater-contact-info {
+  .chatter-contact-info {
     display: flex;
     align-items: center;
     justify-content: space-between;

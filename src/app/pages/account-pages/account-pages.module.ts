@@ -4,9 +4,10 @@ import { UserSettingsPageComponent } from './user-settings-page/user-settings-pa
 import {RouterModule, Routes} from '@angular/router';
 import {AccountPagesComponent} from './account-pages.component';
 import {MatButtonModule} from '@angular/material';
-import {SpinnerModule} from '../../spinner/spinner.module';
 import {FormLayersModule} from '../../form-layers/form-layers.module';
 import {LayoutModule} from '../../layout/layout.module';
+import {UiModule} from '../../ui/ui.module';
+import {FilesModule} from '../../files/files.module';
 
 const routes: Routes = [
   {
@@ -27,8 +28,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormLayersModule,
     MatButtonModule,
-    SpinnerModule,
-    LayoutModule
+    UiModule,
+    LayoutModule,
+    FilesModule
   ],
   declarations: [UserSettingsPageComponent, AccountPagesComponent]
 })

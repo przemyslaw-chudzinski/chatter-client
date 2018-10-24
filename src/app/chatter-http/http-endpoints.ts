@@ -11,7 +11,8 @@ export const usersEndpoints = {
   usersEndpoint: `${apiUrl}/users`,
   userEndpoint: (userId: string): string => `${apiUrl}/user/${userId}`,
   updateProfileEndpoint: `${apiUrl}/users/update-profile`,
-  loggedUserEndpoint: `${apiUrl}/users/logged-user`
+  loggedUserEndpoint: `${apiUrl}/users/logged-user`,
+  userAvatarEndpoint: `${apiUrl}/users/avatar`
 };
 
 export const messagesEndpoints = {
@@ -32,5 +33,10 @@ export const channelsEndpoints = {
 };
 
 export const notificationsEndpoints = {
-  notificationsEndpoint: `${apiUrl}/notifications`
+  notificationsEndpoint: `${apiUrl}/notifications`,
+  countNotificationsEndpoint: `${apiUrl}/notifications/count`
+};
+
+export const filesEndpoints = {
+  uploadFilesEndpoint: `${apiUrl}/files/upload-files`
 };

@@ -9,7 +9,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from '@angular/cdk/a11y';
 import {PortalModule} from '@angular/cdk/portal';
 import { NotificationsDropdownContentComponent } from './notifications-dropdown/notifications-dropdown-content/notifications-dropdown-content.component';
-import {CardModule} from '../ui/card/card.module';
+import {UiModule} from '../ui/ui.module';
+import {NotificationsStoreModule} from './notifications-store/notifications-store.module';
+import { NotificationInvitationToGroupChatComponent } from './notifications-dropdown/notifications-dropdown-content/notification-invitation-to-group-chat/notification-invitation-to-group-chat.component';
 
 @NgModule({
   imports: [
@@ -22,9 +24,10 @@ import {CardModule} from '../ui/card/card.module';
     A11yModule,
     MatCardModule,
     PortalModule,
-    CardModule
+    UiModule,
+    NotificationsStoreModule
   ],
-  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationsDropdownContentComponent],
+  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationsDropdownContentComponent, NotificationInvitationToGroupChatComponent],
   entryComponents: [PrimaryNotificationComponent, NotificationsDropdownContentComponent],
   exports: [NotificationsDropdownComponent]
 })

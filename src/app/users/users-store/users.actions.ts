@@ -1,5 +1,6 @@
 import {IUser} from '../../auth/models/user.model';
 import {Action} from '@ngrx/store';
+import {IFile} from '../../files/models/file.model';
 
 export enum usersActionTypes {
   LoadUsers = '[Users] Load Users',
@@ -8,7 +9,11 @@ export enum usersActionTypes {
 
   LoadUser = '[Users] Load User',
   LoadUserSuccess = '[Users] Load User Success',
-  LoadUserError = '[Users] Load User Error'
+  LoadUserError = '[Users] Load User Error',
+
+  LoadUserAvatar = '[Users] Load User Avatar',
+  LoadUserAvatarSuccess = '[Users] Load User Avatar Success',
+  LoadUserAvatarError = '[Users] Load User Avatar Error'
 }
 
 /* Load Users Actions */
@@ -45,10 +50,30 @@ export class LoadUserErrorAction implements Action {
 }
 /***********************************************************/
 
+/* Load User Avatar Actions */
+export class LoadUserAvatarAction implements Action {
+  readonly type = usersActionTypes.LoadUserAvatar;
+  constructor() {}
+}
+
+export class LoadUserAvatarSuccessAction implements Action {
+  readonly type = usersActionTypes.LoadUserAvatarSuccess;
+  constructor(public payload: IFile) {}
+}
+
+export class LoadUserAvatarErrorAction implements Action {
+  readonly type = usersActionTypes.LoadUserAvatarError;
+  constructor(public payload: any) {}
+}
+/***********************************************************/
+
 export type UsersActions =
   | LoadUsersAction
   | LoadUsersSuccessAction
   | LoadUsersErrorAction
   | LoadUserAction
   | LoadUserSuccessAction
-  | LoadUserErrorAction;
+  | LoadUserErrorAction
+  | LoadUserAvatarAction
+  | LoadUserAvatarSuccessAction
+  | LoadUserAvatarErrorAction;

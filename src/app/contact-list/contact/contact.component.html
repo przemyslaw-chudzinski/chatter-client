@@ -1,12 +1,11 @@
 <div *ngIf="contact"
-     class="chater-contact animated fadeIn"
+     class="chatter-contact animated fadeIn"
      [routerLink]="['/', links.messagesPage, contact._id]"
      routerLinkActive="selected">
-  <div class="chater-contact-avatar">
-    <img src="http://placehold.it/50x50"
-         alt="">
+  <div class="chatter-contact-avatar">
+    <chatter-user-avatar [user]="contact"></chatter-user-avatar>
   </div>
-  <div class="chater-contact-info">
+  <div class="chatter-contact-info">
     <strong [matBadge]="contact.newMessagesCount"
             [matBadgeHidden]="!contact.newMessagesCount"
             matBadgePosition="above after"

@@ -10,11 +10,10 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import {ContactListModule} from '../contact-list/contact-list.module';
-import {SpinnerModule} from '../spinner/spinner.module';
-import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 import { LoaderBtnDirective } from './directives/loader-btn.directive';
 import {NotificationsModule} from '../notifications/notifications.module';
+import {UiModule} from '../ui/ui.module';
 
 @NgModule({
   imports: [
@@ -26,14 +25,13 @@ import {NotificationsModule} from '../notifications/notifications.module';
     MatMenuModule,
     RouterModule,
     ContactListModule,
-    SpinnerModule,
+    UiModule,
     NotificationsModule
   ],
   declarations: [
     LayoutComponent,
     TopbarComponent,
     UserMenuComponent,
-    UserAvatarComponent,
     TopbarUserInfoComponent,
     LoaderBtnDirective
   ],

@@ -30,8 +30,13 @@
   </button>
 
   <!-- Here will be component for upload user image -->
-  <div class="c-margin-top-1" *ngIf="userSettingsForm.user as user">
-    <img *ngIf="user.avatar" [src]="user.avatar" />
+  <div class="c-margin-top-1"
+       *ngIf="userSettingsForm.user as user">
+
+    <chatter-file-upload (filesUploaded)="handleUploadedFiles($event)"
+                         [files]="[user.avatar]">
+    </chatter-file-upload>
+
   </div>
   <!--**********************************************-->
 

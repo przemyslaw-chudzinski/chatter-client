@@ -1,3 +1,5 @@
+import {IFile} from '../../files/models/file.model';
+
 export interface IUser {
   _id?: string;
   firstName: string;
@@ -7,5 +9,5 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
   available?: boolean;
-  avatar?: string;
+  avatar?: IFile | string;
 }

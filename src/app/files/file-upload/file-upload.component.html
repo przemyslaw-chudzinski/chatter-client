@@ -1,0 +1,14 @@
+<div class="file-upload"
+     chatterOpenFileBox
+     [multiple]="multiple"
+     (filesLoaded)="handleFilesLoaded($event)">
+
+  <mat-icon *ngIf="!files || !files.length; else previewView;">cloud_upload</mat-icon>
+
+</div>
+
+<ng-template #previewView>
+  <chatter-file-preview *ngFor="let file of files"
+                        [file]="file">
+  </chatter-file-preview>
+</ng-template>

@@ -16,6 +16,11 @@ export const usersReducer = (
         ...state,
         user: action.payload
       };
+    case usersActionTypes.LoadUserAvatarSuccess:
+      return {
+        ...state,
+        avatar: action.payload
+      };
     default:
       return state;
   }

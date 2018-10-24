@@ -1,0 +1,19 @@
+:host {
+  position: relative;
+  z-index: 3000 !important;
+
+  .notification-invitation-to-group-chat-avatar {
+    //width: 100%;
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .notification-invitation-to-group-chat-content {
+    width: 100%;
+    padding-left: .5rem;
+    h5 {
+      margin-top: 0;
+    }
+  }
+}

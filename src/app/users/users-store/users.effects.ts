@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {LoadUsersSuccessAction, LoadUserSuccessAction, usersActionTypes} from './users.actions';
+import {LoadUserAvatarSuccessAction, LoadUsersSuccessAction, LoadUserSuccessAction, usersActionTypes} from './users.actions';
 import {map, switchMap} from 'rxjs/operators';
-import {UsersService} from '../users.service';
+import {UsersApiService} from '../users-api.service';
 
 @Injectable()
 export class UsersEffects {
@@ -25,8 +25,15 @@ export class UsersEffects {
     map(user => new LoadUserSuccessAction(user))
   );
 
+  @Effect()
+  loadAvatar$: Observable<Action> = this.actions$.pipe(
+    ofType(usersActionTypes.LoadUserAvatar),
+    switchMap(() => this.usersService.loadAvatar()),
+    map(avatar => new LoadUserAvatarSuccessAction(avatar))
+  );
+
   constructor(
     private actions$: Actions,
-    private usersService: UsersService
+    private usersService: UsersApiService
   ) {}
 }
