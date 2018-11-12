@@ -1,62 +1,83 @@
-<div>
+<div class="account-page-wrapper">
 
-  <h3>Account settings</h3>
+  <div class="account-box">
 
-  <div *ngIf="userSettingsForm.user as user; else loadingTpl">
+    <div>
 
-    <p>
-      <strong>Created at: </strong> {{ user.createdAt | date }}
-    </p>
+      <h3>Account settings</h3>
 
-    <p>
-      <strong>Updated at: </strong> {{ user.updatedAt | date }}
-    </p>
+      <div *ngIf="userSettingsForm.user as user; else loadingTpl">
+
+        <p>
+          <strong>Created at: </strong> {{ user.createdAt | date }}
+        </p>
+
+        <p>
+          <strong>Updated at: </strong> {{ user.updatedAt | date }}
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="form-box user-info-box">
+
+      <chatter-card [loadingState]="loadingUserForm || userSettingsForm.isSending">
+
+        <div class="user-info-box-forms">
+
+          <div class="user-info-box-form">
+
+            <h3>User info</h3>
+
+            <chatter-user-settings-form #userSettingsForm="user-settings-form"></chatter-user-settings-form>
+
+            <button
+              [disabled]="userSettingsForm.isInvalid"
+              mat-raised-button
+              color="primary"
+              chatterLoaderBtn
+              [loadingState]="userSettingsForm.isSending"
+              (click)="userSettingsForm.saveUser()">
+              Save
+            </button>
+
+          </div>
+
+          <chatter-file-upload *ngIf="userSettingsForm.user as user" (filesUploaded)="handleUploadedFiles($event)"
+                               [files]="[user.avatar]">
+          </chatter-file-upload>
+
+        </div>
+
+      </chatter-card>
+
+    </div>
+
+    <div class="form-box reset-password-box">
+
+      <chatter-card>
+
+        <h3>Reset password</h3>
+
+        <chatter-reset-password-form #resetPasswordForm="reset-password-form"></chatter-reset-password-form>
+
+        <button
+          outsideContent
+          [disabled]="resetPasswordForm.isInvalid"
+          mat-raised-button
+          color="primary"
+          (click)="resetPasswordForm.resetPassword()">Save</button>
+      </chatter-card>
+
+    </div>
 
   </div>
-
-  <chatter-user-settings-form
-    #userSettingsForm="user-settings-form">
-  </chatter-user-settings-form>
-
-  <button
-    *ngIf="userSettingsForm.user"
-    [disabled]="userSettingsForm.isInvalid"
-    mat-raised-button
-    color="primary"
-    chatterLoaderBtn
-    [loadingState]="userSettingsForm.isSending"
-    (click)="userSettingsForm.saveUser()">
-    Save
-  </button>
-
-  <!-- Here will be component for upload user image -->
-  <div class="c-margin-top-1"
-       *ngIf="userSettingsForm.user as user">
-
-    <chatter-file-upload (filesUploaded)="handleUploadedFiles($event)"
-                         [files]="[user.avatar]">
-    </chatter-file-upload>
-
-  </div>
-  <!--**********************************************-->
-
-</div>
-
-<div>
-
-  <h3>Reset password</h3>
-
-  <chatter-reset-password-form #resetPasswordForm="reset-password-form"></chatter-reset-password-form>
-
-  <button
-    [disabled]="resetPasswordForm.isInvalid"
-    mat-raised-button
-    color="primary"
-    (click)="resetPasswordForm.resetPassword()">Save</button>
 
 </div>
 
 <ng-template #loadingTpl>
-  <chatter-loader
-    message="Processing data..."></chatter-loader>
+
+  <chatter-loader message="Processing data..."></chatter-loader>
+
 </ng-template>

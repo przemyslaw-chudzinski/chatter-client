@@ -12,8 +12,8 @@ export class UsersApiService {
     private _httpClient: ChatterHttpClient
   ) {}
 
-  loadUsers(): Observable<IResponseData<IUser>> {
-    return this._httpClient.get<IResponseData<IUser>>(usersEndpoints.usersEndpoint);
+  loadUsers(): Observable<IResponseData<IUser[]>> {
+    return this._httpClient.get<IResponseData<IUser[]>>(usersEndpoints.usersEndpoint);
   }
 
   loadUser(userId = ''): Observable<IUser> {

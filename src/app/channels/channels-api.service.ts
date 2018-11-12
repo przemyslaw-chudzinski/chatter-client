@@ -18,7 +18,7 @@ export class ChannelsApiService {
     return this._httpClient.post<IResponseData<IChannel>>(channelsEndpoints.channelEndpoint, payload);
   }
 
-  getChannels(): Observable<IResponseData<IChannel>> {
-    return this._httpClient.get(channelsEndpoints.channelEndpoint);
+  getChannels(): Observable<IResponseData<IChannel[]>> {
+    return this._httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
   }
 }

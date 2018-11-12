@@ -26,11 +26,12 @@
 
 <ng-template #autocompleteItemTpl let-item="item">
 
-  <img class="user-avatar-option"
-       aria-hidden
-       [src]="item.avatar"
-       height="25">
+ <div class="user-avatar-option">
 
-  <span>{{ item.firstName }} {{ item.lastName }}</span>
+   <chatter-user-avatar [user]="item"></chatter-user-avatar>
+
+   <span>{{ item.firstName }} {{ item.lastName }}</span>
+
+ </div>
 
 </ng-template>

@@ -12,7 +12,7 @@ export class UsersEffects {
   $loadUsers: Observable<Action> = this.actions$.pipe(
     ofType(usersActionTypes.LoadUsers),
     switchMap(() => this.usersService.loadUsers().pipe(
-      map(response => response.results)
+      map(response => response.data)
     )),
     map(users => new LoadUsersSuccessAction(users))
   );

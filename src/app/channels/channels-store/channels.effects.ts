@@ -12,7 +12,7 @@ export class ChannelsEffects {
   loadChannels$: Observable<Action> = this.actions$.pipe(
     ofType(channelsActionTypes.LoadChannels),
     switchMap(() => this.channelsApiService.getChannels().pipe(
-      map(response => response.results)
+      map(response => response.data)
     )),
     map(channels => new LoadChannelsSuccessAction(channels))
   );

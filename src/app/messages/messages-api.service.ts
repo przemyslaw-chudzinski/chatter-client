@@ -12,8 +12,8 @@ export class MessagesApiService {
     private _httpClient: ChatterHttpClient
   ) {}
 
-  getMessages(recipientId: string): Observable<IResponseData<IMessage>> {
-    return this._httpClient.get<IResponseData<IMessage>>(
+  getMessages(recipientId: string): Observable<IResponseData<IMessage[]>> {
+    return this._httpClient.get<IResponseData<IMessage[]>>(
       messagesEndpoints.messagesEndpoint(recipientId)
     );
   }
@@ -22,12 +22,12 @@ export class MessagesApiService {
     return this._httpClient.patch<IResponseData<IMessage>>(messagesEndpoints.updateMessageEndpoint, body);
   }
 
-  saveMessage(body: IMessage): Observable<IResponseData<IMessage>> {
-    return this._httpClient.post<IResponseData<IMessage>>(messagesEndpoints.saveMessageEndpoint, body);
+  saveMessage(body: IMessage): Observable<IMessage> {
+    return this._httpClient.post<IMessage>(messagesEndpoints.saveMessageEndpoint, body);
   }
 
-  getUnreadMessages(): Observable<IUnreadMessage[]> {
-    return this._httpClient.get<IUnreadMessage[]>(messagesEndpoints.unreadMessagesEndpoint);
+  getUnreadMessages(): Observable<IResponseData<IUnreadMessage[]>> {
+    return this._httpClient.get<IResponseData<IUnreadMessage[]>>(messagesEndpoints.unreadMessagesEndpoint);
   }
 
   resetUnreadMessages(contactId: string): Observable<any> {

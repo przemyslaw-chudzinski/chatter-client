@@ -12,19 +12,23 @@ import {NotificationsService} from '../../../notifications/notifications.service
 })
 export class UserSettingsPageComponent {
 
+  loadingUserForm: boolean;
+
   constructor(
     private _usersApiService: UsersApiService,
     private _auth: AuthService,
-    private _notificatonsService: NotificationsService
+    private _notificationsService: NotificationsService
   ) {}
 
   handleUploadedFiles(files: IFile[]): void {
+    this.loadingUserForm = true;
     this._auth.user$
       .pipe(
         take(1),
         tap(user => user && (user.avatar = files[0])),
         switchMap(user => this._usersApiService.update(user)),
-        tap(() => this._notificatonsService.open('Avatar has been changed', 'Got it'))
+        tap(() => this._notificationsService.open('Avatar has been changed', 'Got it')),
+        tap(() => (this.loadingUserForm = false))
       )
       .subscribe();
   }

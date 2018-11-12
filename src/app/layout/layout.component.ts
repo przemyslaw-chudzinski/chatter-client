@@ -62,6 +62,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       .getUnreadMessages()
       .pipe(
         take(1),
+        map(response => response.data),
         tap(unreadMessagesData => (this.unreadMessagesData = unreadMessagesData))
       )
       .subscribe();

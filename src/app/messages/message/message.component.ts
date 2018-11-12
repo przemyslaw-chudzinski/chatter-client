@@ -1,15 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IMessage } from '../models/message.model';
-import { AuthService } from '../../auth/auth.service';
-import { take, tap } from 'rxjs/operators';
-import { IUser } from '../../auth/models/user.model';
-import { MatDialog } from '@angular/material/dialog';
-import { EditMessageDialogComponent } from '../dialogs/edit-message-dialog/edit-message-dialog.component';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {IMessage} from '../models/message.model';
+import {AuthService} from '../../auth/auth.service';
+import {take, tap} from 'rxjs/operators';
+import {IUser} from '../../auth/models/user.model';
+import {MatDialog} from '@angular/material/dialog';
+import {EditMessageDialogComponent} from '../dialogs/edit-message-dialog/edit-message-dialog.component';
 
 @Component({
   selector: 'chatter-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss']
+  styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent implements OnInit {
   private _currentUser: IUser;

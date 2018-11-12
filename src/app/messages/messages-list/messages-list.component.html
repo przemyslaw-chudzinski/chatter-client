@@ -1,10 +1,14 @@
 <div class="chatter-chat-messages-list"
-     [chatterScrollToBottom]="messages">
+     chatterScrollToBottom>
 
   <!-- Single message -->
-  <chatter-message *ngFor="let msg of messages"
-                   [message]="msg"></chatter-message>
+  <ng-container *ngIf="messages$ | async as messages">
 
+    <chatter-message *ngFor="let msg of messages"
+                     [message]="msg">
+    </chatter-message>
+
+  </ng-container>
   <!-- ######################################### -->
   <chatter-spinner *ngIf="loading"></chatter-spinner>
 

@@ -15,7 +15,7 @@ export class MessagesEffects {
     map((action: any) => action.payload as string),
     switchMap(recipientId => this.messagesService.getMessages(recipientId).pipe(
       tap(() => this.contactListService.resetUnreadMessages.emit(recipientId)),
-      map(response => response.results)
+      map(response => response.data)
     )),
     map(messages => new LoadMessagesSuccessAction(messages))
   );

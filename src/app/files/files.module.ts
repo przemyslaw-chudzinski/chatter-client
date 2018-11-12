@@ -8,6 +8,7 @@ import {SpinnerModule} from '../ui/spinner/spinner.module';
 import { FilePreviewComponent } from './file-preview/file-preview.component';
 import { FilePreviewTplDirective } from './file-preview-tpl.directive';
 import { FilePreviewOutletDirective } from './file-preview-outlet.directive';
+import { DownloadFIleDirective } from './download-file.directive';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FilePreviewOutletDirective } from './file-preview-outlet.directive';
     OpenFileBoxDirective,
     FilePreviewComponent,
     FilePreviewTplDirective,
-    FilePreviewOutletDirective
+    FilePreviewOutletDirective,
+    DownloadFIleDirective
   ],
   exports: [
     FileUploadComponent

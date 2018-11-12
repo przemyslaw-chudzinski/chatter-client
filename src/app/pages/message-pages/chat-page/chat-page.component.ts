@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WebsocketService } from '../../../websocket/websocket.service';
-import { ActivatedRoute } from '@angular/router';
-import {tap, takeWhile, switchMap, take, map} from 'rxjs/operators';
-import { EWebSocketActions } from '../../../websocket/enums/websocket-actions.enum';
-import { AuthService } from '../../../auth/auth.service';
-import { IUser } from '../../../auth/models/user.model';
-import { IMessage } from '../../../messages/models/message.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {WebsocketService} from '../../../websocket/websocket.service';
+import {ActivatedRoute} from '@angular/router';
+import {map, switchMap, take, takeWhile, tap} from 'rxjs/operators';
+import {EWebSocketActions} from '../../../websocket/enums/websocket-actions.enum';
+import {AuthService} from '../../../auth/auth.service';
+import {IUser} from '../../../auth/models/user.model';
+import {IMessage} from '../../../messages/models/message.model';
 import {select, Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {
@@ -112,7 +112,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         .saveMessage({recipientId: this._contactId, content: event.content})
         .pipe(
           take(1),
-          map(response => response.data),
+          // map(response => response.data),
           // tap(message => this._websocketService.sendMessage(message)),
           map(message => {
             message.author = event.author;

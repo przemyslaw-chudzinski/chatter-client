@@ -1,1 +1,29 @@
+.account-page-wrapper {
+  display: flex;
+  justify-content: center;
 
+  .form-box {
+    margin-bottom: 1rem;
+  }
+
+  .account-box {
+    width: 40rem;
+    .user-info-box {
+      chatter-card .user-info-box-forms {
+        display: flex;
+        flex-flow: row;
+        .user-info-box-form {
+          flex-grow: 1;
+        }
+        chatter-file-upload {
+          padding-left: 1rem;
+        }
+      }
+    }
+
+    .reset-password-box {
+
+    }
+  }
+
+}

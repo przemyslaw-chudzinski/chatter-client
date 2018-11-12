@@ -15,8 +15,8 @@ export class NotificationsApiService {
     private _httpClient: ChatterHttpClient
   ) {}
 
-  getNotifications(): Observable<IResponseData<INotification>> {
-    return this._httpClient.get<IResponseData<INotification>>(notificationsEndpoints.notificationsEndpoint);
+  getNotifications(): Observable<IResponseData<INotification[]>> {
+    return this._httpClient.get<IResponseData<INotification[]>>(notificationsEndpoints.notificationsEndpoint);
   }
 
   getNotificationsNumber(): Observable<INotificationNumber> {
