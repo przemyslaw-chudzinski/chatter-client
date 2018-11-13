@@ -4,6 +4,8 @@
   display: flex;
   cursor: pointer;
   transition: all .4s;
+  min-height: 220px;
+  flex-wrap: wrap;
   &:hover {
     border-color: rgba(#fff, .5);
   }

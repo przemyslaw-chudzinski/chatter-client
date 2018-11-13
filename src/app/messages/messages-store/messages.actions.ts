@@ -6,6 +6,10 @@ export enum messagesActionTypes {
   LoadMessagesSuccess = '[Messages] Load Messages Success',
   LoadMessagesError = '[Messages] Load Messages Error',
 
+  LoadMoreMessages = '[Messages] Load More Messages',
+  LoadMoreMessagesSuccess = '[Messages] Load More Messages Success',
+  LoadMoreMessagesError = '[Messages] Load More Messages Error',
+
   UpdateMessage = '[Messages] Update Message',
 
   CleanMessagesStore = '[Messages] Clean Messages Store',
@@ -25,6 +29,23 @@ export class LoadMessagesSuccessAction implements Action {
 
 export class LoadMessagesErrorAction implements Action {
   readonly type = messagesActionTypes.LoadMessagesError;
+  constructor(public payload: any) {}
+}
+/***********************************************************/
+
+/* Load More Messages */
+export class LoadMoreMessagesAction implements Action {
+  readonly type = messagesActionTypes.LoadMoreMessages;
+  constructor(public recipientId: string, public skip: number, take: number) {}
+}
+
+export class LoadMoreMessagesSuccessAction implements Action {
+  readonly type = messagesActionTypes.LoadMoreMessagesSuccess;
+  constructor(public payload: IMessage[]) {}
+}
+
+export class LoadMoreMessagesErrorAction implements Action {
+  readonly type = messagesActionTypes.LoadMoreMessagesError;
   constructor(public payload: any) {}
 }
 /***********************************************************/
@@ -56,4 +77,7 @@ export type MessagesActions =
   | LoadMessagesErrorAction
   | CleanMessagesStoreAction
   | PushMessageAction
-  | UpdateMessageAction;
+  | UpdateMessageAction
+  | LoadMoreMessagesAction
+  | LoadMoreMessagesSuccessAction
+  | LoadMoreMessagesErrorAction;

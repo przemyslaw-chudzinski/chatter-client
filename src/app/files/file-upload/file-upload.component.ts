@@ -14,6 +14,7 @@ export class FileUploadComponent {
     this._files = files;
   }
   @Output() filesUploaded = new EventEmitter<IFile[]>();
+  @Output() fileRemoved = new EventEmitter<IFile>();
   private _files: IFile[] = [];
 
   get files(): IFile[] {
@@ -32,6 +33,16 @@ export class FileUploadComponent {
         tap(files => this.multiple ? this._pushFiles(files) : this._replaceFiles(files))
       )
       .subscribe();
+  }
+
+  clear(): void {
+    this._files = [];
+  }
+
+  removeFile(file: IFile): void {
+    event.stopPropagation();
+    this._files = this._files.filter(f => f.fileId !== file.fileId);
+    this.fileRemoved.emit(file);
   }
 
   private _pushFiles(files: IFile[]): void {

@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {MessagesApiService} from '../messages-api.service';
-import {LoadMessagesSuccessAction, messagesActionTypes} from './messages.actions';
+import {LoadMessagesSuccessAction, LoadMoreMessagesSuccessAction, messagesActionTypes} from './messages.actions';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {ContactListService} from '../../contact-list/contact-list.service';
 
@@ -18,6 +18,22 @@ export class MessagesEffects {
       map(response => response.data)
     )),
     map(messages => new LoadMessagesSuccessAction(messages))
+  );
+
+  @Effect()
+  loadMoreMessages$: Observable<Action> = this.actions$.pipe(
+    ofType(messagesActionTypes.LoadMoreMessages),
+    map((action: any) => {
+      action.recipientId as string;
+      action.take as number;
+      action.skip as number;
+      return action;
+    }),
+    switchMap(action => this.messagesService.getMessages(action.recipientId, action.skip, action.take).pipe(
+      tap(() => this.contactListService.resetUnreadMessages.emit(action.recipientId)),
+      map(response => response.data)
+    )),
+    map(messages => new LoadMoreMessagesSuccessAction(messages))
   );
 
   constructor(

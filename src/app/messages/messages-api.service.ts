@@ -12,9 +12,10 @@ export class MessagesApiService {
     private _httpClient: ChatterHttpClient
   ) {}
 
-  getMessages(recipientId: string): Observable<IResponseData<IMessage[]>> {
+  getMessages(recipientId: string, skip = 0, take = 30): Observable<IResponseData<IMessage[]>> {
     return this._httpClient.get<IResponseData<IMessage[]>>(
-      messagesEndpoints.messagesEndpoint(recipientId)
+      messagesEndpoints.messagesEndpoint(recipientId),
+      {params: {take, skip}}
     );
   }
 

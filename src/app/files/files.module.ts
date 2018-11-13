@@ -27,7 +27,8 @@ import { DownloadFIleDirective } from './download-file.directive';
     DownloadFIleDirective
   ],
   exports: [
-    FileUploadComponent
+    FileUploadComponent,
+    FilePreviewComponent
   ],
   providers: [FilesApiService]
 })

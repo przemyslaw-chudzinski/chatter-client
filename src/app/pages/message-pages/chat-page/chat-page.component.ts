@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WebsocketService} from '../../../websocket/websocket.service';
 import {ActivatedRoute} from '@angular/router';
 import {map, switchMap, take, takeWhile, tap} from 'rxjs/operators';
@@ -10,7 +10,7 @@ import {select, Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {
   CleanMessagesStoreAction,
-  LoadMessagesAction,
+  LoadMessagesAction, LoadMoreMessagesAction,
   PushMessageAction,
   UpdateMessageAction
 } from '../../../messages/messages-store/messages.actions';
@@ -19,6 +19,9 @@ import {LoadUserAction} from '../../../users/users-store/users.actions';
 import {selectMessages} from '../../../messages/messages-store/messages.selectors';
 import {selectUser} from '../../../users/users-store/users.selectors';
 import {MessagesApiService} from '../../../messages/messages-api.service';
+import {IScrollEvent} from '../../../ui/ui-directives/models/scroll-event.model';
+import {FileUploadComponent} from '../../../files/file-upload/file-upload.component';
+import {IFile} from '../../../files/models/file.model';
 
 @Component({
   selector: 'chatter-chat-page',
@@ -33,6 +36,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
   user$: Observable<IUser> = this._store.pipe(select(selectUser));
   sending: boolean;
+  private _skip = 1;
+  @ViewChild(FileUploadComponent) private _uploader: FileUploadComponent;
+  showFileUploader: boolean;
+
+  get attachedFiles(): IFile[] | null {
+    if (this._uploader) {
+      return this._uploader.files.length ? this._uploader.files : null;
+    }
+    return null;
+  }
 
   constructor(
     private _websocketService: WebsocketService,
@@ -103,22 +116,30 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
+  handleScroll(event: IScrollEvent): void {
+    if (event.scrollTop === 0) {
+      const recipientId = this._route.snapshot.params.id;
+      this._store.dispatch(new LoadMoreMessagesAction(recipientId, this._skip, 15));
+      this._skip++;
+    }
+  }
+
   sendMessage(event: IMessage): void {
+    console.log('sendMessage', event);
     if (this.contact && event && event.content) {
       event.recipientId = this._contactId;
       this.sending = true;
       this
         ._messagesApiService
-        .saveMessage({recipientId: this._contactId, content: event.content})
+        .saveMessage({recipientId: this._contactId, content: event.content, attachedFiles: this.attachedFiles})
         .pipe(
           take(1),
-          // map(response => response.data),
-          // tap(message => this._websocketService.sendMessage(message)),
           map(message => {
             message.author = event.author;
             return message;
           }),
-          tap(x => console.log(x)),
+          tap(() => this._uploader && this._uploader.clear()),
+          tap(() => (this.showFileUploader = false)),
           tap(message => this._store.dispatch(new PushMessageAction(message))),
           tap(() => (this.sending = false))
         )

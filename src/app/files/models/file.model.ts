@@ -5,4 +5,5 @@ export interface IFile {
   extension: string;
   original?: IFileSize;
   thumbnail?: IFileSize;
+  fileId: string;
 }

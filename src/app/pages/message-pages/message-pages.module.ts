@@ -7,6 +7,7 @@ import { MessagesModule } from '../../messages/messages.module';
 import {routerLinks} from '../../routes/router-links';
 import {UiModule} from '../../ui/ui.module';
 import {FilesModule} from '../../files/files.module';
+import {MatButtonModule} from '@angular/material';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MessagesModule,
     UiModule,
-    FilesModule
+    FilesModule,
+    MatButtonModule
   ],
   declarations: [MessagePagesComponent, ChatPageComponent]
 })

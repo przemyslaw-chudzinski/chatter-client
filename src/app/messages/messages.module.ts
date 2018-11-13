@@ -5,7 +5,6 @@ import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageComponent } from './message/message.component';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
 import { FormsModule } from '@angular/forms';
-import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 import { MessageEditorDirective } from './message-editor/message-editor.directive';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +16,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MessagesStoreModule} from './messages-store/messages-store.module';
 import {MessagesEventsService} from './messages-events.service';
 import {UiModule} from '../ui/ui.module';
+import {FilesModule} from '../files/files.module';
+import { MessageAttachedFilesComponent } from './message-attached-files/message-attached-files.component';
 
 @NgModule({
   imports: [
@@ -29,15 +30,16 @@ import {UiModule} from '../ui/ui.module';
     MatDialogModule,
     MatChipsModule,
     MatTooltipModule,
-    MessagesStoreModule
+    MessagesStoreModule,
+    FilesModule
   ],
   declarations: [
     MessagesListComponent,
     MessageComponent,
     MessageEditorComponent,
-    ScrollToBottomDirective,
     MessageEditorDirective,
-    EditMessageDialogComponent
+    EditMessageDialogComponent,
+    MessageAttachedFilesComponent
   ],
   exports: [MessagesListComponent, MessageComponent, MessageEditorComponent],
   entryComponents: [EditMessageDialogComponent]

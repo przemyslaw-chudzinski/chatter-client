@@ -8,6 +8,7 @@
 
   <!-- Chatter Chat messages list -->
   <chatter-messages-list [loading]="!messages"
+                         (onScroll)="handleScroll($event)"
                          [messages]="messages">
   </chatter-messages-list>
   <!-- ################################################### -->
@@ -20,7 +21,16 @@
   <!-- ################################################### -->
 
   <!-- Chatter file uploader for message -->
-  <!--<chatter-file-upload [multiple]="true"></chatter-file-upload>-->
+  <button *ngIf="messages"
+          class="show-files-uploader-btn"
+          mat-raised-button
+          color="primary"
+          (click)="showFileUploader = !showFileUploader">
+    Add files
+  </button>
+  <chatter-file-upload *ngIf="showFileUploader"
+                       [multiple]="true">
+  </chatter-file-upload>
   <!-- ################################################### -->
 
 </div>

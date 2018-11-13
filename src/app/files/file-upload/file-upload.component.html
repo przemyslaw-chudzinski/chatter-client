@@ -8,7 +8,10 @@
 </div>
 
 <ng-template #previewView>
+
   <chatter-file-preview *ngFor="let file of files"
+                        (onRemove)="removeFile($event)"
                         [file]="file">
   </chatter-file-preview>
+
 </ng-template>

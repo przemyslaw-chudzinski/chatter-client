@@ -1,0 +1,7 @@
+<div class="message-attached-files-container" *ngIf="files &&files.length">
+
+  <chatter-file-preview *ngFor="let file of files"
+                        [file]="file">
+  </chatter-file-preview>
+
+</div>

@@ -35,6 +35,11 @@ export const messagesReducer = (
         ...state,
         messages: messages2
       };
+    case messagesActionTypes.LoadMoreMessagesSuccess:
+      return {
+        ...state,
+        messages: [...action.payload, ...state.messages]
+      };
     default:
       return state;
   }
