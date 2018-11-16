@@ -11,7 +11,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import {ContactListModule} from '../contact-list/contact-list.module';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
-import { LoaderBtnDirective } from './directives/loader-btn.directive';
 import {NotificationsModule} from '../notifications/notifications.module';
 import {UiModule} from '../ui/ui.module';
 
@@ -32,13 +31,11 @@ import {UiModule} from '../ui/ui.module';
     LayoutComponent,
     TopbarComponent,
     UserMenuComponent,
-    TopbarUserInfoComponent,
-    LoaderBtnDirective
+    TopbarUserInfoComponent
   ],
   exports: [
     LayoutComponent,
-    TopbarComponent,
-    LoaderBtnDirective
+    TopbarComponent
   ]
 })
 export class LayoutModule {}

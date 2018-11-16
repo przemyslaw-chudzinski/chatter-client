@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PrimaryNotificationComponent } from './primary-notification/primary-notification.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NotificationsService} from './notifications.service';
-import {MatBadgeModule, MatButtonModule, MatCardModule, MatIconModule} from '@angular/material';
+import {MatBadgeModule, MatButtonModule, MatCardModule, MatDialogModule, MatIconModule} from '@angular/material';
 import { NotificationsDropdownComponent } from './notifications-dropdown/notifications-dropdown.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from '@angular/cdk/a11y';
@@ -12,6 +12,7 @@ import { NotificationsDropdownContentComponent } from './notifications-dropdown/
 import {UiModule} from '../ui/ui.module';
 import {NotificationsStoreModule} from './notifications-store/notifications-store.module';
 import { NotificationInvitationToGroupChatComponent } from './notifications-dropdown/notifications-dropdown-content/notification-invitation-to-group-chat/notification-invitation-to-group-chat.component';
+import { NotificationsListComponent } from './dialogs/notifications-list/notifications-list.component';
 
 @NgModule({
   imports: [
@@ -25,10 +26,11 @@ import { NotificationInvitationToGroupChatComponent } from './notifications-drop
     MatCardModule,
     PortalModule,
     UiModule,
-    NotificationsStoreModule
+    NotificationsStoreModule,
+    MatDialogModule
   ],
-  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationsDropdownContentComponent, NotificationInvitationToGroupChatComponent],
-  entryComponents: [PrimaryNotificationComponent, NotificationsDropdownContentComponent],
+  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationsDropdownContentComponent, NotificationInvitationToGroupChatComponent, NotificationsListComponent],
+  entryComponents: [PrimaryNotificationComponent, NotificationsDropdownContentComponent, NotificationsListComponent],
   exports: [NotificationsDropdownComponent]
 })
 export class NotificationsModule {

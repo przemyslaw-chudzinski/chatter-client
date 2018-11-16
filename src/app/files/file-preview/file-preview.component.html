@@ -8,7 +8,10 @@
 <ng-template chatterFilePreviewTpl="image" let-file>
   <div class="file-preview-container file-preview-image">
     <div class="file-preview-section">
-      <img [src]="file.original.url" alt="">
+      <img [src]="file.thumbnail.url" alt="">
+    </div>
+    <div class="file-preview-file-name">
+      {{ file.original.name }}
     </div>
     <div class="file-preview-actions">
       <button mat-icon-button>
@@ -24,11 +27,15 @@
     </div>
   </div>
 </ng-template>
+<!--====================================================================-->
 <!-- Pdf template -->
 <ng-template chatterFilePreviewTpl="pdf" let-file>
   <div class="file-preview-container file-preview-image">
     <div class="file-preview-section">
-      <mat-icon>file_copy</mat-icon>
+      <mat-icon>attach_file</mat-icon>
+    </div>
+    <div class="file-preview-file-name">
+      {{ file.original.name }}
     </div>
     <div class="file-preview-actions">
       <button mat-icon-button>
@@ -43,7 +50,27 @@
     </div>
   </div>
 </ng-template>
+<!--====================================================================-->
 <!-- Txt template -->
 <ng-template chatterFilePreviewTpl="text" let-file>
-  txt file
+  <div class="file-preview-container file-preview-image">
+    <div class="file-preview-section">
+      <mat-icon>attach_file</mat-icon>
+    </div>
+    <div class="file-preview-file-name">
+      {{ file.original.name }}
+    </div>
+    <div class="file-preview-actions">
+      <button mat-icon-button>
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>save_alt</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
 </ng-template>
+<!--====================================================================-->

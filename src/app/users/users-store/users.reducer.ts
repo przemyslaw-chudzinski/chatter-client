@@ -1,5 +1,18 @@
 import {UsersState} from './users.state';
 import {UsersActions, usersActionTypes} from './users.actions';
+import {IFile} from '../../files/models/file.model';
+
+const defaultAvatar: IFile = {
+  original: {
+    url: 'http://placehold.it/100x100',
+    name: null,
+    size: null
+  },
+  fileId: null,
+  thumbnail: null,
+  extension: null,
+  mimeType: null
+};
 
 export const usersReducer = (
   state: UsersState = new UsersState(),
@@ -20,6 +33,11 @@ export const usersReducer = (
       return {
         ...state,
         avatar: action.payload
+      };
+    case usersActionTypes.LoadUserAvatarError:
+      return {
+        ...state,
+        avatar: defaultAvatar
       };
     default:
       return state;

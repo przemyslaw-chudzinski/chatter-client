@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {LoadUserAvatarSuccessAction, LoadUsersSuccessAction, LoadUserSuccessAction, usersActionTypes} from './users.actions';
-import {map, switchMap} from 'rxjs/operators';
+import {
+  LoadUserAvatarErrorAction,
+  LoadUserAvatarSuccessAction,
+  LoadUsersSuccessAction,
+  LoadUserSuccessAction,
+  usersActionTypes
+} from './users.actions';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {UsersApiService} from '../users-api.service';
 
 @Injectable()
@@ -29,7 +35,8 @@ export class UsersEffects {
   loadAvatar$: Observable<Action> = this.actions$.pipe(
     ofType(usersActionTypes.LoadUserAvatar),
     switchMap(() => this.usersService.loadAvatar()),
-    map(avatar => new LoadUserAvatarSuccessAction(avatar))
+    map(avatar => new LoadUserAvatarSuccessAction(avatar)),
+    catchError(err => of(new LoadUserAvatarErrorAction(err)))
   );
 
   constructor(

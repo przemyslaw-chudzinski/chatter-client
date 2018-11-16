@@ -1,7 +1,7 @@
 <span
   class="chatter-user-avatar"
-  *ngIf="user && user.avatar && user.avatar.original; else defaultImage">
-    <img [src]="user.avatar.original.url" alt="">
+  *ngIf="user && user.avatar && user.avatar.thumbnail; else defaultImage">
+    <img [src]="user.avatar.thumbnail.url" alt="">
   </span>
 
 <ng-template #defaultImage>
