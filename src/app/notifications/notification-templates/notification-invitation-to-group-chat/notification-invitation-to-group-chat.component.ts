@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {INotification} from '../../../models/notification.model';
+import {INotification} from '../../models/notification.model';
 
 @Component({
   selector: 'chatter-notification-invitation-to-group-chat',
@@ -8,7 +8,6 @@ import {INotification} from '../../../models/notification.model';
 })
 export class NotificationInvitationToGroupChatComponent implements OnInit {
   @Input() notification: INotification;
-
   constructor() { }
 
   ngOnInit() {

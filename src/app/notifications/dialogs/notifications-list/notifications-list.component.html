@@ -1,3 +1,26 @@
-<p>
-  notifications-list works!
-</p>
+<div class="notifications-list-dialog">
+
+  <div *ngIf="notifications$ | async as notifications; else loadingTemplate">
+
+    <h3>Notifications</h3>
+
+    <div *ngIf="notifications && notifications.length; else noItems">
+
+      <chatter-notification-invitation-to-group-chat *ngFor="let notification of notifications"
+                                                     [notification]="notification">
+      </chatter-notification-invitation-to-group-chat>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<ng-template #loadingTemplate>
+  <chatter-spinner></chatter-spinner>
+</ng-template>
+
+<ng-template #noItems>
+  <div>There is no any items to display</div>
+</ng-template>

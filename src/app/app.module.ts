@@ -17,7 +17,7 @@ import { MessagesModule } from './messages/messages.module';
 import { UserNotLoggedGuard } from './auth/guards/user-not-logged.guard';
 import {ChatterStoreModule} from './chatter-store/chatter-store.module';
 import {FormLayersModule} from './form-layers/form-layers.module';
-import {token} from './helpers/helpers';
+import {getToken} from './helpers/helpers';
 import {NotificationsModule} from './notifications/notifications.module';
 
 const routes: Routes = [
@@ -62,7 +62,7 @@ const routes: Routes = [
     FormLayersModule.forRoot(),
     JwtModule.forRoot({
       config: {
-        tokenGetter: token
+        tokenGetter: getToken
       }
     }),
     ChatterHttpModule.forRoot(),

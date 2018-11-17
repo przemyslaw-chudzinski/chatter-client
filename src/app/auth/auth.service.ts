@@ -8,7 +8,7 @@ import { ChatterHttpClient } from '../chatter-http/chatter-http-client';
 import { IAuthResponse } from './models/auth-response.model';
 import { WebsocketService } from '../websocket/websocket.service';
 import { take, map, tap } from 'rxjs/operators';
-import {decodedToken, removeToken, saveToken, token, tokenExpired} from '../helpers/helpers';
+import {decodedToken, removeToken, saveToken, getToken, tokenExpired} from '../helpers/helpers';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class AuthService {
 
   initUser(): IUser {
     const _decodedToken = decodedToken();
-    token && !tokenExpired() && this.user$.next(_decodedToken.user) || null;
+    getToken() && !tokenExpired() && this.user$.next(_decodedToken.user) || null;
     return (_decodedToken && _decodedToken.user) || null;
   }
 

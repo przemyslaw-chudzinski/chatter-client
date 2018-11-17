@@ -16,7 +16,7 @@ import {switchMap, takeWhile, tap} from 'rxjs/operators';
 })
 export class UserMenuComponent implements OnInit, OnDestroy {
   links = routerLinks;
-  private _avatar: IFile | string;
+  private _avatar: IFile;
   private _user: IUser;
   private _alive = true;
 

@@ -1,10 +1,10 @@
 import {NotificationsState} from './notifications-store.state';
 import {NotificationsActions, notificationsActionTypes} from './notifications-store.actions';
 
-export const notificationsReducer = (
+export function notificationsReducer (
   state: NotificationsState = new NotificationsState(),
   action: NotificationsActions
-): NotificationsState => {
+): NotificationsState {
   switch (action.type) {
     case notificationsActionTypes.LoadNotificationsSuccess:
       return {

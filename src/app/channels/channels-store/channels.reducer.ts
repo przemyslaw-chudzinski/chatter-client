@@ -1,10 +1,10 @@
 import {ChannelsState} from './channels.state';
 import {ChannelsActions, channelsActionTypes} from './channels.actions';
 
-export const channelsReducer = (
+export function channelsReducer (
   state: ChannelsState = new ChannelsState(),
   action: ChannelsActions
-): ChannelsState => {
+): ChannelsState {
   switch (action.type) {
     case channelsActionTypes.LoadChannelsSuccess:
       return {

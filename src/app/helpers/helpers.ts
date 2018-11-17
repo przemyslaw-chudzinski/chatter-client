@@ -6,7 +6,7 @@ const jwtHelper = new JwtHelperService();
 /**
  * @desc It returns token from local storage
  */
-export const token = (tokenName?: string): string  => localStorage.getItem(tokenName || environment.tokenKey);
+export function getToken (tokenName?: string): string  { return localStorage.getItem(tokenName || environment.tokenKey) };
 
 /**
  * @desc It removes token from local storage
@@ -21,12 +21,12 @@ export const saveToken = (payload: string, tokenName?: string): void => localSto
 /**
  * @desc It checks token expired
  */
-export const tokenExpired = (_token?: string): boolean => jwtHelper.isTokenExpired(_token || token());
+export const tokenExpired = (_token?: string): boolean => jwtHelper.isTokenExpired(_token || getToken());
 
 /**
  * @desc It returns decoded token
  */
-export const decodedToken = (_token?: string): any => jwtHelper.decodeToken(_token || token());
+export const decodedToken = (_token?: string): any => jwtHelper.decodeToken(_token || getToken());
 
 /**
  * @desc It checks txt is Url with http or https

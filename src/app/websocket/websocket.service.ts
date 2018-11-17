@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {IWebSocketData} from './models/websocket-payload.model';
 import {EWebSocketActions} from './enums/websocket-actions.enum';
 import {IWebsocketState} from './models/websocket-state.model';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class WebsocketService {
@@ -29,7 +30,7 @@ export class WebsocketService {
 
   connect(userId: string): void {
     this._userId = userId;
-    this._ws = this._ws || new WebSocket('ws://localhost:8000');
+    this._ws = this._ws || new WebSocket(environment.websocketServer);
     this._ws.onopen = this._ws && this.onOpenHandler.bind(this, userId);
     this._ws.onmessage = this._ws && this.onMessageHandler.bind(this);
     this._ws.onerror = () => console.log('on error');

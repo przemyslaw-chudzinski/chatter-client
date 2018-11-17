@@ -14,10 +14,10 @@ const defaultAvatar: IFile = {
   mimeType: null
 };
 
-export const usersReducer = (
+export function usersReducer (
   state: UsersState = new UsersState(),
   action: UsersActions
-): UsersState => {
+): UsersState {
   switch (action.type) {
     case usersActionTypes.LoadUsersSuccess:
       return {

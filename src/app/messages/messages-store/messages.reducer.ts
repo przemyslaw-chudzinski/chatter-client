@@ -1,10 +1,10 @@
 import {MessagesState} from './messages.state';
 import {MessagesActions, messagesActionTypes} from './messages.actions';
 
-export const messagesReducer = (
+export function messagesReducer (
   state: MessagesState = new MessagesState(),
   action: MessagesActions
-) => {
+) {
   switch (action.type) {
     case messagesActionTypes.LoadMessagesSuccess:
       return {

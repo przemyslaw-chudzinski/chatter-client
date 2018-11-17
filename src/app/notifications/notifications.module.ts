@@ -8,11 +8,10 @@ import { NotificationsDropdownComponent } from './notifications-dropdown/notific
 import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from '@angular/cdk/a11y';
 import {PortalModule} from '@angular/cdk/portal';
-import { NotificationsDropdownContentComponent } from './notifications-dropdown/notifications-dropdown-content/notifications-dropdown-content.component';
 import {UiModule} from '../ui/ui.module';
 import {NotificationsStoreModule} from './notifications-store/notifications-store.module';
-import { NotificationInvitationToGroupChatComponent } from './notifications-dropdown/notifications-dropdown-content/notification-invitation-to-group-chat/notification-invitation-to-group-chat.component';
 import { NotificationsListComponent } from './dialogs/notifications-list/notifications-list.component';
+import {NotificationInvitationToGroupChatComponent} from './notification-templates/notification-invitation-to-group-chat/notification-invitation-to-group-chat.component';
 
 @NgModule({
   imports: [
@@ -29,8 +28,8 @@ import { NotificationsListComponent } from './dialogs/notifications-list/notific
     NotificationsStoreModule,
     MatDialogModule
   ],
-  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationsDropdownContentComponent, NotificationInvitationToGroupChatComponent, NotificationsListComponent],
-  entryComponents: [PrimaryNotificationComponent, NotificationsDropdownContentComponent, NotificationsListComponent],
+  declarations: [PrimaryNotificationComponent, NotificationsDropdownComponent, NotificationInvitationToGroupChatComponent, NotificationsListComponent],
+  entryComponents: [PrimaryNotificationComponent, NotificationsListComponent],
   exports: [NotificationsDropdownComponent]
 })
 export class NotificationsModule {
