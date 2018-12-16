@@ -8,6 +8,7 @@ import {FormLayersModule} from '../form-layers/form-layers.module';
 import {ChannelsStoreModule} from './channels-store/channels-store.module';
 import {NotificationsModule} from '../notifications/notifications.module';
 import {UiModule} from '../ui/ui.module';
+import { OnlyConfirmedPipe } from './filters/only-confirmed.pipe';
 
 @NgModule({
   imports: [
@@ -19,7 +20,12 @@ import {UiModule} from '../ui/ui.module';
     ChannelsStoreModule,
     NotificationsModule
   ],
-  declarations: [ChannelsListComponent, ChannelComponent, CreateGroupConversationDialogComponent],
+  declarations: [
+    ChannelsListComponent,
+    ChannelComponent,
+    CreateGroupConversationDialogComponent,
+    OnlyConfirmedPipe
+  ],
   exports: [ChannelsListComponent],
   entryComponents: [CreateGroupConversationDialogComponent]
 })

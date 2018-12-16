@@ -1,4 +1,4 @@
-<div class="create-channel c-d-flex c-align-content-center c-flex-flow-column">
+<div class="create-channel c-d-flex c-align-content-center c-flex-flow-column c-padding-bottom-1">
   <p>Create group conversation</p>
   <button
     mat-raised-button
@@ -8,6 +8,10 @@
   </button>
 </div>
 
-<div class="channels-list">
-
+<div *ngIf="channels && channels.length; else noChannels" class="channels-list">
+  <chatter-channel *ngFor="let channel of channels" [channel]="channel"></chatter-channel>
 </div>
+
+<ng-template #noChannels>
+  <div>You don't belongs to any channel</div>
+</ng-template>

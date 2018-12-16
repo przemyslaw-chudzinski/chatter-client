@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IChannel} from '../models/channel.model';
 
 @Component({
   selector: 'chatter-channel',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./channel.component.scss']
 })
 export class ChannelComponent implements OnInit {
-
-  constructor() { }
+  @Input() channel: IChannel = null;
 
   ngOnInit() {
   }

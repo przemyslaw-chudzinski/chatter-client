@@ -1,3 +1,8 @@
-<p>
-  channel works!
-</p>
+<div class="chatter-channel c-padding-bottom-1 c-padding-top-1 c-padding-left-1 c-padding-right-1">
+  <div>
+    <strong>{{ channel.name }}</strong>
+  </div>
+  <div>
+    Members: {{ (channel.members | onlyConfirmed).length }}
+  </div>
+</div>
