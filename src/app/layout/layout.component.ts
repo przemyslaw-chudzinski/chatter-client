@@ -28,19 +28,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
     select(selectUsers),
     map(users => users as IContact[]),
     map(contacts => {
-      if (contacts && contacts.length) {
-        contacts = contacts.map(c => {
-          c.newMessagesCount = 0;
-          return c;
-        });
-      }
+      contacts = contacts && contacts.length ? contacts.map(c => {
+        c.newMessagesCount = 0;
+        return c;
+      }) : null;
       return contacts;
     }),
   );
 
-  channels$: Observable<IChannel[]> = this._store.pipe(
-    select(selectChannels)
-  );
+  channels$: Observable<IChannel[]> = this._store.pipe(select(selectChannels));
 
   constructor(
     public auth: AuthService,

@@ -48,9 +48,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
             ) {
               let dataToUpdate = [ ...this.contacts ];
               dataToUpdate = dataToUpdate.map(item => {
-                if (item._id === data.contactId) {
-                  item.newMessagesCount++;
-                }
+                item._id === data.contactId ? item.newMessagesCount++ : null;
                 return item;
               });
               this.contacts = dataToUpdate;
@@ -70,9 +68,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
             // Fragment to refactoring
             let dataToUpdate = [ ...this.contacts ];
             dataToUpdate = dataToUpdate.map(item => {
-              if (item._id === contactId) {
-                item.newMessagesCount = null;
-              }
+              item._id === contactId ? item.newMessagesCount = null : null;
               return item;
             });
             this.contacts = dataToUpdate;
@@ -113,11 +109,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
     if (this.unreadMessagesData && this.unreadMessagesData.length && this.contacts.length) {
       let dataToUpdate = [ ...this.contacts ];
       dataToUpdate = dataToUpdate.map(contact => {
-        this.unreadMessagesData.forEach(item => {
-          if (item.authorId === contact._id) {
-            contact.newMessagesCount = item.count;
-          }
-        });
+        this.unreadMessagesData.forEach(item => item.authorId === contact._id ?  contact.newMessagesCount = item.count : null);
         return contact;
       });
       this.contacts = dataToUpdate;

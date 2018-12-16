@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { EAlertTypes } from '../enums/alert-types.enum';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chatter-form-alert-main',
   templateUrl: './form-alert-main.component.html',
   styleUrls: ['./form-alert-main.component.scss']
