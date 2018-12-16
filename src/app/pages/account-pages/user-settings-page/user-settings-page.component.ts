@@ -32,4 +32,17 @@ export class UserSettingsPageComponent {
       )
       .subscribe();
   }
+
+  handleFileRemoved(): void {
+    this.loadingUserForm = true;
+    this._auth.user$
+      .pipe(
+        take(1),
+        tap(user => user && (user.avatar = null)),
+        switchMap(user => this._usersApiService.update(user)),
+        tap(() => this._notificationsService.open('Avatar has been changed', 'Got it')),
+        tap(() => (this.loadingUserForm = false))
+      )
+      .subscribe();
+  }
 }

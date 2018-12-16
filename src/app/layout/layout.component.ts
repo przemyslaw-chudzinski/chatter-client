@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import {map, take, takeWhile, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, switchMap, takeWhile, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import {IContact} from '../contact-list/models/contact';
 import {select, Store} from '@ngrx/store';
 import {LoadUsersAction} from '../users/users-store/users.actions';
@@ -55,17 +55,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
       tap(user => user && this._store.dispatch(new LoadUsersAction())),
       tap(user => user && this._store.dispatch(new LoadChannelsAction())),
       tap(user => user && this._store.dispatch(new LoadNotificationsNumberAction())),
-      tap(user => user && this._websocketService.connect(user._id))
+      tap(user => user && this._websocketService.connect(user._id)),
+      switchMap(user => user && this._messagesApiService.getUnreadMessages() || of(null)),
+      map(response => response ? response.data : null),
+      tap(unreadMessagesData => (this.unreadMessagesData = unreadMessagesData))
     ).subscribe();
-
-    this._messagesApiService
-      .getUnreadMessages()
-      .pipe(
-        take(1),
-        map(response => response.data),
-        tap(unreadMessagesData => (this.unreadMessagesData = unreadMessagesData))
-      )
-      .subscribe();
   }
 
   ngOnDestroy() {

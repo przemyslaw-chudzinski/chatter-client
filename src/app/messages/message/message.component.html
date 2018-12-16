@@ -18,7 +18,7 @@
     <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong>
     <span [innerHTML]="message.content"></span>
     <chatter-message-attached-files *ngIf="message.attachedFiles && message.attachedFiles.length"
-                                    [files]="message.attachedFiles">
+                                    [files]="message.attachedFiles" [canRemove]="false">
     </chatter-message-attached-files>
   </div>
   <div class="chatter-chat-message-actions">

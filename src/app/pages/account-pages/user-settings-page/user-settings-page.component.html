@@ -46,7 +46,8 @@
 
           <chatter-file-upload *ngIf="userSettingsForm.user as user"
                                (filesUploaded)="handleUploadedFiles($event)"
-                               [files]="[user.avatar]">
+                               (fileRemoved)="handleFileRemoved()"
+                               [files]="user.avatar ? [user.avatar] : []">
           </chatter-file-upload>
 
         </div>

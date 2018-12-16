@@ -33,7 +33,7 @@ export class WebsocketService {
     this._ws = this._ws || new WebSocket(environment.websocketServer);
     this._ws.onopen = this._ws && this.onOpenHandler.bind(this, userId);
     this._ws.onmessage = this._ws && this.onMessageHandler.bind(this);
-    this._ws.onerror = () => console.log('on error');
+    this._ws.onerror = err => console.log('on error', err);
     this._ws.onclose = () => console.log('on close');
   }
 
@@ -74,10 +74,6 @@ export class WebsocketService {
   }
 
   private send(data: IWebSocketData): void {
-    if (typeof data === 'object') {
-      this._ws.send(JSON.stringify(data));
-    } else {
-      this._ws.send(data);
-    }
+    typeof data === 'object' ? this._ws.send(JSON.stringify(data)) : this._ws.send(data);
   }
 }

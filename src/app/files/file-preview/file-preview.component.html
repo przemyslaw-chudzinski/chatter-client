@@ -14,13 +14,18 @@
       {{ file.original.name }}
     </div>
     <div class="file-preview-actions">
-      <button mat-icon-button>
+      <button *ngIf="canPreview"
+              mat-icon-button>
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button chatterDownloadFIle [fileUrl]="file.original.url">
+      <button *ngIf="canDownload"
+              mat-icon-button
+              chatterDownloadFIle
+              [fileUrl]="file.original.url">
         <mat-icon>save_alt</mat-icon>
       </button>
-      <button mat-icon-button
+      <button *ngIf="canRemove"
+              mat-icon-button
               (click)="handleDelete($event)">
         <mat-icon>delete</mat-icon>
       </button>
@@ -38,13 +43,18 @@
       {{ file.original.name }}
     </div>
     <div class="file-preview-actions">
-      <button mat-icon-button>
+      <button *ngIf="canPreview"
+              mat-icon-button>
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button *ngIf="canDownload"
+              chatterDownloadFIle
+              [fileUrl]="file.original.url"
+              mat-icon-button>
         <mat-icon>save_alt</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button *ngIf="canRemove"
+              mat-icon-button>
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -61,13 +71,18 @@
       {{ file.original.name }}
     </div>
     <div class="file-preview-actions">
-      <button mat-icon-button>
+      <button *ngIf="canPreview"
+              mat-icon-button>
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button *ngIf="canDownload"
+              chatterDownloadFIle
+              [fileUrl]="file.original.url"
+              mat-icon-button>
         <mat-icon>save_alt</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button *ngIf="canRemove"
+              mat-icon-button>
         <mat-icon>delete</mat-icon>
       </button>
     </div>

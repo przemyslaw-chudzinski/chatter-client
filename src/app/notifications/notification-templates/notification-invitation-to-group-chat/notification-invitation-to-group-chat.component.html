@@ -1,13 +1,17 @@
-<div class="notification-invitation-to-group-chat c-d-flex c-justify-content-space-between">
+<div class="notification-invitation-to-group-chat c-d-flex c-padding-bottom-1">
   <div class="notification-invitation-to-group-chat-avatar">
-    <img src="http://placehold.it/50x50">
+    <div *ngIf="notification.author.avatar as avatar; else defaultImage">
+      <img [src]="avatar.thumbnail.url" alt="" width="70">
+    </div>
   </div>
-  <div class="notification-invitation-to-group-chat-content">
-    <!--<h5>Invitation to group chat from Anna Kowalska</h5>-->
-    <div>{{ notification.message }}</div>
+  <div class="notification-invitation-to-group-chat-content c-margin-left-2">
+    <div class="c-margin-bottom-1">{{ notification.message }}</div>
     <div>
       <button mat-button>Accept</button>
-      <button mat-button>Reject</button>
     </div>
   </div>
 </div>
+
+<ng-template #defaultImage>
+  <img src="http://placehold.it/70x70">
+</ng-template>

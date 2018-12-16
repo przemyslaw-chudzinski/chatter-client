@@ -8,4 +8,7 @@ import {IFile} from '../../files/models/file.model';
 })
 export class MessageAttachedFilesComponent {
   @Input() files: IFile[];
+  @Input() canRemove = true;
+  @Input() canDownload = true;
+  @Input() canPreview = true;
 }

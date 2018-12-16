@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   tokenKey: 'token',
   apiUrl: 'http://localhost:3000/api/',
-  websocketServer: 'ws://localhost:3000'
+  websocketServer: 'ws://localhost:3001'
 };
 
 /*

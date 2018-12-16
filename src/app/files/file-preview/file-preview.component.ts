@@ -9,6 +9,9 @@ import {FilePreviewTplDirective} from '../file-preview-tpl.directive';
 })
 export class FilePreviewComponent implements AfterViewInit {
   @Input() file: IFile;
+  @Input() canRemove = true;
+  @Input() canDownload = true;
+  @Input() canPreview = true;
   @ViewChildren(FilePreviewTplDirective, {read: FilePreviewTplDirective}) private _previewTemplates = new QueryList<FilePreviewTplDirective>();
   private _templates: FilePreviewTplDirective[] = null;
   @Output() onRemove = new EventEmitter<IFile>();

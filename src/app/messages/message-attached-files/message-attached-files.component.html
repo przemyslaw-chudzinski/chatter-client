@@ -1,7 +1,10 @@
 <div class="message-attached-files-container" *ngIf="files &&files.length">
 
   <chatter-file-preview *ngFor="let file of files"
-                        [file]="file">
+                        [file]="file"
+                        [canDownload]="canDownload"
+                        [canPreview]="canPreview"
+                        [canRemove]="canRemove">
   </chatter-file-preview>
 
 </div>
