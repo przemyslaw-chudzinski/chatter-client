@@ -32,7 +32,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   messages: IMessage[];
   contact: IUser;
   private _contactId: string = null;
-  private alive = true;
+  private _alive = true;
   messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
   user$: Observable<IUser> = this._store.pipe(select(selectUser));
   sending: boolean;
@@ -41,10 +41,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   showFileUploader: boolean;
 
   get attachedFiles(): IFile[] | null {
-    if (this._uploader) {
-      return this._uploader.files.length ? this._uploader.files : null;
-    }
-    return null;
+    return this._uploader ? (this._uploader.files.length ? this._uploader.files : null) : null;
   }
 
   constructor(
@@ -56,11 +53,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-
-    this
-      ._route
-      .params
-      .pipe(
+    this._route.params.pipe(
         tap(() => (this.contact = null)),
         tap(() => (this.messages = null)),
         tap(() => this._store.dispatch(new CleanMessagesStoreAction())),
@@ -70,52 +63,36 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         switchMap(params => this._messagesApiService.resetUnreadMessages(params.id)),
         switchMap(() => this._websocketService.state$),
         tap(state => state && state.connected && this._websocketService.switchToContact(this._contactId))
-      )
-      .subscribe();
+      ).subscribe();
 
     this.user$.pipe(
-      takeWhile(() => this.alive),
+      takeWhile(() => this._alive),
       tap(user => (this.contact = user)),
     ).subscribe();
 
     this.messages$.pipe(
-      takeWhile(() => this.alive),
+      takeWhile(() => this._alive),
       tap(messages => (this.messages = messages))
     ).subscribe();
 
     this._websocketService.onMessage$
       .pipe(
-        takeWhile(() => this.alive),
-        tap(x => console.log('onMessage', x)),
+        takeWhile(() => this._alive),
         tap(event => {
-          if (
-            event &&
-            event.action === EWebSocketActions.MessageToContact &&
-            this.contact
-            && this.contact._id === event.data.authorId
-          ) {
-            const payload: IMessage = {
-              ...event.data,
-              author: this.contact
-            };
-            console.log('payload', payload);
+          if (event && event.action === EWebSocketActions.MessageToContact && this.contact && this.contact._id === event.data.authorId) {
+            const payload: IMessage = {...event.data, author: this.contact};
             this._store.dispatch(new PushMessageAction(payload));
           }
-          if (
-            event &&
-            event.action === EWebSocketActions.MessageUpdated
-          ) {
-            this._store.dispatch(new UpdateMessageAction(event.data));
-          }
+          event && event.action === EWebSocketActions.MessageUpdated && this._store.dispatch(new UpdateMessageAction(event.data));
         })
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this._alive = false;
   }
 
+  // Pagination on scroll event
   handleScroll(event: IScrollEvent): void {
     if (event.scrollTop === 0) {
       const recipientId = this._route.snapshot.params.id;
@@ -129,9 +106,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     if (this.contact && event && event.content) {
       event.recipientId = this._contactId;
       this.sending = true;
-      this
-        ._messagesApiService
-        .saveMessage({recipientId: this._contactId, content: event.content, attachedFiles: this.attachedFiles})
+      this._messagesApiService.saveMessage({recipientId: this._contactId, content: event.content, attachedFiles: this.attachedFiles})
         .pipe(
           take(1),
           map(message => {
@@ -142,8 +117,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
           tap(() => (this.showFileUploader = false)),
           tap(message => this._store.dispatch(new PushMessageAction(message))),
           tap(() => (this.sending = false))
-        )
-        .subscribe();
+        ).subscribe();
     }
   }
 }

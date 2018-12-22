@@ -1,6 +1,6 @@
 <button mat-icon-button cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="open()">
-  <mat-icon [matBadge]="notificatonsNumber$ | async"
-            [matBadgeHidden]="!(notificatonsNumber$ | async)"
+  <mat-icon [matBadge]="notificationsNumber"
+            [matBadgeHidden]="!(notificationsNumber)"
             matBadgePosition="above after"
             matBadgeColor="accent">
     notifications
