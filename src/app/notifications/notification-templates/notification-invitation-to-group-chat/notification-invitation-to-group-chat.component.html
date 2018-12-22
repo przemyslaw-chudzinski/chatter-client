@@ -7,7 +7,7 @@
   <div class="notification-invitation-to-group-chat-content c-margin-left-2">
     <div class="c-margin-bottom-1">{{ notification.message }}</div>
     <div>
-      <button mat-button>Accept</button>
+      <button mat-button (click)="handleAcceptation($event)">Accept</button>
     </div>
   </div>
 </div>

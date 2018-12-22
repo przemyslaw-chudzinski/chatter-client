@@ -90,15 +90,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._alive = false;
+    this._websocketService.detachContact();
   }
 
   // Pagination on scroll event
   handleScroll(event: IScrollEvent): void {
-    if (event.scrollTop === 0) {
-      const recipientId = this._route.snapshot.params.id;
-      this._store.dispatch(new LoadMoreMessagesAction(recipientId, this._skip, 15));
-      this._skip++;
-    }
+    // if (event.scrollTop === 0) {
+    //   const recipientId = this._route.snapshot.params.id;
+    //   this._store.dispatch(new LoadMoreMessagesAction(recipientId, this._skip, 15));
+    //   this._skip++;
+    // }
   }
 
   sendMessage(event: IMessage): void {

@@ -38,10 +38,7 @@
               color="primary"
               chatterLoaderBtn
               [loadingState]="userSettingsForm.isSending"
-              (click)="userSettingsForm.saveUser()">
-              Save
-            </button>
-
+              (click)="userSettingsForm.saveUser()">Save</button>
           </div>
 
           <chatter-file-upload *ngIf="userSettingsForm.user as user"

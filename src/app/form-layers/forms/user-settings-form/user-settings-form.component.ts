@@ -35,27 +35,21 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
   ngOnInit() {
     this.formGroup = this._userSettingsFormService.init();
 
-    this._usersService
-      .loadLoggedUser()
-      .pipe(
+    this._usersService.loadLoggedUser().pipe(
         take(1),
         tap(user => (this._user = user)),
         tap(user => user && this.formGroup.patchValue(user))
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   saveUser(): void {
     this._isSending = true;
-    this._usersService.update(this.formGroup.value)
-      .pipe(
+    this._usersService.update(this.formGroup.value).pipe(
         take(1),
         tap(user => (this._user = user)),
         tap(() => (this._isSending = false)),
         tap(() => this._notificationsService.open('Settings saved', 'Got it'))
-        // tap(() => this._notificationsService.openPrimary())
-      )
-      .subscribe();
+      ).subscribe();
   }
 
 }

@@ -8,9 +8,7 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class WebsocketService {
   private _ws: WebSocket = null;
-  private _onMessage$: BehaviorSubject<IWebSocketData> = new BehaviorSubject<
-    IWebSocketData
-  >(null);
+  private _onMessage$: BehaviorSubject<IWebSocketData> = new BehaviorSubject<IWebSocketData>(null);
   private _userId: string;
   private _state = new BehaviorSubject<IWebsocketState>(null);
 
@@ -23,9 +21,7 @@ export class WebsocketService {
   }
 
   constructor() {
-    if (!WebSocket) {
-      throw new Error('Your browser doesn\'t support WebSocket');
-    }
+    if (!WebSocket) throw new Error('Your browser doesn\'t support WebSocket');
   }
 
   connect(userId: string): void {
@@ -46,14 +42,18 @@ export class WebsocketService {
   }
 
   switchToContact(contactId: string): void {
-    this._ws &&
-    this._userId &&
-      contactId &&
-      this.send({
+    this._ws && this._userId && contactId && this.send({
         action: EWebSocketActions.SwitchedToContact,
-        contactId: contactId,
+        contactId,
         userId: this._userId
       });
+  }
+
+  detachContact(): void {
+    this._ws && this._userId && this.send({
+      action: EWebSocketActions.DetachContact,
+      userId: this._userId
+    });
   }
 
   emitUserLogged(userId): void {

@@ -10,9 +10,7 @@ import {IChannelPayload} from './models/channel-payload.model';
   providedIn: 'root'
 })
 export class ChannelsApiService {
-  constructor(
-    private _httpClient: ChatterHttpClient
-  ) { }
+  constructor(private _httpClient: ChatterHttpClient) { }
 
   saveChannel(payload: IChannelPayload): Observable<IResponseData<IChannel>> {
     return this._httpClient.post<IResponseData<IChannel>>(channelsEndpoints.channelEndpoint, payload);
@@ -20,5 +18,9 @@ export class ChannelsApiService {
 
   getChannels(): Observable<IResponseData<IChannel[]>> {
     return this._httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
+  }
+
+  acceptInvitation(notificationId): Observable<any> {
+    return this._httpClient.post<any>(channelsEndpoints.acceptInvitationEndpoint, {notificationId});
   }
 }

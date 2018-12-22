@@ -11,7 +11,6 @@ import {NotificationsService} from '../../../notifications/notifications.service
   styleUrls: ['./user-settings-page.component.scss']
 })
 export class UserSettingsPageComponent {
-
   loadingUserForm: boolean;
 
   constructor(
@@ -29,20 +28,17 @@ export class UserSettingsPageComponent {
         switchMap(user => this._usersApiService.update(user)),
         tap(() => this._notificationsService.open('Avatar has been changed', 'Got it')),
         tap(() => (this.loadingUserForm = false))
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   handleFileRemoved(): void {
     this.loadingUserForm = true;
-    this._auth.user$
-      .pipe(
+    this._auth.user$.pipe(
         take(1),
         tap(user => user && (user.avatar = null)),
         switchMap(user => this._usersApiService.update(user)),
         tap(() => this._notificationsService.open('Avatar has been changed', 'Got it')),
         tap(() => (this.loadingUserForm = false))
-      )
-      .subscribe();
+      ).subscribe();
   }
 }
