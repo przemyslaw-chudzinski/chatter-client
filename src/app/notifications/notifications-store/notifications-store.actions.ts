@@ -11,7 +11,9 @@ export enum notificationsActionTypes {
   LoadNotificationsNumberSuccess = '[Notifications] Load  Notifications Number Success',
   LoadNotificationsNumberError = '[Notifications] Load  Notifications Number Error',
 
-  ResetNotificationsNumber = '[Notifications] Reset Notifications Number'
+  ResetNotificationsNumber = '[Notifications] Reset Notifications Number',
+
+  ResetNotificationStore = '[Notifications] Reset Notifications Store'
 }
 
 /* Load Notifications Actions */
@@ -55,6 +57,12 @@ export class ResetNotificationsNumberAction implements Action {
 }
 /***********************************************************/
 
+/* Reset notifications store action */
+export class ResetNotificationStore implements Action {
+  readonly type = notificationsActionTypes.ResetNotificationStore;
+  constructor() {}
+}
+
 export type NotificationsActions =
   | LoadNotificationsActon
   | LoadNotificationsSuccessActon
@@ -62,4 +70,5 @@ export type NotificationsActions =
   | LoadNotificationsNumberAction
   | LoadNotificationsNumberSuccessAction
   | LoadNotificationsNumberErrorAction
-  | ResetNotificationsNumberAction;
+  | ResetNotificationsNumberAction
+  | ResetNotificationStore;

@@ -1,20 +1,26 @@
-<div class="notifications-list-dialog">
+<div class="chatter-dialog-title" mat-dialog-title>
+  <h3 class="chatter-dialog-title__heading">Notifications</h3>
+</div>
 
-  <div *ngIf="notifications$ | async as notifications; else loadingTemplate">
+<mat-dialog-content [style.overflow]="'auto'">
 
-    <h3>Notifications</h3>
+  <div class="notifications-list-dialog">
 
-    <div *ngIf="notifications && notifications.length; else noItems">
+    <div *ngIf="notifications$ | async as notifications; else loadingTemplate">
 
-      <chatter-notification-invitation-to-group-chat *ngFor="let notification of notifications"
-                                                     [notification]="notification">
-      </chatter-notification-invitation-to-group-chat>
+      <div class="notifications-list-dialog__list" *ngIf="notifications && notifications.length; else noItems">
+
+        <chatter-notification-invitation-to-group-chat *ngFor="let notification of notifications"
+                                                       [notification]="notification">
+        </chatter-notification-invitation-to-group-chat>
+
+      </div>
 
     </div>
 
   </div>
 
-</div>
+</mat-dialog-content>
 
 
 <ng-template #loadingTemplate>

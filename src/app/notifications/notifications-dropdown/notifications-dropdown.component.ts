@@ -8,6 +8,7 @@ import {NotificationsListComponent} from '../dialogs/notifications-list/notifica
 import {WebsocketService} from '../../websocket/websocket.service';
 import {takeWhile, tap} from 'rxjs/operators';
 import {EWebSocketActions} from '../../websocket/enums/websocket-actions.enum';
+import {ResetNotificationStore} from '../notifications-store/notifications-store.actions';
 
 @Component({
   selector: 'chatter-notifications-dropdown',
@@ -47,7 +48,9 @@ export class NotificationsDropdownComponent implements OnInit, OnDestroy {
   }
 
   open(): void {
-    this._dialog.open(NotificationsListComponent);
+    const dialogRef = this._dialog.open(NotificationsListComponent);
+    dialogRef.afterClosed()
+      .subscribe(() => this._store.dispatch(new ResetNotificationStore()));
   }
 
 }

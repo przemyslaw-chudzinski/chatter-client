@@ -23,11 +23,7 @@ export class UserNotLoggedGuard implements CanActivate {
     return this._auth.user$.pipe(
       take(1),
       map(user => !user),
-      tap(
-        logged =>
-          !logged &&
-          this._router.navigateByUrl(routerLinks.dashboardPage)
-      )
+      tap(logged => !logged && this._router.navigateByUrl(routerLinks.dashboardPage))
     );
   }
 }

@@ -11,6 +11,8 @@
 
   <chatter-file-preview *ngFor="let file of files"
                         (onRemove)="removeFile($event)"
+                        [canPreview]="false"
+                        [canDownload]="false"
                         [file]="file">
   </chatter-file-preview>
 

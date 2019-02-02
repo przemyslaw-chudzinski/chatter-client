@@ -2,6 +2,10 @@
 @import "animate";
 @import "helpers/helpers";
 
+// Components
+@import "components/dialog-title";
+
+
 body {
   height: 100vh;
   margin: 0;

@@ -9,7 +9,7 @@ import {takeWhile, tap} from 'rxjs/operators';
   templateUrl: './messages-list.component.html',
   styleUrls: ['./messages-list.component.scss']
 })
-export class MessagesListComponent implements AfterViewInit, OnDestroy, OnChanges {
+export class MessagesListComponent implements AfterViewInit, OnDestroy {
   @Input() loading: boolean;
   messages$: Subject<IMessage[]> = new Subject<IMessage[]>();
   private _alive = true;
@@ -21,9 +21,9 @@ export class MessagesListComponent implements AfterViewInit, OnDestroy, OnChange
   @ViewChild(ScrollToBottomDirective, { read: ScrollToBottomDirective })
   chatterScrollToBottom: ScrollToBottomDirective;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log(changes)
+  // }
 
   ngAfterViewInit() {
     this.chatterScrollToBottom && this.messages$

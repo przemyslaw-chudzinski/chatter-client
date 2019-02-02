@@ -21,7 +21,12 @@ export function notificationsReducer (
         ...state,
         notificationsNumber: null
       };
+    case notificationsActionTypes.ResetNotificationStore:
+      return {
+        ...state,
+        notifications: null
+      };
     default:
       return state;
   }
-};
+}

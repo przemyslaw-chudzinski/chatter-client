@@ -13,6 +13,7 @@ export class FileUploadComponent {
   @Input() set files(files: IFile[]) {
     this._files = files;
   }
+  // TODO: Dodać dodatkowe informacje takie jak canRemove, canDownload etc...
   @Output() filesUploaded = new EventEmitter<IFile[]>();
   @Output() fileRemoved = new EventEmitter<IFile>();
   private _files: IFile[] = [];

@@ -42,9 +42,7 @@ export class AuthService {
         map(response => response.user),
         tap(user => this.user$.next(user)),
         tap(user => user && this._websocketService.connect(user._id)),
-        tap(() =>
-          this._router.navigateByUrl(routerLinks.dashboardPage)
-        )
+        tap(() => this._router.navigateByUrl(routerLinks.dashboardPage))
       );
   }
 
@@ -60,6 +58,7 @@ export class AuthService {
       .subscribe();
   }
 
+  //TODO: Coś z tym zrboic
   resetPassword(): Observable<any> {
     return this._httpClient.post('', null);
   }
