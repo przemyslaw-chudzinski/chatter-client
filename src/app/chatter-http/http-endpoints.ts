@@ -35,7 +35,8 @@ export const channelsEndpoints = {
 
 export const notificationsEndpoints = {
   notificationsEndpoint: `${apiUrl}/notifications`,
-  countNotificationsEndpoint: `${apiUrl}/notifications/count`
+  countNotificationsEndpoint: `${apiUrl}/notifications/count`,
+  markAsReadNotificationsEndpoint: `${apiUrl}/notifications/mark-as-read`
 };
 
 export const filesEndpoints = {

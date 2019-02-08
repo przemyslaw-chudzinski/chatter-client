@@ -5,5 +5,6 @@ export const routerLinks = {
   messagesPage: 'messages',
   accountPages: {
     userAccount: 'account'
-  }
+  },
+  channelsPage: 'channel'
 };

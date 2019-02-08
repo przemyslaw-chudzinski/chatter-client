@@ -9,4 +9,9 @@
   &:hover {
     border-color: rgba(#fff, .5);
   }
+
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
 }

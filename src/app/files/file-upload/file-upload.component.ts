@@ -32,8 +32,7 @@ export class FileUploadComponent {
         take(1),
         tap(files => this.filesUploaded.emit(files)),
         tap(files => this.multiple ? this._pushFiles(files) : this._replaceFiles(files))
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   clear(): void {

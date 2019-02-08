@@ -22,4 +22,8 @@ export class NotificationsApiService {
   getNotificationsNumber(): Observable<INotificationNumber> {
     return this._httpClient.get<INotificationNumber>(notificationsEndpoints.countNotificationsEndpoint);
   }
+
+  markNotificationsAsRead(): Observable<any> {
+    return this._httpClient.post<any>(notificationsEndpoints.markAsReadNotificationsEndpoint, null);
+  }
 }

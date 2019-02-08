@@ -17,6 +17,7 @@
   <!-- Chatter chat editor -->
   <chatter-message-editor *ngIf="messages"
                           [loading]="sending"
+                          [disabled]="sending"
                           (messageReady)="sendMessage($event)">
   </chatter-message-editor>
   <!-- ################################################### -->

@@ -47,6 +47,11 @@ const routes: Routes = [
     path: routerLinks.accountPages.userAccount,
     loadChildren: 'src/app/pages/account-pages/account-pages.module#AccountPagesModule',
     canActivate: [AuthGuard]
+  },
+  {
+    path: routerLinks.channelsPage,
+    loadChildren: 'src/app/pages/channel-pages/channel-pages.module#ChannelPagesModule',
+    canActivate: [AuthGuard]
   }
 ];
 

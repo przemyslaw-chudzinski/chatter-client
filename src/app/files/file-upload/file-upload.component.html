@@ -1,4 +1,5 @@
 <div class="file-upload"
+     [class.center]="!files || !files.length"
      chatterOpenFileBox
      [multiple]="multiple"
      (filesLoaded)="handleFilesLoaded($event)">

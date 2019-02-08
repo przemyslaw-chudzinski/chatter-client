@@ -1,6 +1,6 @@
 <div chatterMessageEditor
      class="chatter-message-editor"
-     contenteditable="true"
+     [disabled]="disabled"
      (keyup)="keyUpHandler($event)"
      (keydown.enter)="keyDownEnterHandler()"
      [innerHTML]="value">

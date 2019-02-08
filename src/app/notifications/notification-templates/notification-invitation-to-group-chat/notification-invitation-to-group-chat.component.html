@@ -6,10 +6,10 @@
   </div>
   <div class="notification-invitation-to-group-chat-content c-margin-left-2">
     <div class="c-margin-bottom-1">{{ notification.message }}</div>
-    <div>
+    <div *ngIf="notification.extra && notification.extra.confirmable">
       <button *ngIf="!processingRequest; else processingTpl" mat-button
-              (click)="handleAcceptation($event)"
-              [disabled]="notification.extra.confirmed">
+               (click)="handleAcceptation($event)"
+               [disabled]="notification.extra.confirmed">
         {{ notification.extra.confirmed ? 'Accepted' : 'Accept' }}
       </button>
     </div>

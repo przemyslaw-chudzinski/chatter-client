@@ -1,6 +1,8 @@
 @import "../../../scss/themes/variables";
 .chatter-channel {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
   &:hover,
   &.selected {
     background-color: $blue-gray-700;

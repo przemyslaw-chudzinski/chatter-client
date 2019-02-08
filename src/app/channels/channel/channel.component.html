@@ -1,8 +1,18 @@
 <div class="chatter-channel c-padding-bottom-1 c-padding-top-1 c-padding-left-1 c-padding-right-1">
   <div>
-    <strong>{{ channel.name }}</strong>
+    <div>
+      <strong>{{ channel.name }}</strong>
+    </div>
+    <div>
+      Members: {{ (channel.members | onlyConfirmed).length }}
+    </div>
   </div>
-  <div>
-    Members: {{ (channel.members | onlyConfirmed).length }}
+  <div *chatterIfUserEquals="channel.authorId">
+    <button mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon" (click)="showEditForm(channel, $event)">edit</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon" (click)="removeGroup(channel, $event)">clear</mat-icon>
+    </button>
   </div>
 </div>

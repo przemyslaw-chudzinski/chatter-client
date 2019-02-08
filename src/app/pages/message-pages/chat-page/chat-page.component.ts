@@ -10,7 +10,7 @@ import {select, Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {
   CleanMessagesStoreAction,
-  LoadMessagesAction, LoadMoreMessagesAction,
+  LoadMessagesAction,
   PushMessageAction,
   UpdateMessageAction
 } from '../../../messages/messages-store/messages.actions';
