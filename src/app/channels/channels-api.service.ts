@@ -23,4 +23,8 @@ export class ChannelsApiService {
   acceptInvitation(notificationId): Observable<any> {
     return this._httpClient.post<any>(channelsEndpoints.acceptInvitationEndpoint, {notificationId});
   }
+
+  getChannel(payload: string): Observable<IResponseData<IChannel>> {
+    return this._httpClient.get<IResponseData<IChannel>>(channelsEndpoints.singleChannelEndpoint(payload));
+  }
 }

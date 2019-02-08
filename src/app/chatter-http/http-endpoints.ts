@@ -30,6 +30,7 @@ export const validatorEndpoints = {
 
 export const channelsEndpoints = {
   channelEndpoint: `${apiUrl}/channels`,
+  singleChannelEndpoint: (channelId) => `${apiUrl}/channels/${channelId}`,
   acceptInvitationEndpoint: `${apiUrl}/channels/accept-invitation`
 };
 

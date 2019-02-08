@@ -35,7 +35,8 @@ export class UserSettingsPageComponent {
     this.loadingUserForm = true;
     this._auth.user$.pipe(
         take(1),
-        tap(user => user && (user.avatar = null)),
+        tap(user => user && (user.avatar = 'remove')),
+        tap(user => console.log(user)),
         switchMap(user => this._usersApiService.update(user)),
         tap(() => this._notificationsService.open('Avatar has been changed', 'Got it')),
         tap(() => (this.loadingUserForm = false))

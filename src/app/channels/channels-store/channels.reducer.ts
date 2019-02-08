@@ -11,6 +11,11 @@ export function channelsReducer (
         ...state,
         channels: action.payload
       };
+    case channelsActionTypes.LoadChannelSuccess:
+      return {
+        ...state,
+        channel: action.payload
+      };
 
     default:
       return state;

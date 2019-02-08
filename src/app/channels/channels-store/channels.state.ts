@@ -3,4 +3,5 @@ import {IChannel} from '../models/channel.model';
 
 export class ChannelsState extends ChatterState {
   channels: IChannel[] = null;
+  channel: IChannel = null;
 }
