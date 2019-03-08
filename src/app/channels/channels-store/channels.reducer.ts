@@ -16,6 +16,8 @@ export function channelsReducer (
         ...state,
         channel: action.payload
       };
+    case channelsActionTypes.ClearChannelsStore:
+      return new ChannelsState();
 
     default:
       return state;

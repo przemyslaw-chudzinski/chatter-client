@@ -16,22 +16,20 @@ export class UsersApiService {
     return this._httpClient.get<IResponseData<IUser[]>>(usersEndpoints.usersEndpoint);
   }
 
-  loadUser(userId = ''): Observable<IUser> {
-    if (userId === '') {
-      throw new Error('userId is required');
-    }
-    return this._httpClient.get<IUser>(usersEndpoints.userEndpoint(userId));
+  loadUser(userId = ''): Observable<IResponseData<IUser>> {
+    if (userId === '') throw new Error('userId is required');
+    return this._httpClient.get<IResponseData<IUser>>(usersEndpoints.userEndpoint(userId));
   }
 
-  update(user: IUser): Observable<IUser> {
-    return this._httpClient.post<IUser>(usersEndpoints.updateProfileEndpoint, user);
+  update(user: IUser): Observable<IResponseData<IUser>> {
+    return this._httpClient.post<IResponseData<IUser>>(usersEndpoints.updateProfileEndpoint, user);
   }
 
-  loadLoggedUser(): Observable<IUser> {
-    return this._httpClient.get(usersEndpoints.loggedUserEndpoint);
+  loadLoggedUser(): Observable<IResponseData<IUser>> {
+    return this._httpClient.get<IResponseData<IUser>>(usersEndpoints.loggedUserEndpoint);
   }
 
-  loadAvatar(): Observable<IFile> {
-    return this._httpClient.get(usersEndpoints.userAvatarEndpoint);
+  loadAvatar(): Observable<IResponseData<IFile>> {
+    return this._httpClient.get<IResponseData<IFile>>(usersEndpoints.userAvatarEndpoint);
   }
 }

@@ -28,14 +28,14 @@ export class UsersEffects {
     ofType(usersActionTypes.LoadUser),
     map((action: any) => action.payload as string),
     switchMap(userId => this.usersService.loadUser(userId)),
-    map(user => new LoadUserSuccessAction(user))
+    map(response => new LoadUserSuccessAction(response.data))
   );
 
   @Effect()
   loadAvatar$: Observable<Action> = this.actions$.pipe(
     ofType(usersActionTypes.LoadUserAvatar),
     switchMap(() => this.usersService.loadAvatar()),
-    map(avatar => new LoadUserAvatarSuccessAction(avatar)),
+    map(({data}) => new LoadUserAvatarSuccessAction(data)),
     catchError(err => of(new LoadUserAvatarErrorAction(err)))
   );
 

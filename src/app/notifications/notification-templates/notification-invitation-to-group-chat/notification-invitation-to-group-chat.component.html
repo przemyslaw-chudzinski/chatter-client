@@ -6,20 +6,9 @@
   </div>
   <div class="notification-invitation-to-group-chat-content c-margin-left-2">
     <div class="c-margin-bottom-1">{{ notification.message }}</div>
-    <div *ngIf="notification.extra && notification.extra.confirmable">
-      <button *ngIf="!processingRequest; else processingTpl" mat-button
-               (click)="handleAcceptation($event)"
-               [disabled]="notification.extra.confirmed">
-        {{ notification.extra.confirmed ? 'Accepted' : 'Accept' }}
-      </button>
-    </div>
   </div>
 </div>
 
 <ng-template #defaultImage>
   <img src="http://placehold.it/70x70" alt="">
-</ng-template>
-
-<ng-template #processingTpl>
-  <chatter-loader message="Processing data..."></chatter-loader>
 </ng-template>

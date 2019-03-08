@@ -13,18 +13,22 @@ export class ChannelsApiService {
   constructor(private _httpClient: ChatterHttpClient) { }
 
   saveChannel(payload: IChannelPayload): Observable<IResponseData<IChannel>> {
-    return this._httpClient.post<IResponseData<IChannel>>(channelsEndpoints.channelEndpoint, payload);
+    return this._httpClient.post<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.channelEndpoint, payload);
   }
 
   getChannels(): Observable<IResponseData<IChannel[]>> {
     return this._httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
   }
 
-  acceptInvitation(notificationId): Observable<any> {
-    return this._httpClient.post<any>(channelsEndpoints.acceptInvitationEndpoint, {notificationId});
+  acceptInvitation(channelId: string): Observable<any> {
+    return this._httpClient.post<any, {[key: string]: string}>(channelsEndpoints.acceptInvitationEndpoint, {channelId});
   }
 
   getChannel(payload: string): Observable<IResponseData<IChannel>> {
     return this._httpClient.get<IResponseData<IChannel>>(channelsEndpoints.singleChannelEndpoint(payload));
+  }
+
+  deleteChannel(payload: string): Observable<IResponseData<IChannel>> {
+    return this._httpClient.delete<IResponseData<IChannel>>(channelsEndpoints.deleteChannelEndpoint(payload));
   }
 }

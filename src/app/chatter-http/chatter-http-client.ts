@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ChatterHttpClient {
-  private _defaultOptions = {
-  };
+  private _defaultOptions = {};
 
   constructor(private httpClient: HttpClient) {}
 
@@ -13,16 +12,20 @@ export class ChatterHttpClient {
     return this.httpClient.get<T>(url, options);
   }
 
-  post<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
+  post<T, S = any>(url: string, body: S, options = this._defaultOptions): Observable<T> {
     return this.httpClient.post<T>(url, body, options);
   }
 
-  put<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
+  put<T, S = any>(url: string, body: S, options = this._defaultOptions): Observable<T> {
     return this.httpClient.put<T>(url, body, options);
   }
 
   patch<T>(url: string, body: any, options = this._defaultOptions): Observable<T> {
     return this.httpClient.patch<T>(url, body, options);
+  }
+
+  delete<T>(url: string, options = this._defaultOptions): Observable<T> {
+    return this.httpClient.delete<T>(url, options);
   }
 }
 
