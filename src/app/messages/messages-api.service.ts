@@ -23,8 +23,8 @@ export class MessagesApiService {
     return this._httpClient.patch<IResponseData<IMessage>>(messagesEndpoints.updateMessageEndpoint, body);
   }
 
-  saveMessage(body: IMessage): Observable<IMessage> {
-    return this._httpClient.post<IMessage>(messagesEndpoints.saveMessageEndpoint, body);
+  saveMessage(body: IMessage): Observable<IResponseData<IMessage>> {
+    return this._httpClient.post<IResponseData<IMessage>>(messagesEndpoints.saveMessageEndpoint, body);
   }
 
   getUnreadMessages(): Observable<IResponseData<IUnreadMessage[]>> {

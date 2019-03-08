@@ -37,8 +37,8 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
 
     this._usersService.loadLoggedUser().pipe(
         take(1),
-        tap(user => (this._user = user)),
-        tap(user => user && this.formGroup.patchValue(user))
+        tap(({data}) => (this._user = data)),
+        tap(({data}) => data && this.formGroup.patchValue(data))
       ).subscribe();
   }
 
@@ -46,9 +46,9 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
     this._isSending = true;
     this._usersService.update(this.formGroup.value).pipe(
         take(1),
-        tap(user => (this._user = user)),
-        tap(() => (this._isSending = false)),
-        tap(() => this._notificationsService.open('Settings saved', 'Got it'))
+        tap(({message}) => this._notificationsService.open(message || 'Settings saved', 'Got it')),
+        tap(({data}) => (this._user = data)),
+        tap(() => (this._isSending = false))
       ).subscribe();
   }
 

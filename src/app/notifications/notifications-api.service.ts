@@ -19,8 +19,8 @@ export class NotificationsApiService {
     return this._httpClient.get<IResponseData<INotification[]>>(notificationsEndpoints.notificationsEndpoint);
   }
 
-  getNotificationsNumber(): Observable<INotificationNumber> {
-    return this._httpClient.get<INotificationNumber>(notificationsEndpoints.countNotificationsEndpoint);
+  getNotificationsNumber(): Observable<IResponseData<number>> {
+    return this._httpClient.get<IResponseData<number>>(notificationsEndpoints.countNotificationsEndpoint);
   }
 
   markNotificationsAsRead(): Observable<any> {

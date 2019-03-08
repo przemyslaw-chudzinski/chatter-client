@@ -20,7 +20,11 @@ export class ChannelComponent {
 
   removeGroup(channel: IChannel, event: MouseEvent): void {
     event.stopPropagation();
-    const confirmed = confirm('Do you want to remove this group?');
+    // const confirmed = confirm('Do you want to remove this group?');
+    this._channelsApiService.deleteChannel(channel._id)
+      .subscribe(response => {
+        // console.log
+      });
   }
 
 }

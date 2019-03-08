@@ -103,13 +103,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(event: IMessage): void {
-    console.log('sendMessage', event);
+    // console.log('sendMessage', event);
     if (this.contact && event && event.content) {
       event.recipientId = this._contactId;
       this.sending = true;
       this._messagesApiService.saveMessage({recipientId: this._contactId, content: event.content, attachedFiles: this.attachedFiles})
         .pipe(
           take(1),
+          map(response => response.data as IMessage),
           map(message => {
             message.author = event.author;
             return message;

@@ -23,7 +23,7 @@ export class NotificationsEffects {
     ofType(notificationsActionTypes.LoadNotificationsNumber),
     switchMap(() => this._notificationsApiService.getNotificationsNumber()
       .pipe(
-        map(data => data.unread)
+        map(response => response.data)
       )),
     map(data => new LoadNotificationsNumberSuccessAction(data))
   );
