@@ -10,6 +10,8 @@ export enum channelsActionTypes {
   LoadChannelSuccess = '[Channels] Load Single Channel Success',
   LoadChannelError = '[Channels] Load Single Channel Error',
 
+  ClearChannelsStore = '[Channels] Clear Channels Store',
+
 }
 
 /* Load Channels Actions */
@@ -46,10 +48,17 @@ export class LoadChannelErrorAction implements Action {
 }
 /***********************************************************/
 
+/* Clear channels store action */
+export class ClearChannelsStore implements Action {
+  readonly type = channelsActionTypes.ClearChannelsStore;
+}
+/***********************************************************/
+
 export type ChannelsActions =
   | LoadChannelsAction
   | LoadChannelsSuccessAction
   | LoadChannelsErrorAction
   | LoadChannelAction
   | LoadChannelSuccessAction
-  | LoadChannelErrorAction;
+  | LoadChannelErrorAction
+  | ClearChannelsStore;

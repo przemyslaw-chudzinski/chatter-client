@@ -20,8 +20,8 @@ export class ChannelsApiService {
     return this._httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
   }
 
-  acceptInvitation(notificationId: string): Observable<any> {
-    return this._httpClient.post<any, {[key: string]: string}>(channelsEndpoints.acceptInvitationEndpoint, {notificationId});
+  acceptInvitation(channelId: string): Observable<any> {
+    return this._httpClient.post<any, {[key: string]: string}>(channelsEndpoints.acceptInvitationEndpoint, {channelId});
   }
 
   getChannel(payload: string): Observable<IResponseData<IChannel>> {

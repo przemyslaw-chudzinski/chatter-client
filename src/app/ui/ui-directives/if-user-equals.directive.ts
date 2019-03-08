@@ -12,6 +12,8 @@ export class IfUserEqualsDirective implements OnInit {
 
   @Input('chatterIfUserEqualsCompareWith') compareWith: string = '_id';
 
+  @Input('chatterIfUserEqualsElse') otherTemplate: TemplateRef<any> = null;
+
   constructor(
     private _templateRef: TemplateRef<any>,
     private _auth: AuthService,
@@ -27,7 +29,10 @@ export class IfUserEqualsDirective implements OnInit {
   }
 
   private _compare(user: IUser) {
-    this.valueToCompare === user[this.compareWith].toString() && this._containerRef.createEmbeddedView(this._templateRef);
+    this.valueToCompare === user[this.compareWith].toString() ? this._containerRef.createEmbeddedView(this._templateRef) : this.renderElse();
   }
 
+  private renderElse() {
+    this.otherTemplate && this.otherTemplate instanceof TemplateRef &&  this._containerRef.createEmbeddedView(this.otherTemplate);
+  }
 }

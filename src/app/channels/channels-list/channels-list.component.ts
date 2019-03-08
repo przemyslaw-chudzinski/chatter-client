@@ -11,10 +11,13 @@ import {CreateGroupConversationDialogComponent} from '../dialogs/create-group-co
 export class ChannelsListComponent {
   @Input() channels: IChannel[] = null;
 
-  constructor(private _dialog: MatDialog) { }
+  constructor(
+    private _dialog: MatDialog
+  ) { }
 
   createGroupConversation(): void {
     this._dialog.open(CreateGroupConversationDialogComponent, { width: '60rem' });
   }
+
 
 }
