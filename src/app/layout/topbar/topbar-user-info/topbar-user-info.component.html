@@ -1,3 +1,9 @@
-<div class="chatter-topbar-user-info">
-  <chatter-user-avatar [user]="user"></chatter-user-avatar>
+<div class="chatter-topbar-user-info" [chatterDropdownTriggerFor]="userMenu">
+  <chatter-user-avatar [user]="user"></chatter-user-avatar> &nbsp;
+  {{ user.firstName }}
 </div>
+
+
+<ng-template #userMenu>
+  User menu work!!!!
+</ng-template>

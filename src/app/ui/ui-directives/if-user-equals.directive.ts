@@ -9,9 +9,7 @@ import {IUser} from '../../auth/models/user.model';
 export class IfUserEqualsDirective implements OnInit {
 
   @Input('chatterIfUserEquals') valueToCompare: string;
-
   @Input('chatterIfUserEqualsCompareWith') compareWith: string = '_id';
-
   @Input('chatterIfUserEqualsElse') otherTemplate: TemplateRef<any> = null;
 
   constructor(
@@ -24,11 +22,11 @@ export class IfUserEqualsDirective implements OnInit {
     this._auth.user$
       .pipe(
         take(1),
-        tap(user => this._compare(user))
+        tap(user => this.compare(user))
       ).subscribe();
   }
 
-  private _compare(user: IUser) {
+  private compare(user: IUser) {
     this.valueToCompare === user[this.compareWith].toString() ? this._containerRef.createEmbeddedView(this._templateRef) : this.renderElse();
   }
 

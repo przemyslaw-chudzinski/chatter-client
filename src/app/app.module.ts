@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: routerLinks.dashboardPage,
     loadChildren:
-      'src/app/pages/dashboard-pages/dashboard-pages.module#DashboardPagesModule',
+        'src/app/pages/dashboard-pages/dashboard-pages.module#DashboardPagesModule',
     canActivate: [AuthGuard]
   },
   {

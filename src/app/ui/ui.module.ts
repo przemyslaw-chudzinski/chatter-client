@@ -5,8 +5,6 @@ import {UserAvatarModule} from './user-avatar/user-avatar.module';
 import {UiDirectivesModule} from './ui-directives/ui-directives.module';
 
 @NgModule({
-  imports: [],
-  declarations: [],
   exports: [
     CardModule,
     SpinnerModule,
