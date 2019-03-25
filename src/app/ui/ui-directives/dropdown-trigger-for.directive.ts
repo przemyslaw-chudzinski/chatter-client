@@ -9,7 +9,7 @@ import {take, tap} from 'rxjs/operators';
 export class DropdownTriggerForDirective {
 
   @Input() context: any = null;
-  @Input('chatterDropdownTriggerFor') tplRef: any;
+  @Input('chatterDropdownTriggerFor') tplRef: TemplateRef<IDropdownTemplateContext>;
 
   @Input() originX: HorizontalConnectionPos = 'start';
   @Input() originY: VerticalConnectionPos = 'bottom';

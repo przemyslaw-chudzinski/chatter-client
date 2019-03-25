@@ -7,3 +7,24 @@
     margin-left: .5rem;
   }
 }
+
+.user-menu {
+  width: 25rem;
+
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__subheading {
+    font-size: 0.7rem;
+  }
+
+  &__headings {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+}

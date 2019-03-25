@@ -1,9 +1,22 @@
 <div class="chatter-topbar-user-info" [chatterDropdownTriggerFor]="userMenu">
-  <chatter-user-avatar [user]="user"></chatter-user-avatar> &nbsp;
-  {{ user.firstName }}
+  <chatter-user-avatar [user]="user"></chatter-user-avatar>
 </div>
 
 
-<ng-template #userMenu>
-  User menu work!!!!
+<ng-template #userMenu let-destroy="destroy">
+  <chatter-card class="user-menu">
+    <div class="c-d-flex">
+      <div class="user-menu__avatar c-margin-right-1">
+        <chatter-user-avatar [user]="user"></chatter-user-avatar>
+      </div>
+      <div class="user-menu__headings">
+        <div class="user-menu__heading">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="user-menu__subheading">{{ user.email }}</div>
+      </div>
+    </div>
+    <div cardActions class="user-menu__actions">
+      <button mat-button (click)="redirectToSettings(destroy, $event)">Account settings</button>
+      <button mat-button (click)="logout(destroy, $event)">Logout</button>
+    </div>
+  </chatter-card>
 </ng-template>
