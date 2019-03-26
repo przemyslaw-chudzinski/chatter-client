@@ -13,6 +13,7 @@ import {ContactListModule} from '../contact-list/contact-list.module';
 import { TopbarUserInfoComponent } from './topbar/topbar-user-info/topbar-user-info.component';
 import {NotificationsModule} from '../notifications/notifications.module';
 import {UiModule} from '../ui/ui.module';
+import {MatDividerModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import {UiModule} from '../ui/ui.module';
     MatSidenavModule,
     MatButtonModule,
     MatMenuModule,
+    MatDividerModule,
     RouterModule,
     ContactListModule,
     UiModule,

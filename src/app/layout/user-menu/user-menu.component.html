@@ -1,17 +1,21 @@
-<chatter-topbar-user-info [matMenuTriggerFor]="menu"
-                          [user]="user">
-</chatter-topbar-user-info>
+<!--<chatter-topbar-user-info [matMenuTriggerFor]="menu"-->
+<!--[user]="user">-->
+<!--</chatter-topbar-user-info>-->
 
-<mat-menu #menu="matMenu">
+<!--<mat-menu #menu="matMenu">-->
 
-  <button mat-menu-item
-          [routerLink]="['/', links.accountPages.userAccount]">
-    Account Settings
-  </button>
+<!--<button mat-menu-item-->
+<!--[routerLink]="['/', links.accountPages.userAccount]">-->
+<!--Account Settings-->
+<!--</button>-->
 
-  <button mat-menu-item
-          (click)="auth.logOut()">
-    Log out
-  </button>
+<!--<button mat-menu-item-->
+<!--(click)="auth.logOut()">-->
+<!--Log out-->
+<!--</button>-->
 
-</mat-menu>
+<!--</mat-menu>-->
+
+
+<chatter-topbar-user-info [user]="user"></chatter-topbar-user-info>
+
