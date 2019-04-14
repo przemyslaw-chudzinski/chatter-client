@@ -6,7 +6,7 @@ import {IChannel} from '../models/channel.model';
 import {Store} from '@ngrx/store';
 import {ChatterState} from '../../chatter-store/chatter-store.state';
 import {map, take} from 'rxjs/operators';
-import {LoadChannelAction, LoadChannelSuccessAction} from '../channels-store/channels.actions';
+import {LoadChannelSuccessAction} from '../channels-store/channels.actions';
 import {tap} from 'rxjs/internal/operators/tap';
 import {ChannelsApiService} from '../channels-api.service';
 

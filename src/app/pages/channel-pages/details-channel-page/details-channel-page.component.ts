@@ -4,7 +4,6 @@ import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {Observable} from 'rxjs';
 import {IChannel} from '../../../channels/models/channel.model';
 import {selectChannel} from '../../../channels/channels-store/channels.selectors';
-import {ChannelsApiService} from '../../../channels/channels-api.service';
 import {takeWhile, tap} from 'rxjs/operators';
 
 @Component({
@@ -15,12 +14,12 @@ import {takeWhile, tap} from 'rxjs/operators';
 export class DetailsChannelPageComponent implements OnInit, OnDestroy {
 
   channel$: Observable<IChannel> = this.store.pipe(select(selectChannel));
-  private alive = true;
   channel: IChannel = null;
 
+  private alive = true;
+
   constructor(
-    private store: Store<ChatterState>,
-    private channelsApiService: ChannelsApiService
+    private store: Store<ChatterState>
   ) { }
 
   ngOnInit(): void {
@@ -32,10 +31,6 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.alive = false;
-  }
-
-  handleSave(name: string): void {
-    this.channelsApiService.updateChannel(this.channel._id, {name})
   }
 
 }
