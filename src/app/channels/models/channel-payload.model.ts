@@ -1,4 +1,4 @@
 export interface IChannelPayload {
-  name: string;
-  memberIds: string[];
+  name?: string;
+  memberIds?: string[];
 }

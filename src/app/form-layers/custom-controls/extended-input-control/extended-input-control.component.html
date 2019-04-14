@@ -1,18 +1,22 @@
-<div  *ngIf="editState else editStateTpl">
-  <input matInput
-         [type]="type"
-         [value]="value"
-         [disabled]="disabled"
-         (keydown)="handleValueChange($event)">
-  <button *ngIf="editState" (click)="handleSave($event)">Save</button>
-  <button *ngIf="editState" (click)="close($event)">Cancel</button>
+<div class="extended-input-wrapper" *ngIf="editState else editStateTpl">
+  <mat-form-field>
+    <input matInput
+           [type]="type"
+           [value]="value"
+           [disabled]="disabled"
+           (keyup)="handleValueChange($event)">
+  </mat-form-field>
+  <div>
+    <button mat-button *ngIf="editState" (click)="handleSave($event)">Save</button>
+    <button mat-button *ngIf="editState" (click)="close($event)">Cancel</button>
+  </div>
 </div>
 
 <ng-template #editStateTpl>
-  <div>
+  <div class="extended-input-text">
     <div>{{ value }}</div>
     <div>
-      <button *ngIf="!editState" (click)="open($event)">Edit</button>
+      <button mat-button *ngIf="!editState" (click)="open($event)">Edit</button>
     </div>
   </div>
 </ng-template>

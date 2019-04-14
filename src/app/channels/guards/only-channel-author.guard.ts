@@ -3,29 +3,31 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {IChannel} from '../models/channel.model';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {ChatterState} from '../../chatter-store/chatter-store.state';
-import {selectChannel} from '../channels-store/channels.selectors';
-import {map} from 'rxjs/operators';
-import {LoadChannelAction} from '../channels-store/channels.actions';
+import {map, take} from 'rxjs/operators';
+import {LoadChannelAction, LoadChannelSuccessAction} from '../channels-store/channels.actions';
+import {tap} from 'rxjs/internal/operators/tap';
+import {ChannelsApiService} from '../channels-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OnlyChannelAuthorGuard implements CanActivate {
 
-  channel$: Observable<IChannel> = this.store.pipe(select(selectChannel));
-
   constructor(
     private auth: AuthService,
-    private store: Store<ChatterState>
+    private store: Store<ChatterState>,
+    private channelsApiService: ChannelsApiService
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    next.params.id && this.store.dispatch(new LoadChannelAction(next.params.id));
-    return this.channel$.pipe(
+    return this.channelsApiService.getChannel(next.params.id).pipe(
+      take(1),
+      map(response => response.data),
+      tap(channel => this.store.dispatch(new LoadChannelSuccessAction(channel))),
       map(channel => this.isCurrentUserAuthor(channel))
     );
   }

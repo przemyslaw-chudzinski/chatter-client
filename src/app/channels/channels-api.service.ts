@@ -10,25 +10,29 @@ import {IChannelPayload} from './models/channel-payload.model';
   providedIn: 'root'
 })
 export class ChannelsApiService {
-  constructor(private _httpClient: ChatterHttpClient) { }
+  constructor(private httpClient: ChatterHttpClient) { }
 
   saveChannel(payload: IChannelPayload): Observable<IResponseData<IChannel>> {
-    return this._httpClient.post<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.channelEndpoint, payload);
+    return this.httpClient.post<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.channelEndpoint, payload);
   }
 
   getChannels(): Observable<IResponseData<IChannel[]>> {
-    return this._httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
+    return this.httpClient.get<IResponseData<IChannel[]>>(channelsEndpoints.channelEndpoint);
   }
 
   acceptInvitation(channelId: string): Observable<any> {
-    return this._httpClient.post<any, {[key: string]: string}>(channelsEndpoints.acceptInvitationEndpoint, {channelId});
+    return this.httpClient.post<any, {[key: string]: string}>(channelsEndpoints.acceptInvitationEndpoint, {channelId});
   }
 
-  getChannel(payload: string): Observable<IResponseData<IChannel>> {
-    return this._httpClient.get<IResponseData<IChannel>>(channelsEndpoints.singleChannelEndpoint(payload));
+  getChannel(channelId: string): Observable<IResponseData<IChannel>> {
+    return this.httpClient.get<IResponseData<IChannel>>(channelsEndpoints.singleChannelEndpoint(channelId));
   }
 
-  deleteChannel(payload: string): Observable<IResponseData<IChannel>> {
-    return this._httpClient.delete<IResponseData<IChannel>>(channelsEndpoints.deleteChannelEndpoint(payload));
+  deleteChannel(channelId: string): Observable<IResponseData<IChannel>> {
+    return this.httpClient.delete<IResponseData<IChannel>>(channelsEndpoints.deleteChannelEndpoint(channelId));
+  }
+
+  updateChannel(channelId: string, payload: IChannelPayload): Observable<IResponseData<IChannel>> {
+    return this.httpClient.put<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.updateChannelEndpoint(channelId), payload);
   }
 }

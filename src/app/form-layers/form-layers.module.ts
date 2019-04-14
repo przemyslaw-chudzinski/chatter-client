@@ -15,10 +15,12 @@ import {MatchFieldsDirective} from './validators/match-fields.directive';
 import {ValidatorsService} from './validators/validators.service';
 import { ValidationFeedbackComponent } from './validation-feedback/validation-feedback.component';
 import { CreateGroupConversationFormComponent } from './forms/create-group-conversation-form/create-group-conversation-form.component';
-import {MatAutocompleteModule, MatChipsModule, MatIconModule} from '@angular/material';
+import {MatAutocompleteModule, MatButtonModule, MatChipsModule, MatIconModule} from '@angular/material';
 import { AutocompleteControlComponent } from './custom-controls/autocomplete-control/autocomplete-control.component';
 import { AutocompleteControlDirective } from './custom-controls/autocomplete-control/autocomplete-control.directive';
 import {UiModule} from '../ui/ui.module';
+import { ExtendedInputControlComponent } from './custom-controls/extended-input-control/extended-input-control.component';
+import { EditChannelNameFormComponent } from './forms/edit-channel-name-form/edit-channel-name-form.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ import {UiModule} from '../ui/ui.module';
     MatChipsModule,
     MatAutocompleteModule,
     MatIconModule,
-    UiModule
+    UiModule,
+    MatButtonModule
   ],
   declarations: [
     LoginFormComponent,
@@ -41,7 +44,9 @@ import {UiModule} from '../ui/ui.module';
     ValidationFeedbackComponent,
     CreateGroupConversationFormComponent,
     AutocompleteControlComponent,
-    AutocompleteControlDirective
+    AutocompleteControlDirective,
+    ExtendedInputControlComponent,
+    EditChannelNameFormComponent
   ],
   exports: [
     LoginFormComponent,
@@ -50,7 +55,9 @@ import {UiModule} from '../ui/ui.module';
     ResetPasswordFormComponent,
     MatchFieldsDirective,
     ValidationFeedbackComponent,
-    CreateGroupConversationFormComponent
+    CreateGroupConversationFormComponent,
+    ExtendedInputControlComponent,
+    EditChannelNameFormComponent
   ]
 })
 export class FormLayersModule {

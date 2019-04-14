@@ -4,6 +4,9 @@ import { ChannelPagesComponent } from './channel-pages.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import {routerLinks} from '../../routes/router-links';
+import { DetailsChannelPageComponent } from './details-channel-page/details-channel-page.component';
+import {OnlyChannelAuthorGuard} from '../../channels/guards/only-channel-author.guard';
+import {FormLayersModule} from '../../form-layers/form-layers.module';
 
 const routes: Routes = [
   {
@@ -13,6 +16,11 @@ const routes: Routes = [
       {
         path: ':id',
         component: ChatPageComponent
+      },
+      {
+        path: ':id/details',
+        component: DetailsChannelPageComponent,
+        canActivate: [OnlyChannelAuthorGuard]
       },
       {
         path: '',
@@ -26,8 +34,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormLayersModule
   ],
-  declarations: [ChannelPagesComponent, ChatPageComponent]
+  declarations: [ChannelPagesComponent, ChatPageComponent, DetailsChannelPageComponent]
 })
 export class ChannelPagesModule { }
