@@ -90,17 +90,13 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
 
   private _remove(item: IAutocompleteData, stack: any[]): void {
     const index = stack.indexOf(item);
-    if (index >= 0) {
-      stack.splice(index, 1);
-    }
+    if (index >= 0) stack.splice(index, 1);
   }
 
   private _removeFromValue(item: IAutocompleteData): void {
     const _value = [...this.value];
     const index = _value.indexOf(item);
-    if (index >= 0) {
-      _value.splice(index, 1);
-    }
+    if (index >= 0) _value.splice(index, 1);
     this.value = _value;
   }
 
@@ -109,10 +105,7 @@ export class AutocompleteControlComponent extends ControlValueAccessorAbstract {
   }
 
   private _clearAutocompleteList(value: any[]): void {
-    if (!value || !value.length) {
-      this.currentAutocompleteData = [...this._autocompleteData];
-    } else {
-      this.currentAutocompleteData = [...this._autocompleteData].filter(i => !value.includes(this._mapData(i).value));
-    }
+    if (!value || !value.length) this.currentAutocompleteData = [...this._autocompleteData];
+    else this.currentAutocompleteData = [...this._autocompleteData].filter(i => !value.includes(this._mapData(i).value));
   }
 }

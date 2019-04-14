@@ -1,4 +1,5 @@
 import {ControlValueAccessor} from '@angular/forms';
+import {Input} from '@angular/core';
 
 export abstract class ControlValueAccessorAbstract<T = any> implements ControlValueAccessor {
 
@@ -13,9 +14,9 @@ export abstract class ControlValueAccessorAbstract<T = any> implements ControlVa
     return this._value;
   }
 
-  set value(value: T) {
+  @Input() set value(value: T) {
     this._value = value;
-    this._onChange(this._value);
+    this._onChange && this._onChange(this._value);
   }
 
   registerOnChange(fn: (value: T) => void): void {
