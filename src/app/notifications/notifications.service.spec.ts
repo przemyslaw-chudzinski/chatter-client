@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { NotificationsService } from './notifications.service';
+import { AlertsService } from './alerts.service';
 
-describe('NotificationsService', () => {
+describe('AlertsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationsService]
+      providers: [AlertsService]
     });
   });
 
-  it('should be created', inject([NotificationsService], (service: NotificationsService) => {
+  it('should be created', inject([AlertsService], (service: AlertsService) => {
     expect(service).toBeTruthy();
   }));
 });

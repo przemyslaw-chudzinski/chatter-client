@@ -10,6 +10,10 @@ export enum channelsActionTypes {
   LoadChannelSuccess = '[Channels] Load Single Channel Success',
   LoadChannelError = '[Channels] Load Single Channel Error',
 
+  RemoveChannel = '[Channels] Remove Channel',
+  RemoveChannelSuccess = '[Channels] Remove Channel Success',
+  RemoveChannelError = '[Channels] Remove Channel Error',
+
   ClearChannelsStore = '[Channels] Clear Channels Store',
 
 }
@@ -54,6 +58,23 @@ export class ClearChannelsStore implements Action {
 }
 /***********************************************************/
 
+/* Remove channel actions */
+export class RemoveChannelAction implements Action {
+  readonly type = channelsActionTypes.RemoveChannel;
+  constructor(public payload: IChannel) {}
+}
+
+export class RemoveChannelSuccessAction implements Action {
+  readonly type = channelsActionTypes.RemoveChannelSuccess;
+  constructor(public payload: IChannel) {}
+}
+
+export class RemoveChannelErrorAction implements Action {
+  readonly type = channelsActionTypes.RemoveChannelError;
+  constructor(public payload: any) {}
+}
+/***********************************************************/
+
 export type ChannelsActions =
   | LoadChannelsAction
   | LoadChannelsSuccessAction
@@ -61,4 +82,7 @@ export type ChannelsActions =
   | LoadChannelAction
   | LoadChannelSuccessAction
   | LoadChannelErrorAction
-  | ClearChannelsStore;
+  | ClearChannelsStore
+  | RemoveChannelAction
+  | RemoveChannelSuccessAction
+  | RemoveChannelErrorAction;

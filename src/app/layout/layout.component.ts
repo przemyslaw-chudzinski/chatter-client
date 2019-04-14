@@ -24,18 +24,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private alive = true;
   unreadMessagesData: IUnreadMessage[] = [];
 
-  // contacts$: Observable<IContact[]> = this._store.pipe(
-  //   select(selectUsers),
-  //   map(users => users as IContact[]),
-  //   map(contacts => {
-  //     contacts = contacts && contacts.length ? contacts.map(c => {
-  //       c.newMessagesCount = 0;
-  //       return c;
-  //     }) : null;
-  //     return contacts;
-  //   }),
-  // );
-
   contacts$: Observable<IContact[]> = this._store.pipe(
     select(selectUsers),
     map(users => users as IContact[]),

@@ -3,7 +3,7 @@ import {MatSnackBar} from '@angular/material';
 import {PrimaryNotificationComponent} from './primary-notification/primary-notification.component';
 
 @Injectable()
-export class NotificationsService {
+export class AlertsService {
 
   constructor(private _snackBar: MatSnackBar) {
   }
