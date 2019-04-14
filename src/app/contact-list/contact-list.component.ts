@@ -32,21 +32,6 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (!this.onMessageSub) {
-    //   // this.websocketService.onMessage$
-    //   //   .pipe(
-    //   //     takeWhile(() => this._alive),
-    //   //     map(data => data as IWebSocketData),
-    //   //     tap(this.notifyContactHandler.bind(this)),
-    //   //     tap(this.channelHasBeenDeletedHandler.bind(this))
-    //   //   ).subscribe();
-    //   //
-    //   // /* Reset unread messages logic */
-    //   // this.contactListService.resetUnreadMessages.pipe(
-    //   //   tap(this.resetUnreadMessagesHandler.bind(this))
-    //   // ).subscribe();
-    // }
-
     /**
      * Listener of ws actions
      */
@@ -79,6 +64,7 @@ export class ContactListComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   private channelHasBeenDeletedHandler(data: IWebSocketData): void {
+    console.log('test', data);
     data && data.action && data.action === EWebSocketActions.ChannelHasBeenDeleted && this.store.dispatch(new LoadChannelsAction());
   }
 

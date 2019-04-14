@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IChannel} from '../models/channel.model';
 import {ChannelsApiService} from '../channels-api.service';
 import {take, tap} from 'rxjs/operators';
-import {NotificationsService} from '../../notifications/notifications.service';
 import {Store} from '@ngrx/store';
 import {ChatterState} from '../../chatter-store/chatter-store.state';
-import {LoadChannelsAction} from '../channels-store/channels.actions';
+import {LoadChannelsAction, RemoveChannelAction} from '../channels-store/channels.actions';
 import {AuthService} from '../../auth/auth.service';
+import {IUser} from '../../auth/models/user.model';
 
 @Component({
   selector: 'chatter-channel',
@@ -16,12 +16,13 @@ import {AuthService} from '../../auth/auth.service';
 export class ChannelComponent implements OnInit {
   @Input() channel: IChannel = null;
   accepted: boolean;
+  accepting: boolean;
+  removing: boolean;
 
   constructor(
-    private _channelsApiService: ChannelsApiService,
-    private _notificationsService: NotificationsService,
-    private _store: Store<ChatterState>,
-    private _auth: AuthService
+    private channelsApiService: ChannelsApiService,
+    private store: Store<ChatterState>,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -32,27 +33,32 @@ export class ChannelComponent implements OnInit {
     event.stopPropagation();
   }
 
-  removeGroup(channel: IChannel, event: MouseEvent): void {
+  get authUser(): IUser {
+    return this.auth.user$.value;
+  }
+
+  removeChannel(channel: IChannel, event: MouseEvent): void {
     event.stopPropagation();
+    event.preventDefault();
     const confirmed = confirm('Do you want to remove this conversation group?');
-    confirmed && this._channelsApiService.deleteChannel(channel._id)
-      .pipe(
-        take(1),
-        tap(response => this._notificationsService.open(response.message)),
-        tap(() => this._store.dispatch(new LoadChannelsAction()))
-      ).subscribe();
+    confirmed && (this.removing = true);
+    confirmed && this.store.dispatch(new RemoveChannelAction(channel));
   }
 
   checkAcceptation(): boolean {
-    return this.channel.members.some(member => member.memberId === this._auth.user$.value._id && member.confirmed);
+    return this.channel.members.some(member => member.memberId === this.authUser._id && member.confirmed);
   }
 
   acceptInvitation(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this._channelsApiService.acceptInvitation(this.channel._id)
+    this.accepting = true;
+    this.channelsApiService.acceptInvitation(this.channel._id)
       .pipe(
+        take(1),
         tap(() => (this.accepted = true)),
+        tap(() => (this.accepting = false)),
+        tap(() => this.store.dispatch(new LoadChannelsAction()))
       ).subscribe();
   }
 }

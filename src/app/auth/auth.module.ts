@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { UserNotLoggedGuard } from './guards/user-not-logged.guard';
+import { NoAccessDialogComponent } from './dialogs/no-access-dialog/no-access-dialog.component';
+import {MatButtonModule, MatDialogModule} from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: []
+  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  declarations: [NoAccessDialogComponent],
+  exports: [NoAccessDialogComponent],
+  entryComponents: [NoAccessDialogComponent]
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {

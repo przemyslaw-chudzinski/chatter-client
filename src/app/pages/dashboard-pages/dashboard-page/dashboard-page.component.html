@@ -1,1 +1,4 @@
-<h2>Hello John Doe</h2>
+<div class="dashboard-welcome">
+  <mat-icon class="dashboard-welcome__icon">chat</mat-icon>
+  <h2 class="dashboard-welcome__text" *ngIf="auth.user$ | async as user">Witaj {{ user.firstName }}</h2>
+</div>

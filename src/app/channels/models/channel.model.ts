@@ -1,9 +1,9 @@
-import {IMember} from './member.model';
+import {IChannelMember} from './channel-member.model';
 
 export interface IChannel {
   _id: string;
   name: string;
-  members: IMember[];
+  members: IChannelMember[];
   authorId: string;
   createdAt: string;
 }

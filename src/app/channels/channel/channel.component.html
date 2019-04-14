@@ -3,22 +3,27 @@
     <div>
       <strong>{{ channel.name }}</strong>
     </div>
-    <div>
+    <div class="chatter-channel__meta">
       Members: {{ (channel.members | onlyConfirmed).length }}
     </div>
   </div>
   <div *chatterIfUserEquals="channel.authorId; else userIsNotOwner;">
-    <div class="c-d-flex">
+    <div *ngIf="!removing else spinnerTpl;" class="c-d-flex">
       <button mat-icon-button>
         <mat-icon aria-label="Example icon-button with a heart icon" (click)="showEditForm(channel, $event)">edit</mat-icon>
       </button>
       <button mat-icon-button>
-        <mat-icon aria-label="Example icon-button with a heart icon" (click)="removeGroup(channel, $event)">clear</mat-icon>
+        <mat-icon aria-label="Example icon-button with a heart icon" (click)="removeChannel(channel, $event)">clear</mat-icon>
       </button>
     </div>
   </div>
 </div>
 
 <ng-template #userIsNotOwner>
-  <button chatterLoaderBtn mat-button *ngIf="!accepted" (click)="acceptInvitation($event)">Accept</button>
+  <button chatterLoaderBtn mat-button *ngIf="!accepted && !accepting" (click)="acceptInvitation($event)">Accept</button>
+  <ng-container *ngIf="!accepting else spinnerTpl;"></ng-container>
+</ng-template>
+
+<ng-template #spinnerTpl>
+  <chatter-spinner [diameter]="30"></chatter-spinner>
 </ng-template>

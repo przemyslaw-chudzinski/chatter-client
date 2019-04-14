@@ -4,7 +4,7 @@ import {CreateGroupConversationFormComponent} from '../../../form-layers/forms/c
 import {Store} from '@ngrx/store';
 import {ChatterState} from '../../../chatter-store/chatter-store.state';
 import {LoadChannelsAction} from '../../channels-store/channels.actions';
-import {NotificationsService} from '../../../notifications/notifications.service';
+import {AlertsService} from '../../../notifications/alerts.service';
 
 @Component({
   selector: 'chatter-create-group-conversation-dialog',
@@ -18,7 +18,7 @@ export class CreateGroupConversationDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CreateGroupConversationDialogComponent>,
     private _store: Store<ChatterState>,
-    private _notificationsService: NotificationsService
+    private _notificationsService: AlertsService
   ) { }
 
   submittedHandler(event): void {

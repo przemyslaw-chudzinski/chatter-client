@@ -10,6 +10,7 @@ import {NotificationsModule} from '../notifications/notifications.module';
 import {UiModule} from '../ui/ui.module';
 import { OnlyConfirmedPipe } from './filters/only-confirmed.pipe';
 import {RouterModule} from '@angular/router';
+import { GoToChannelPageDirective } from './directives/go-to-channel-page.directive';
 
 @NgModule({
   imports: [
@@ -27,9 +28,10 @@ import {RouterModule} from '@angular/router';
     ChannelsListComponent,
     ChannelComponent,
     CreateGroupConversationDialogComponent,
-    OnlyConfirmedPipe
+    OnlyConfirmedPipe,
+    GoToChannelPageDirective
   ],
-  exports: [ChannelsListComponent],
+  exports: [ChannelsListComponent, GoToChannelPageDirective],
   entryComponents: [CreateGroupConversationDialogComponent]
 })
 export class ChannelsModule { }

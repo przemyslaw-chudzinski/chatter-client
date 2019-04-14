@@ -11,15 +11,22 @@ export function channelsReducer (
         ...state,
         channels: action.payload
       };
+
     case channelsActionTypes.LoadChannelSuccess:
       return {
         ...state,
         channel: action.payload
       };
+
     case channelsActionTypes.ClearChannelsStore:
       return new ChannelsState();
+
+    case channelsActionTypes.RemoveChannelSuccess:
+      return {
+        ...state
+      };
 
     default:
       return state;
   }
-};
+}

@@ -1,7 +1,4 @@
-<div class="chatter-chat-messages-list"
-     chatterScroll
-     (onScroll)="this.onScroll.emit($event)"
-     chatterScrollToBottom>
+<div class="chatter-chat-messages-list">
 
   <!-- Single message -->
   <ng-container *ngIf="messages$ | async as messages">
@@ -10,19 +7,19 @@
                      [message]="msg">
     </chatter-message>
 
+    <div
+      class="chatter-chat-messages-no-message c-d-flex c-justify-content-center c-align-content-center c-text-center"
+      *ngIf="messages && !messages.length">
+
+      <div class="c-d-flex c-justify-content-center c-flex-wrap ">
+        <mat-icon>chat</mat-icon>
+        <span class="c-d-block c-width-100">No messages to display</span>
+      </div>
+
+    </div>
+
   </ng-container>
   <!-- ######################################### -->
   <chatter-spinner *ngIf="loading"></chatter-spinner>
-
-  <div
-    class="chatter-chat-messages-no-message c-d-flex c-justify-content-center c-align-content-center c-text-center"
-    *ngIf="messages && !messages.length">
-
-    <div class="c-d-flex c-justify-content-center c-flex-wrap ">
-      <mat-icon>chat</mat-icon>
-      <span class="c-d-block c-width-100">No messages yet</span>
-    </div>
-
-  </div>
 
 </div>

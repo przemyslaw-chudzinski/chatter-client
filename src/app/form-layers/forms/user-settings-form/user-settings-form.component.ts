@@ -4,7 +4,7 @@ import {FormLayersAbstract} from '../../form-layers.abstract';
 import {take, tap} from 'rxjs/operators';
 import {UsersApiService} from '../../../users/users-api.service';
 import {IUser} from '../../../auth/models/user.model';
-import {NotificationsService} from '../../../notifications/notifications.service';
+import {AlertsService} from '../../../notifications/alerts.service';
 
 @Component({
   selector: 'chatter-user-settings-form',
@@ -27,7 +27,7 @@ export class UserSettingsFormComponent extends FormLayersAbstract implements OnI
   constructor(
     private _userSettingsFormService: UserSettingsFormService,
     private _usersService: UsersApiService,
-    private _notificationsService: NotificationsService
+    private _notificationsService: AlertsService
   ) {
     super();
   }

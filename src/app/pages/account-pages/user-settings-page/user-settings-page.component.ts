@@ -3,7 +3,7 @@ import {IFile} from '../../../files/models/file.model';
 import {UsersApiService} from '../../../users/users-api.service';
 import {switchMap, take, tap} from 'rxjs/operators';
 import {AuthService} from '../../../auth/auth.service';
-import {NotificationsService} from '../../../notifications/notifications.service';
+import {AlertsService} from '../../../notifications/alerts.service';
 
 @Component({
   selector: 'chatter-user-settings-page',
@@ -16,7 +16,7 @@ export class UserSettingsPageComponent {
   constructor(
     private _usersApiService: UsersApiService,
     private _auth: AuthService,
-    private _notificationsService: NotificationsService
+    private _notificationsService: AlertsService
   ) {}
 
   handleUploadedFiles(files: IFile[]): void {
