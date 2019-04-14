@@ -5,6 +5,4 @@ export const selectChannelsState = createFeatureSelector<ChannelsState>('channel
 
 export const selectChannels = createSelector(selectChannelsState, state => state.channels);
 
-export const selectChannelState = createFeatureSelector<ChannelsState>('channel');
-
-export const selectChannel = createSelector(selectChannelState, state => state.channel);
+export const selectChannel = createSelector(selectChannelsState, state => state.channel);
