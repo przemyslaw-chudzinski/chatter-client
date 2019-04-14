@@ -18,7 +18,6 @@ export abstract class ControlValueAccessorAbstract<T = any> implements ControlVa
     this._onChange(this._value);
   }
 
-
   registerOnChange(fn: (value: T) => void): void {
     this._onChange = fn;
   }
