@@ -41,7 +41,7 @@ export class ChannelComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
     const confirmed = confirm('Do you want to remove this conversation group?');
-    this.removing = true;
+    confirmed && (this.removing = true);
     confirmed && this.store.dispatch(new RemoveChannelAction(channel));
   }
 
