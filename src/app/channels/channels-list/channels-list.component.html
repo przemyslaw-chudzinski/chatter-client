@@ -9,7 +9,7 @@
 </div>
 
 <div *ngIf="channels && channels.length; else noChannels" class="channels-list">
-  <chatter-channel *ngFor="let channel of channels" [channel]="channel" [routerLink]="['channel', channel._id]"></chatter-channel>
+  <chatter-channel *ngFor="let channel of channels" [channel]="channel" [chatterGoToChannelPage]="channel"></chatter-channel>
 </div>
 
 <ng-template #noChannels>

@@ -19,5 +19,4 @@ export class ChannelsListComponent {
     this._dialog.open(CreateGroupConversationDialogComponent, { width: '60rem' });
   }
 
-
 }
