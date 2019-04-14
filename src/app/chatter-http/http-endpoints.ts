@@ -32,7 +32,8 @@ export const channelsEndpoints = {
   channelEndpoint: `${apiUrl}/channels`,
   singleChannelEndpoint: (channelId: string): string => `${apiUrl}/channels/${channelId}`,
   acceptInvitationEndpoint: `${apiUrl}/channels/accept-invitation`,
-  deleteChannelEndpoint: (channelId: string): string => `${apiUrl}/channels/${channelId}`
+  deleteChannelEndpoint: (channelId: string): string => `${apiUrl}/channels/${channelId}`,
+  updateChannelEndpoint: (channelId: string): string => `${apiUrl}/channels/${channelId}`
 };
 
 export const notificationsEndpoints = {

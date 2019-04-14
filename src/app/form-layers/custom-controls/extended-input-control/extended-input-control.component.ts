@@ -1,21 +1,38 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ControlValueAccessorAbstract} from '../control-value-accessor.abstract';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+
+export const EXTENDED_INPUT_CONTROL_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => ExtendedInputControlComponent),
+  multi: true,
+};
 
 @Component({
   selector: 'chatter-extended-input-control',
   templateUrl: './extended-input-control.component.html',
-  styleUrls: ['./extended-input-control.component.scss']
+  styleUrls: ['./extended-input-control.component.scss'],
+  providers: [EXTENDED_INPUT_CONTROL_VALUE_ACCESSOR]
 })
-export class ExtendedInputControlComponent extends ControlValueAccessorAbstract<string> {
+export class ExtendedInputControlComponent implements ControlValueAccessor {
 
-  @Input() type: string;
+  @Input() type = 'text';
   @Input() disabled: boolean;
   @Input() editState: boolean;
 
-  @Output() onSaved = new EventEmitter<string>();
+  @Output() onSave = new EventEmitter<string>();
 
-  constructor() {
-    super();
+  value: string = null;
+
+  private propagateChange = (_: string) => {};
+
+  registerOnTouched(fn: any): void {}
+
+  writeValue(value: string): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
   }
 
   toggle(): void {
@@ -25,7 +42,6 @@ export class ExtendedInputControlComponent extends ControlValueAccessorAbstract<
   close(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
-
     this.editState = false;
   }
 
@@ -38,12 +54,13 @@ export class ExtendedInputControlComponent extends ControlValueAccessorAbstract<
   handleSave(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
-    this.onSaved.emit(this.value)
+    this.onSave.emit(this.value);
   }
 
   handleValueChange(event: any): void {
-    this.value = event.target.value as string;
-    this.onChange(this.value);
+    const value = event.target.value;
+    this.value = value;
+    this.propagateChange(value);
   }
 
 }

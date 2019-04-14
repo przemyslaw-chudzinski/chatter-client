@@ -14,14 +14,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private _alive = true;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _store: Store<ChatterState>,
+    private route: ActivatedRoute,
+    private store: Store<ChatterState>,
   ) { }
 
   ngOnInit() {
-    this._route.params.pipe(
+    this.route.params.pipe(
       takeWhile(() => this._alive),
-      tap(params => params && this._store.dispatch(new LoadChannelAction(params.id)))
+      tap(params => params && this.store.dispatch(new LoadChannelAction(params.id)))
     ).subscribe();
   }
 
