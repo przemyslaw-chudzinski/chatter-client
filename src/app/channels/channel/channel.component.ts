@@ -7,6 +7,8 @@ import {ChatterState} from '../../chatter-store/chatter-store.state';
 import {LoadChannelsAction, RemoveChannelAction} from '../channels-store/channels.actions';
 import {AuthService} from '../../auth/auth.service';
 import {IUser} from '../../auth/models/user.model';
+import {routerLinks} from '../../routes/router-links';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'chatter-channel',
@@ -22,7 +24,8 @@ export class ChannelComponent implements OnInit {
   constructor(
     private channelsApiService: ChannelsApiService,
     private store: Store<ChatterState>,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,5 +63,11 @@ export class ChannelComponent implements OnInit {
         tap(() => (this.accepting = false)),
         tap(() => this.store.dispatch(new LoadChannelsAction()))
       ).subscribe();
+  }
+
+  goToChannelDetails(channel: IChannel, event: MouseEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.router.navigate([routerLinks.channelsPage, channel._id, 'details'])
   }
 }

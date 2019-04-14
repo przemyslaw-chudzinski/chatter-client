@@ -9,11 +9,11 @@
   </div>
   <div *chatterIfUserEquals="channel.authorId; else userIsNotOwner;">
     <div *ngIf="!removing else spinnerTpl;" class="c-d-flex">
-      <button mat-icon-button>
-        <mat-icon aria-label="Example icon-button with a heart icon" (click)="showEditForm(channel, $event)">edit</mat-icon>
+      <button mat-icon-button (click)="goToChannelDetails(channel, $event)">
+        <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon aria-label="Example icon-button with a heart icon" (click)="removeChannel(channel, $event)">clear</mat-icon>
+      <button mat-icon-button (click)="removeChannel(channel, $event)">
+        <mat-icon aria-label="Example icon-button with a heart icon" >clear</mat-icon>
       </button>
     </div>
   </div>
