@@ -1,3 +1,5 @@
-<chatter-edit-channel-name-form *ngIf="channel$ | async as channel" [channel]="channel">
-</chatter-edit-channel-name-form>
+<ng-container *ngIf="channel$ | async as channel">
+  <chatter-edit-channel-name-form *ngIf="canEdit(channel)" [channel]="channel">
+  </chatter-edit-channel-name-form>
+</ng-container>
 

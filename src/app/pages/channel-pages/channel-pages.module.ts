@@ -5,8 +5,8 @@ import {RouterModule, Routes} from '@angular/router';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import {routerLinks} from '../../routes/router-links';
 import { DetailsChannelPageComponent } from './details-channel-page/details-channel-page.component';
-import {OnlyChannelAuthorGuard} from '../../channels/guards/only-channel-author.guard';
 import {FormLayersModule} from '../../form-layers/form-layers.module';
+import {OnlyChannelAuthorGuard} from '../../channels/guards/only-channel-author.guard';
 
 const routes: Routes = [
   {
