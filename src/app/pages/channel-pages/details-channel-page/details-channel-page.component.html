@@ -1,3 +1,10 @@
 <chatter-edit-channel-name-form *ngIf="channel$ | async as channel" [channel]="channel">
 </chatter-edit-channel-name-form>
 
+<ng-container *ngIf="!fetchingMembers else spinnerTpl">
+  <chatter-channel-members-list *ngIf="members" [members]="members"></chatter-channel-members-list>
+</ng-container>
+
+<ng-template #spinnerTpl>
+  <chatter-loader message="Processing data..."></chatter-loader>
+</ng-template>

@@ -1,0 +1,15 @@
+@import "../../../../scss/themes/chatter-dark-theme";
+
+$channel-member-menu-color: rgb(66,66,66);
+
+mat-list {
+  background: $channel-member-menu-color;
+  padding-bottom: .5rem;
+}
+
+.menu-list-item {
+  cursor: pointer;
+  &:hover {
+    background: lighten($channel-member-menu-color, 20%);
+  }
+}

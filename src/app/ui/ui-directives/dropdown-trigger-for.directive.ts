@@ -2,6 +2,7 @@ import {Directive, ElementRef, EventEmitter, HostListener, Input, Output, Templa
 import {HorizontalConnectionPos, Overlay, OverlayConfig, OverlayRef, PositionStrategy, VerticalConnectionPos} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {take, tap} from 'rxjs/operators';
+import {IDropdownTemplateContext} from './models/dropdown-template-context.model';
 
 @Directive({
   selector: '[chatterDropdownTriggerFor]'
@@ -36,7 +37,7 @@ export class DropdownTriggerForDirective {
   private render(): void {
     const overlayConfig = this.getOverlayConfig();
     this.overlayRef = this.overlay.create(overlayConfig);
-    const ctx: IDropdownTemplateContext = {destroy: this.destroy.bind(this), ...this.context};
+    const ctx: IDropdownTemplateContext = {destroy: this.destroy.bind(this), extra: {...this.context}};
     const portal = new TemplatePortal(this.tplRef, this.containerRef, ctx);
     this.overlayRef.attach<any>(portal);
     this.opened.emit();
