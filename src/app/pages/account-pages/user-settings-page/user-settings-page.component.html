@@ -6,14 +6,14 @@
 
       <h3>Account settings</h3>
 
-      <div *ngIf="userSettingsForm.user as user; else loadingTpl">
+      <div class="c-d-flex" *ngIf="userSettingsForm.user as user; else loadingTpl">
 
-        <p>
+        <p class="c-margin-right-2">
           <strong>Created at: </strong> {{ user.createdAt | date }}
         </p>
 
         <p>
-          <strong>Updated at: </strong> {{ user.updatedAt | date }}
+          <strong>Last update at: </strong> {{ user.updatedAt | date }}
         </p>
 
       </div>
