@@ -21,6 +21,7 @@ import { AutocompleteControlDirective } from './custom-controls/autocomplete-con
 import {UiModule} from '../ui/ui.module';
 import { ExtendedInputControlComponent } from './custom-controls/extended-input-control/extended-input-control.component';
 import { EditChannelNameFormComponent } from './forms/edit-channel-name-form/edit-channel-name-form.component';
+import { ExtendedInputControlDirective } from './custom-controls/extended-input-control/extended-input-control.directive';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { EditChannelNameFormComponent } from './forms/edit-channel-name-form/edi
     AutocompleteControlComponent,
     AutocompleteControlDirective,
     ExtendedInputControlComponent,
-    EditChannelNameFormComponent
+    EditChannelNameFormComponent,
+    ExtendedInputControlDirective
   ],
   exports: [
     LoginFormComponent,

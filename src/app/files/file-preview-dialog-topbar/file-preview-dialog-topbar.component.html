@@ -1,0 +1,22 @@
+<div class="topbar c-d-flex c-justify-content-space-between">
+
+  <div class="topbar__left c-d-flex c-align-content-center">
+
+    <button mat-icon-button class="c-margin-right-1" (click)="onClose.emit()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div class="filename">{{ file.original.name }}</div>
+
+  </div>
+
+  <div class="topbar__right">
+
+    <button mat-icon-button chatterDownloadFIle [fileUrl]="file.original.url">
+      <mat-icon>cloud_download</mat-icon>
+    </button>
+
+    <ng-content></ng-content>
+
+  </div>
+</div>

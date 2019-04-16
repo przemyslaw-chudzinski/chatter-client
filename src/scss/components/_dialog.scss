@@ -1,0 +1,6 @@
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  &.chatter-dialog-backdrop {
+    background: #000;
+    opacity: 0.85 !important;
+  }
+}

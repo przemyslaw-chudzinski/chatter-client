@@ -1,6 +1,7 @@
 <div class="extended-input-wrapper" *ngIf="editState else editStateTpl">
   <mat-form-field>
     <input matInput
+           chatterExtendedInputControl
            [type]="type"
            [value]="value"
            [disabled]="disabled"
@@ -14,9 +15,9 @@
 
 <ng-template #editStateTpl>
   <div class="extended-input-text">
-    <div>{{ value }}</div>
-    <div>
-      <button mat-button *ngIf="!editState" (click)="open($event)">Edit</button>
-    </div>
+    <div class="c-margin-right-2">{{ value }}</div>
+    <button mat-icon-button *ngIf="!editState" (click)="open($event)">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </ng-template>

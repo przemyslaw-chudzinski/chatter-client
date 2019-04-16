@@ -22,26 +22,30 @@ export class ExtendedInputControlComponent implements ControlValueAccessor {
   @Output() onSave = new EventEmitter<string>();
 
   value: string = null;
+  defaultValue: string = null;
 
   private propagateChange = (_: string) => {};
+  private initControl = true;
 
   registerOnTouched(fn: any): void {}
 
   writeValue(value: string): void {
     this.value = value;
+    if (this.initControl) {
+      this.defaultValue = value;
+      this.initControl = false;
+    }
   }
 
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
-  toggle(): void {
-    this.editState = !this.editState;
-  }
-
   close(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
+    this.writeValue(this.defaultValue);
+    this.propagateChange(this.defaultValue);
     this.editState = false;
   }
 
