@@ -36,7 +36,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   messages$: Observable<IMessage[]> = this._store.pipe(select(selectMessages));
   user$: Observable<IUser> = this._store.pipe(select(selectUser));
   sending: boolean;
-  private _skip = 1;
+  // private _skip = 1;
   @ViewChild(FileUploadComponent) private _uploader: FileUploadComponent;
   showFileUploader: boolean;
 

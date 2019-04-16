@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IChannelMemberFull} from '../../models/channel-member-full.model';
+import {AlertsService} from '../../../notifications/alerts.service';
 
 @Component({
   selector: 'chatter-channel-members-list-menu',
@@ -21,6 +22,7 @@ export class ChannelMembersListMenuComponent {
       clickHandlerMsg: 'Please wait! Blocking user...',
       clickHandler: this.blockUser,
       markUserAsBlocked: this.markUserAsBlocked.bind(this),
+      showNotification: message => this.alertsService.open(message),
       close: this.close.bind(this)
     },
     {
@@ -32,6 +34,7 @@ export class ChannelMembersListMenuComponent {
       clickHandlerMsg: 'Please wait! Blocking user...',
       clickHandler: this.unblockUser,
       markUserAsUnblocked: this.markUserAsUnblocked.bind(this),
+      showNotification: message => this.alertsService.open(message),
       close: this.close.bind(this)
     },
     {
@@ -42,9 +45,14 @@ export class ChannelMembersListMenuComponent {
       loading: false,
       clickHandlerMsg: 'Please wait! Sending a new invitation...',
       clickHandler: this.sendInvitation,
+      showNotification: message => this.alertsService.open(message),
       close: this.close.bind(this)
     }
   ];
+
+  constructor(
+    private alertsService: AlertsService
+  ) {}
 
   private blockUser(): void {
     const that: any = this;
@@ -52,6 +60,7 @@ export class ChannelMembersListMenuComponent {
     setTimeout(() => {
       that.markUserAsBlocked();
       that.close();
+      that.showNotification('User has been blocked');
     }, 2000);
   }
 
@@ -59,13 +68,19 @@ export class ChannelMembersListMenuComponent {
     const that: any = this;
     that.loading = true;
     that.markUserAsUnblocked();
-    setTimeout(() => that.close(), 2000);
+    setTimeout(() => {
+      that.close();
+      that.showNotification('User has been unblocked');
+    }, 2000);
   }
 
   private sendInvitation(): void {
     const that: any = this;
     that.loading = true;
-    setTimeout(() => that.close(), 2000);
+    setTimeout(() => {
+      that.close();
+      that.showNotification('Invitation has been sent');
+    }, 2000);
   }
 
   private close(): void {

@@ -8,7 +8,7 @@ export class AlertsService {
   constructor(private _snackBar: MatSnackBar) {
   }
 
-  open(message: string, action = 'Got it!'): void {
+  open(message = '', action = 'Got it!'): void {
     this._snackBar.open(message, action);
   }
 
