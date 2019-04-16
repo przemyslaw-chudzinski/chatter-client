@@ -1,0 +1,35 @@
+<ng-container *ngIf="file">
+
+  <chatter-file-preview-dialog-topbar (onClose)="dialogRef.close()" [file]="file">
+
+    <button mat-icon-button [chatterDropdownTriggerFor]="imagePreviewMenuTpl">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+  </chatter-file-preview-dialog-topbar>
+
+  <chatter-dialog-content>
+    <img (load)="loading = false" [style.opacity]="loading ? 0 : 1"  class="preview-image" [src]="file.original.url" alt="preview image">
+    <chatter-loader *ngIf="loading"></chatter-loader>
+  </chatter-dialog-content>
+
+</ng-container>
+
+
+<ng-template #imagePreviewMenuTpl>
+  <mat-list class="chatter-dropdown-list">
+    <mat-list-item class="chatter-dropdown-list-item">
+      <mat-icon mat-list-icon>share</mat-icon>
+      <h3 mat-line>Share</h3>
+      <p mat-line>Share this image to your friends</p>
+    </mat-list-item>
+    <mat-list-item class="chatter-dropdown-list-item">
+      <mat-icon mat-list-icon>star_rate</mat-icon>
+      <h3 mat-line>Add to favourites</h3>
+    </mat-list-item>
+    <mat-list-item class="chatter-dropdown-list-item">
+      <mat-icon mat-list-icon>info</mat-icon>
+      <h3 mat-line>Details</h3>
+    </mat-list-item>
+  </mat-list>
+</ng-template>

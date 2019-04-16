@@ -15,6 +15,7 @@
     </div>
     <div class="file-preview-actions">
       <button *ngIf="canPreview"
+              (click)="showPreviewImage($event)"
               mat-icon-button>
         <mat-icon>visibility</mat-icon>
       </button>

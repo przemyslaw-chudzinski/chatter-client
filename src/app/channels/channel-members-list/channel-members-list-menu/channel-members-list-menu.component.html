@@ -1,6 +1,6 @@
-<mat-list>
+<mat-list class="chatter-dropdown-list">
   <ng-container *ngFor="let item of menuItems">
-    <mat-list-item *ngIf="!item.hidden()" class="menu-list-item" (click)="item.clickHandler($event)">
+    <mat-list-item *ngIf="!item.hidden()" class="chatter-dropdown-list-item" (click)="item.clickHandler($event)">
       <h3 *ngIf="!item.loading" mat-line>{{ item.header }}</h3>
       <p *ngIf="!item.loading" mat-line>{{ item.description }}</p>
       <chatter-loader *ngIf="item.loading" [message]="item.clickHandlerMsg"></chatter-loader>

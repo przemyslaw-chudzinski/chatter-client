@@ -1,0 +1,20 @@
+:host {
+  color: #fff;
+}
+
+.topbar {
+  padding: 1rem;
+
+  &__left {
+
+  }
+
+  &__right {
+    > * {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+}

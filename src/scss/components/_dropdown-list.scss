@@ -1,0 +1,11 @@
+.chatter-dropdown-list {
+  background: rgb(66,66,66);
+  padding-bottom: .5rem;
+}
+
+.chatter-dropdown-list-item {
+  cursor: pointer;
+  &:hover {
+    background: lighten(rgb(66,66,66), 20%);
+  }
+}
