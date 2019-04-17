@@ -1,4 +1,4 @@
-import {decodedToken, removeToken, saveToken, token} from './helpers';
+import {decodedToken, removeToken, saveToken, getToken} from './helpers';
 // import {JwtHelperService} from '@auth0/angular-jwt';
 
 // const jwtHelper = new JwtHelperService();
@@ -16,23 +16,23 @@ describe('token helper function', () => {
 
   it('should return string when tokenName is provided and token exits', () => {
     localStorage.setItem('test_token', 'test_token_content');
-    expect( token('test_token')).toBe('test_token_content');
+    expect( getToken('test_token')).toBe('test_token_content');
     localStorage.removeItem('test_token');
   });
 
   it('should return null when tokenName doesn"t exists in local storage', () => {
-    expect(token('test_not_existing_token_name')).toBe(null);
+    expect(getToken('test_not_existing_token_name')).toBe(null);
   });
 
   it('should return string when row in local storge has key with name token', () => {
     localStorage.setItem('token', 'token_content');
-    expect(token()).toBe('token_content');
+    expect(getToken()).toBe('token_content');
     localStorage.removeItem('token');
   });
 
   it('should return null when local storge doesn"t contain row with with name of key token', () => {
     localStorage.removeItem('token');
-    expect(token()).toBeNull();
+    expect(getToken()).toBeNull();
   });
 
 });

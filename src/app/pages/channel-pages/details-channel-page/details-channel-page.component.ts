@@ -5,9 +5,9 @@ import {Observable} from 'rxjs';
 import {IChannel} from '../../../channels/models/channel.model';
 import {selectChannel} from '../../../channels/channels-store/channels.selectors';
 import {ChannelsApiService} from '../../../channels/channels-api.service';
-import {tap} from 'rxjs/internal/operators/tap';
-import {map, switchMap, takeWhile} from 'rxjs/operators';
 import {IChannelMemberFull} from '../../../channels/models/channel-member-full.model';
+import {takeWhile, switchMap, tap, map} from 'rxjs/operators';
+import {IResponseData} from '../../../chatter-http/models/response-data';
 
 @Component({
   selector: 'chatter-details-channel-page',
@@ -31,7 +31,8 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
     this.channel$.pipe(
       takeWhile(() => this.alive),
       tap(() => (this.fetchingMembers = true)),
-      switchMap(channel => channel && this.channelsApiService.getChannelMembers(channel._id)),
+      switchMap(channel => this.channelsApiService.getChannelMembers(channel._id)),
+      map(response => response as IResponseData<IChannelMemberFull[]>),
       map(response => response.data),
       tap(members => (this.members = members)),
       tap(() => (this.fetchingMembers = false))
