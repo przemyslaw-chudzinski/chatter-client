@@ -32,12 +32,12 @@ export const decodedToken = (_token?: string): any => jwtHelper.decodeToken(_tok
  * @desc It checks txt is Url with http or https
  * @param txt
  */
-export const isLink = (txt: string): null | any[] =>
-  (txt.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, 'ig')));
+// export const isLink = (txt: string): null | any[] =>
+//   (txt.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, 'ig')));
 
 /**
  * @desc It checks txt is yourube link
  * @param txt
  */
-export const isYoutubeLink = (txt: string): null | any[] =>
-  (txt.match(new RegExp(/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/, 'ig')));
+// export const isYoutubeLink = (txt: string): null | any[] =>
+//   (txt.match(new RegExp(/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/, 'ig')));
