@@ -8,16 +8,20 @@
            (keyup)="handleValueChange($event)">
   </mat-form-field>
   <div>
-    <button mat-button *ngIf="editState" (click)="handleSave($event)">Save</button>
-    <button mat-button *ngIf="editState" (click)="close($event)">Cancel</button>
+    <button mat-button *ngIf="editState && !loading else loadingTpl" (click)="handleSave($event)">Save</button>
+    <button mat-button *ngIf="editState" (click)="handleClose($event)">Cancel</button>
   </div>
 </div>
 
 <ng-template #editStateTpl>
   <div class="extended-input-text">
     <div class="c-margin-right-2">{{ value }}</div>
-    <button mat-icon-button *ngIf="!editState" (click)="open($event)">
+    <button mat-icon-button *ngIf="!editState" (click)="handleOpen($event)">
       <mat-icon>edit</mat-icon>
     </button>
   </div>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <chatter-loader></chatter-loader>
 </ng-template>

@@ -8,7 +8,7 @@ import {
   LoadChannelsSuccessAction,
   LoadChannelSuccessAction,
   RemoveChannelAction, RemoveChannelErrorAction,
-  RemoveChannelSuccessAction
+  RemoveChannelSuccessAction, UpdateChannelAction, UpdateChannelErrorAction, UpdateChannelSuccessAction
 } from './channels.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {ChatterState} from '../../chatter-store/chatter-store.state';
@@ -43,6 +43,16 @@ export class ChannelsEffects {
       map(channel => new RemoveChannelSuccessAction(channel)),
       tap(() => this.store.dispatch(new LoadChannelsAction())),
       catchError(err => of(new RemoveChannelErrorAction(err)))
+    ))
+  );
+
+  @Effect()
+  updateChannel$: Observable<Action> = this.actions$.pipe(
+    ofType(channelsActionTypes.UpdateChannel),
+    map((action: UpdateChannelAction) => action.payload),
+    switchMap(payload => this.channelsApiService.updateChannel(payload).pipe(
+      map(response => new UpdateChannelSuccessAction(response)),
+      catchError(err => of(new UpdateChannelErrorAction(err)))
     ))
   );
 

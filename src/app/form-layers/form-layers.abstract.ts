@@ -1,8 +1,10 @@
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Output, EventEmitter } from '@angular/core';
 
-export abstract class FormLayersAbstract {
+export abstract class FormLayersAbstract <T = any> {
+
   @Output() enterDown = new EventEmitter<null>();
+
   @Output() submitted = new EventEmitter<any>();
 
   private _formGroup: FormGroup;
@@ -19,7 +21,7 @@ export abstract class FormLayersAbstract {
     return this._formGroup.controls;
   }
 
-  get value(): any {
+  get value(): T {
     return this._formGroup.value;
   }
 

@@ -26,6 +26,11 @@ export class ExtendedInputControlComponent implements ControlValueAccessor {
 
   private propagateChange = (_: string) => {};
   private initControl = true;
+  private _loading: boolean;
+
+  get loading(): boolean {
+    return this._loading;
+  }
 
   registerOnTouched(fn: any): void {}
 
@@ -41,7 +46,7 @@ export class ExtendedInputControlComponent implements ControlValueAccessor {
     this.propagateChange = fn;
   }
 
-  close(event: MouseEvent): void {
+  handleClose(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
     this.writeValue(this.defaultValue);
@@ -49,7 +54,7 @@ export class ExtendedInputControlComponent implements ControlValueAccessor {
     this.editState = false;
   }
 
-  open(event: MouseEvent): void {
+  handleOpen(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
     this.editState = true;
@@ -65,6 +70,22 @@ export class ExtendedInputControlComponent implements ControlValueAccessor {
     const value = event.target.value;
     this.value = value;
     this.propagateChange(value);
+  }
+
+  close(): void {
+    this.editState = false;
+  }
+
+  open(): void {
+    this.editState = true;
+  }
+
+  showLoader(): void {
+    this._loading = true;
+  }
+
+  hideLoader(): void {
+    this._loading = false;
   }
 
 }

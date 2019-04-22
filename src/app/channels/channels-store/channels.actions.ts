@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {IChannel} from '../models/channel.model';
+import {IResponseData} from '../../chatter-http/models/response-data';
 
 export enum channelsActionTypes {
   LoadChannels = '[Channels] Load Channels',
@@ -13,6 +14,10 @@ export enum channelsActionTypes {
   RemoveChannel = '[Channels] Remove Channel',
   RemoveChannelSuccess = '[Channels] Remove Channel Success',
   RemoveChannelError = '[Channels] Remove Channel Error',
+
+  UpdateChannel = '[Channels] Update Channel',
+  UpdateChannelSuccess = '[Channels] Update Channel Success',
+  UpdateChannelError = '[Channels] Update Channel Error',
 
   ClearChannelsStore = '[Channels] Clear Channels Store',
 
@@ -75,6 +80,23 @@ export class RemoveChannelErrorAction implements Action {
 }
 /***********************************************************/
 
+/* Update channel actions */
+export class UpdateChannelAction implements Action {
+  readonly type = channelsActionTypes.UpdateChannel;
+  constructor(public payload: IChannel) {}
+}
+
+export class UpdateChannelSuccessAction implements Action {
+  readonly type = channelsActionTypes.UpdateChannelSuccess;
+  constructor(public payload: IResponseData<IChannel>) {}
+}
+
+export class UpdateChannelErrorAction implements Action {
+  readonly type = channelsActionTypes.UpdateChannelError;
+  constructor(public payload: any) {}
+}
+/***********************************************************/
+
 export type ChannelsActions =
   | LoadChannelsAction
   | LoadChannelsSuccessAction
@@ -85,4 +107,7 @@ export type ChannelsActions =
   | ClearChannelsStore
   | RemoveChannelAction
   | RemoveChannelSuccessAction
-  | RemoveChannelErrorAction;
+  | RemoveChannelErrorAction
+  | UpdateChannelAction
+  | UpdateChannelSuccessAction
+  | UpdateChannelErrorAction;

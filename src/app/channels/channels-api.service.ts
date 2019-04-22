@@ -33,11 +33,11 @@ export class ChannelsApiService {
     return this.httpClient.delete<IResponseData<IChannel>>(channelsEndpoints.deleteChannelEndpoint(channelId));
   }
 
-  updateChannel(channelId: string, payload: IChannelPayload): Observable<IResponseData<IChannel>> {
-    return this.httpClient.put<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.updateChannelEndpoint(channelId), payload);
+  updateChannel(payload: IChannel): Observable<IResponseData<IChannel>> {
+    return this.httpClient.put<IResponseData<IChannel>, IChannelPayload>(channelsEndpoints.updateChannelEndpoint, payload);
   }
 
   getChannelMembers(channelId: string): Observable<IResponseData<IChannelMemberFull[]>> {
-    return this.httpClient.get<IResponseData<IChannelMemberFull[]>>(channelsEndpoints.getChannelMemebersEndpoint(channelId));
+    return this.httpClient.get<IResponseData<IChannelMemberFull[]>>(channelsEndpoints.getChannelMembersEndpoint(channelId));
   }
 }
