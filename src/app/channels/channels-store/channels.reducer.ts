@@ -26,6 +26,13 @@ export function channelsReducer (
         ...state
       };
 
+    case channelsActionTypes.UpdateChannelSuccess:
+      const _state = {...state};
+      const {data} = action.payload;
+      const index = _state.channels.findIndex(c => c._id === data._id);
+      if (index !== -1) _state.channels[index] = data;
+      return _state;
+
     default:
       return state;
   }
