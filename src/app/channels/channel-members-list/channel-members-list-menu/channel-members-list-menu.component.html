@@ -1,9 +1,12 @@
 <mat-list class="chatter-dropdown-list">
-  <ng-container *ngFor="let item of menuItems">
-    <mat-list-item *ngIf="!item.hidden()" class="chatter-dropdown-list-item" (click)="item.clickHandler($event)">
-      <h3 *ngIf="!item.loading" mat-line>{{ item.header }}</h3>
-      <p *ngIf="!item.loading" mat-line>{{ item.description }}</p>
-      <chatter-loader *ngIf="item.loading" [message]="item.clickHandlerMsg"></chatter-loader>
-    </mat-list-item>
-  </ng-container>
+  <mat-list-item *ngIf="!member.blocked"  class="chatter-dropdown-list-item">
+    <h3 mat-line>Block user</h3>
+    <p mat-line>That action blocks user. He wont be able to see channel page and post messages</p>
+<!--    <chatter-loader *ngIf="item.loading" [message]="item.clickHandlerMsg"></chatter-loader>-->
+  </mat-list-item>
+  <mat-list-item *ngIf="!member.blocked && !member.confirmed" class="chatter-dropdown-list-item">
+    <h3 mat-line>Resend invitation</h3>
+    <p mat-line>That action sends again a new invitation to the user</p>
+    <!--    <chatter-loader *ngIf="item.loading" [message]="item.clickHandlerMsg"></chatter-loader>-->
+  </mat-list-item>
 </mat-list>

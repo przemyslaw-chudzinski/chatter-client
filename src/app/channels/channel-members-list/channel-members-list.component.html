@@ -1,12 +1,16 @@
 <mat-list *ngIf="members && members.length" class="channel-members-list">
   <mat-list-item *ngFor="let member of members">
 
-    <img matListAvatar [src]="member.avatar.thumbnail.url" alt="user avatar">
+    <img matListAvatar
+         *ngIf="member && member.avatar && member.avatar.thumbnail else defaultAvatar"
+         [src]="member.avatar.thumbnail.url || defaultThumbnailUrl"
+         alt="user avatar">
     <h3 mat-line>{{ member.firstName }} {{ member.lastName }}</h3>
     <p mat-line>{{ member.email }}</p>
 
     <mat-icon *ngIf="member.confirmed" class="c-padding-left-2">check_circle</mat-icon>
     <mat-icon *ngIf="!member.confirmed" class="c-padding-left-2">warning</mat-icon>
+    <mat-icon *ngIf="member.blocked" class="c-padding-left-2">block</mat-icon>
 
     <button mat-icon-button [chatterDropdownTriggerFor]="memberMenu" [context]="member">
       <mat-icon>more_vert</mat-icon>
@@ -18,4 +22,8 @@
 
 <ng-template #memberMenu let-destroy="destroy" let-member="extra">
   <chatter-channel-members-list-menu [member]="member" [destroyFn]="destroy"></chatter-channel-members-list-menu>
+</ng-template>
+
+<ng-template #defaultAvatar>
+  <img matListAvatar [src]="defaultThumbnailUrl" alt="user avatar" class="c-margin-right-1">
 </ng-template>

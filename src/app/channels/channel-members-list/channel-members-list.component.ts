@@ -8,4 +8,5 @@ import {IChannelMemberFull} from '../models/channel-member-full.model';
 })
 export class ChannelMembersListComponent {
   @Input() members: IChannelMemberFull[] = null;
+  defaultThumbnailUrl = 'http://placehold.it/40x40';
 }

@@ -10,13 +10,15 @@ import {takeWhile, switchMap, tap, map, take} from 'rxjs/operators';
 import {IResponseData} from '../../../chatter-http/models/response-data';
 import {EditChannelNameFormComponent} from '../../../form-layers/forms/edit-channel-name-form/edit-channel-name-form.component';
 import {
-  channelsActionTypes,
+  channelsActionTypes, RemoveChannelSuccessAction,
   UpdateChannelAction,
   UpdateChannelErrorAction,
   UpdateChannelSuccessAction
 } from '../../../channels/channels-store/channels.actions';
 import {Actions, ofType} from '@ngrx/effects';
 import {AlertsService} from '../../../notifications/alerts.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {routerLinks} from '../../../routes/router-links';
 
 @Component({
   selector: 'chatter-details-channel-page',
@@ -36,13 +38,16 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
     private store: Store<ChatterState>,
     private channelsApiService: ChannelsApiService,
     private actions$: Actions,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.fetchMembersList();
     this.handleTitleUpdateSuccess();
     this.handleTitleUpdateError();
+    this.handleChannelRemoved();
   }
 
   ngOnDestroy(): void {
@@ -64,7 +69,7 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
       ofType(channelsActionTypes.UpdateChannelError),
       map(action => action as UpdateChannelErrorAction),
       tap(() => this.alertsService.error('Something went wrong! Try again')),
-      tap(() => this.channelNameForm && this.channelNameForm.showLoader())
+      tap(() => this.channelNameForm && this.channelNameForm.hideLoader())
     ).subscribe();
   }
 
@@ -89,6 +94,15 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
       map(response => response.data),
       tap(members => (this.members = members)),
       tap(() => (this.fetchingMembers = false))
+    ).subscribe();
+  }
+
+  private handleChannelRemoved(): void {
+    this.actions$.pipe(
+      takeWhile(() => this.alive),
+      ofType(channelsActionTypes.RemoveChannelSuccess),
+      map(action => action as RemoveChannelSuccessAction),
+      tap(({payload}) => payload._id === this.route.snapshot.params.id && this.router.navigate(['/', routerLinks.dashboardPage]))
     ).subscribe();
   }
 
