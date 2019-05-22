@@ -58,7 +58,7 @@ export class AuthService {
       .subscribe();
   }
 
-  //TODO: Coś z tym zrobic
+  // TODO: Remove
   resetPassword(): Observable<any> {
     return this._httpClient.post('', null);
   }

@@ -1,29 +1,44 @@
-<div class="chatter-channel c-padding-bottom-1 c-padding-top-1 c-padding-left-1 c-padding-right-1">
+<div class="chatter-channel">
   <div>
-    <div>
-      <strong>{{ channel.name }}</strong>
-    </div>
+
+    <strong>{{ channel.name }}</strong>
+
     <div class="chatter-channel__meta">
       Members: {{ (channel.members | onlyConfirmed).length }}
     </div>
+
   </div>
+
   <div *chatterIfUserEquals="channel.authorId; else userIsNotOwner;">
+
     <div *ngIf="!removing else spinnerTpl;" class="c-d-flex">
+
       <button mat-icon-button (click)="goToChannelDetails(channel, $event)">
-        <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+
+        <mat-icon>edit</mat-icon>
+
       </button>
+
       <button mat-icon-button (click)="removeChannel(channel, $event)">
-        <mat-icon aria-label="Example icon-button with a heart icon" >clear</mat-icon>
+
+        <mat-icon>clear</mat-icon>
+
       </button>
+
     </div>
+
   </div>
+
 </div>
 
+<!-- When user is not owner of the channel -->
 <ng-template #userIsNotOwner>
   <button chatterLoaderBtn mat-button *ngIf="!accepted && !accepting" (click)="acceptInvitation($event)">Accept</button>
   <ng-container *ngIf="!accepting else spinnerTpl;"></ng-container>
 </ng-template>
 
+
+<!-- Spinner template -->
 <ng-template #spinnerTpl>
   <chatter-spinner [diameter]="30"></chatter-spinner>
 </ng-template>

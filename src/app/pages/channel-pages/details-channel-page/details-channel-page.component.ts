@@ -30,6 +30,7 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
   channel$: Observable<IChannel> = this.store.pipe(select(selectChannel));
   members: IChannelMemberFull[] = null;
   fetchingMembers = true;
+  sending: boolean;
 
   private alive = true;
   @ViewChild(EditChannelNameFormComponent) private channelNameForm: EditChannelNameFormComponent = null;
@@ -55,11 +56,13 @@ export class DetailsChannelPageComponent implements OnInit, OnDestroy {
   }
 
   updateTitle(): void {
+    this.sending = true;
     this.channel$.pipe(
       take(1),
       map(channel => ({...channel, ...this.channelNameForm.value}) as IChannel),
       tap(payload => this.store.dispatch(new UpdateChannelAction(payload))),
-      tap(() => this.channelNameForm && this.channelNameForm.showLoader())
+      tap(() => this.channelNameForm && this.channelNameForm.showLoader()),
+      tap(() => (this.sending = false))
     ).subscribe();
   }
 

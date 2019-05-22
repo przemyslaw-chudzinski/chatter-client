@@ -1,6 +1,8 @@
 <h3>Channel administration page</h3>
 
-<chatter-edit-channel-name-form *ngIf="channel$ | async as channel" [channel]="channel" (submitted)="updateTitle()"></chatter-edit-channel-name-form>
+<chatter-edit-channel-name-form *ngIf="channel$ | async as channel" [channel]="channel"
+                                (submitted)="updateTitle()">
+</chatter-edit-channel-name-form>
 
 <ng-container *ngIf="!fetchingMembers else spinnerTpl">
   <chatter-channel-members-list *ngIf="members" [members]="members"></chatter-channel-members-list>

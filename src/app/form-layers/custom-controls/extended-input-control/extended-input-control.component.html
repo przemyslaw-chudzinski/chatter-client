@@ -9,7 +9,7 @@
   </mat-form-field>
   <div>
     <button mat-button *ngIf="editState && !loading else loadingTpl" (click)="handleSave($event)">Save</button>
-    <button mat-button *ngIf="editState" (click)="handleClose($event)">Cancel</button>
+    <button mat-button *ngIf="editState && !loading" (click)="handleClose($event)">Cancel</button>
   </div>
 </div>
 

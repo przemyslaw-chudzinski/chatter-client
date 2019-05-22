@@ -10,3 +10,18 @@
     align-items: center;
   }
 }
+
+.message-avatar {
+  display: flex;
+  align-items: center;
+  chatter-user-avatar {
+    margin-right: .5rem;
+  }
+
+  margin-bottom: 1rem;
+}
+
+.message-content {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}

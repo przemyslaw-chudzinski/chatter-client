@@ -22,7 +22,6 @@ export class CreateGroupConversationDialogComponent {
   ) { }
 
   submittedHandler(event): void {
-    // todo handle errors and more
     this.dialogRef.close();
     this._store.dispatch(new LoadChannelsAction());
     this._notificationsService.open(event.message, 'Got it');

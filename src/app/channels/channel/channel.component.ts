@@ -32,10 +32,6 @@ export class ChannelComponent implements OnInit {
     this.accepted = this.checkAcceptation();
   }
 
-  showEditForm(channel: IChannel, event: MouseEvent): void {
-    event.stopPropagation();
-  }
-
   get authUser(): IUser {
     return this.auth.user$.value;
   }
@@ -68,6 +64,6 @@ export class ChannelComponent implements OnInit {
   goToChannelDetails(channel: IChannel, event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this.router.navigate([routerLinks.channelsPage, channel._id, 'details'])
+    this.router.navigate([routerLinks.channelsPage, channel._id, 'details']);
   }
 }

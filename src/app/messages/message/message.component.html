@@ -1,7 +1,9 @@
 <div class="chatter-chat-message animated fadeIn"
      *ngIf="message">
   <div>
-    <span>
+
+    <div class="message-avatar">
+       <span>
       <button mat-icon-button
               [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -15,12 +17,18 @@
       <button mat-menu-item>Set as important</button>
     </mat-menu>
     </span>
-    <strong>{{ message.author.firstName }} {{ message.author.lastName }}: </strong>
-    <span [innerHTML]="message.content"></span>
+      <chatter-user-avatar [user]="message.author"></chatter-user-avatar>
+      <strong>{{ message.author.firstName }} {{ message.author.lastName }} </strong>
+    </div>
+
+    <span class="message-content" [innerHTML]="message.content"></span>
+
     <chatter-message-attached-files *ngIf="message.attachedFiles && message.attachedFiles.length"
                                     [files]="message.attachedFiles" [canRemove]="false">
     </chatter-message-attached-files>
+
   </div>
+
   <div class="chatter-chat-message-actions">
      <mat-chip-list>
       <mat-chip
@@ -29,17 +37,5 @@
         Edited
       </mat-chip>
     </mat-chip-list>
-    <!--<button mat-icon-button-->
-            <!--[matMenuTriggerFor]="menu">-->
-      <!--<mat-icon>more_vert</mat-icon>-->
-    <!--</button>-->
-    <!--<mat-menu #menu="matMenu">-->
-      <!--<button *ngIf="showEditForm()"-->
-              <!--mat-menu-item-->
-              <!--(click)="editMessage()">-->
-        <!--Edit-->
-      <!--</button>-->
-      <!--<button mat-menu-item>Set as important</button>-->
-    <!--</mat-menu>-->
   </div>
 </div>
